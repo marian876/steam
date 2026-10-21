@@ -1,0 +1,3143 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sitio web · BATAN · STEAM · SIL</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700;800&family=Public+Sans:ital,wght@0,400;0,500;0,700;1,400&family=IBM+Plex+Mono:wght@400;600&display=swap">
+  <style>
+    :root {
+      --azul: #00306B;
+      --azul-vivo: #1668E0;
+      --azul-suave: #E9F1FB;
+      --turquesa: #0B7D7B;
+      --turquesa-suave: #DCF0EF;
+      --violeta: #6234CE;
+      --violeta-suave: #ECE5FC;
+      --ambar: #B96C12;
+      --ambar-suave: #FBEEDA;
+      --verde: #1B8049;
+      --verde-suave: #DFF2E6;
+      --rojo: #C0392A;
+      --rojo-suave: #FBE5E1;
+      --tinta: #14172B;
+      --tinta2: #474D69;
+      --gris: #787E9B;
+      --linea: #DBDEEC;
+      --linea-fuerte: #C0C5DC;
+      --fondo: #F0F1F8;
+      --superficie: #FFFFFF;
+      --superficie2: #F7F8FD;
+      --sombra: 0 1px 2px rgba(20, 23, 43, .05), 0 10px 28px -16px rgba(20, 23, 43, .30);
+      --sombra-alta: 0 2px 4px rgba(20, 23, 43, .06), 0 22px 48px -24px rgba(20, 23, 43, .42);
+      --display: "Bricolage Grotesque", system-ui, sans-serif;
+      --texto: "Public Sans", system-ui, sans-serif;
+      --mono: "IBM Plex Mono", ui-monospace, monospace;
+      --tbh: 74px;
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      margin: 0;
+      background: var(--fondo);
+      color: var(--tinta);
+      font-family: var(--texto);
+      line-height: 1.6
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background: url("/logos/fondo.jpg") center / cover fixed
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: var(--display);
+      line-height: 1.12;
+      letter-spacing: -.02em
+    }
+
+    a {
+      color: inherit
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--azul-vivo);
+      outline-offset: 3px
+    }
+
+    .saltar {
+      position: fixed;
+      top: -50px;
+      left: 16px;
+      z-index: 100;
+      background: var(--azul);
+      color: white;
+      padding: 9px 13px;
+      border-radius: 8px;
+      text-decoration: none
+    }
+
+    .saltar:focus {
+      top: 12px
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: color-mix(in srgb, var(--superficie) 92%, transparent);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--linea)
+    }
+
+    .tb {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 11px 22px;
+      display: flex;
+      align-items: center;
+      gap: 20px
+    }
+
+    .tb-escudo {
+      display: flex;
+      align-items: center;
+      flex: none;
+      margin-right: -11px;
+      text-decoration: none
+    }
+
+    .tb-logo {
+      height: 26px;
+      width: auto;
+      flex: none;
+      opacity: .92
+    }
+
+    .tb-marca {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: .95rem;
+      color: var(--tinta);
+      text-decoration: none;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 9px
+    }
+
+    .tb-marca .pt {
+      font-family: var(--mono);
+      font-size: 9.5px;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--azul);
+      background: var(--azul-suave);
+      padding: 3px 7px;
+      border-radius: 99px;
+      display: none
+    }
+
+    .rot {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+      color: var(--gris)
+    }
+
+    .num {
+      font-family: var(--mono);
+      font-size: .9rem;
+      font-weight: 600;
+      color: var(--tinta);
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap
+    }
+
+    .tb-prog {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0
+    }
+
+    .barra {
+      height: 7px;
+      background: var(--linea);
+      border-radius: 99px;
+      overflow: hidden;
+      flex: 1;
+      min-width: 60px;
+      max-width: 340px
+    }
+
+    .barra i {
+      display: block;
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--turquesa), var(--azul));
+      border-radius: 99px;
+      transition: width .35s ease
+    }
+
+    .btn-mini {
+      font-family: var(--mono);
+      font-size: 9.5px;
+      font-weight: 600;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      height: 30px;
+      padding: 0 12px;
+      border-radius: 99px;
+      background: var(--superficie);
+      border: 1px solid var(--linea-fuerte);
+      color: var(--gris);
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      cursor: pointer;
+      text-decoration: none
+    }
+
+    .btn-mini:hover {
+      border-color: var(--tinta2);
+      color: var(--tinta)
+    }
+
+    .btn-mini.icono {
+      width: 30px;
+      height: 30px;
+      padding: 0;
+      flex: none
+    }
+
+    .btn-mini.icono svg {
+      width: 16px;
+      height: 16px
+    }
+
+    .btn-mini.rojo {
+      color: var(--rojo);
+      border-color: color-mix(in srgb, var(--rojo) 42%, transparent)
+    }
+
+    .btn-mini.rojo:hover {
+      border-color: var(--rojo);
+      background: var(--rojo-suave);
+      color: var(--rojo)
+    }
+
+    .btn-mini[aria-expanded=true] {
+      border-color: var(--azul);
+      color: var(--azul);
+      background: var(--azul-suave)
+    }
+
+    .tb .btn-mini {
+      flex: none;
+      margin-left: 2px
+    }
+
+    .tb-cuenta {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      flex: none;
+      margin-left: auto
+    }
+
+    .tb-cuenta a {
+      text-decoration: none
+    }
+
+    .tb-cuenta form {
+      display: flex;
+      margin: 0
+    }
+
+    .envoltorio {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 22px 70px
+    }
+
+    .velo {
+      position: fixed;
+      inset: var(--tbh, 54px) 0 0;
+      background: rgba(20, 23, 43, .30);
+      z-index: 38;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s ease
+    }
+
+    body.menu .velo {
+      opacity: 1;
+      pointer-events: auto
+    }
+
+    .rail {
+      position: fixed;
+      top: var(--tbh, 54px);
+      left: 0;
+      bottom: 0;
+      width: 274px;
+      max-width: 86vw;
+      z-index: 39;
+      background: var(--superficie);
+      border-right: 1px solid var(--linea);
+      box-shadow: var(--sombra-alta);
+      padding: 20px 16px 34px;
+      overflow-y: auto;
+      transform: translateX(-101%);
+      transition: transform .22s ease;
+      visibility: hidden
+    }
+
+    body.menu .rail {
+      transform: none;
+      visibility: visible
+    }
+
+    .rail h2 {
+      font-size: .94rem;
+      margin: 1px 8px 10px;
+      color: var(--azul)
+    }
+
+    .rail ol {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 3px
+    }
+
+    .rail a {
+      display: grid;
+      grid-template-columns: 23px 1fr;
+      gap: 7px;
+      padding: 8px;
+      border-radius: 8px;
+      font-size: .8rem;
+      text-decoration: none;
+      color: var(--tinta2)
+    }
+
+    .rail a:hover,
+    .rail a.activo {
+      background: var(--turquesa-suave);
+      color: var(--turquesa);
+      font-weight: 700
+    }
+
+    .rail .n {
+      font: 600 .7rem var(--mono);
+      padding-top: 2px
+    }
+
+    .rail .inicio {
+      margin-bottom: 7px;
+      border-bottom: 1px solid var(--linea)
+    }
+
+    .pantalla {
+      background: transparent;
+      border: 0;
+      box-shadow: none;
+      border-radius: 0;
+      overflow: visible
+    }
+
+    .pantalla[hidden] {
+      display: none
+    }
+
+    .cabecera {
+      padding: clamp(26px, 5vw, 52px);
+      background: linear-gradient(135deg, #F4FBFB 0%, #E9F1FB 100%);
+      border-bottom: 1px solid var(--linea)
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font: 600 .76rem var(--mono);
+      color: var(--turquesa);
+      text-transform: uppercase;
+      letter-spacing: .13em;
+      margin-bottom: 14px
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 28px;
+      height: 3px;
+      border-radius: 2px;
+      background: var(--turquesa)
+    }
+
+    h1 {
+      max-width: 14ch;
+      color: var(--azul);
+      font-size: clamp(2.35rem, 6vw, 4.35rem)
+    }
+
+    .contenido {
+      padding: clamp(22px, 4vw, 40px)
+    }
+
+    .seccion-enc {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      margin-bottom: 24px
+    }
+
+    .numero {
+      width: 45px;
+      height: 45px;
+      flex: none;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      color: white;
+      background: var(--azul);
+      font: 700 1rem var(--mono)
+    }
+
+    .numero.adicional {
+      width: auto;
+      padding: 0 11px;
+      font-size: .7rem
+    }
+
+    .seccion-enc h2 {
+      font-size: clamp(1.7rem, 4vw, 2.45rem)
+    }
+
+    .seccion-enc p {
+      color: var(--tinta2);
+      margin-top: 5px
+    }
+
+    .nota {
+      padding: 15px 17px;
+      background: var(--ambar-suave);
+      border-left: 4px solid var(--ambar);
+      border-radius: 0 10px 10px 0;
+      color: #6B420D;
+      margin: 0 0 22px
+    }
+
+    .nota strong {
+      color: inherit
+    }
+
+    .aviso-importante {
+      margin-top: 16px;
+      padding: 15px 17px;
+      border: 1px solid #E8C96A;
+      border-left: 4px solid var(--ambar);
+      border-radius: 0 10px 10px 0;
+      background: var(--ambar-suave);
+      color: #6B420D;
+      font-size: .91rem
+    }
+
+    .aviso-importante strong {
+      color: #8A5A00
+    }
+
+    .aviso-entrega {
+      margin-top: 16px;
+      padding: 15px 17px;
+      border: 1px solid #E4A29A;
+      border-left: 4px solid var(--rojo);
+      border-radius: 0 10px 10px 0;
+      background: var(--rojo-suave);
+      color: #7D2925;
+      font-size: .91rem
+    }
+
+    .aviso-entrega strong {
+      color: var(--rojo)
+    }
+
+    .criterio {
+      border: 1px solid var(--linea);
+      border-radius: 14px;
+      padding: 18px;
+      background: white
+    }
+
+    .criterio h3 {
+      color: var(--azul);
+      font-size: 1.05rem
+    }
+
+    .criterio p {
+      color: var(--tinta2);
+      margin-top: 6px
+    }
+
+    .punto {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-top: 12px;
+      background: var(--verde-suave);
+      color: var(--verde);
+      font: 700 .82rem var(--texto);
+      padding: 6px 10px;
+      border-radius: 999px
+    }
+
+    .preguntas {
+      margin: 0;
+      padding-left: 20px;
+      color: var(--tinta2);
+      font-size: .91rem
+    }
+
+    .preguntas li+li {
+      margin-top: 7px
+    }
+
+    .grupo-titulo {
+      grid-column: 1 / -1;
+      margin: 18px 0 4px;
+      padding: 8px 14px;
+      border-radius: 8px;
+      background: var(--fondo-tarjeta);
+      color: var(--primario);
+      font: 600 .88rem var(--texto);
+      letter-spacing: .02em
+    }
+
+    .grupo-titulo:first-child {
+      margin-top: 0
+    }
+
+    .badge-estado-dato {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 6px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      font-size: .74rem;
+      font-weight: 600;
+      line-height: 1.25;
+      width: fit-content;
+      transition: all .2s ease;
+    }
+
+    .badge-estado-dato.respondido {
+      background: #DCFCE7;
+      color: #15803D;
+      border: 1px solid #BBF7D0;
+    }
+
+    .badge-estado-dato.respondido-local {
+      background: #E0F2FE;
+      color: #0369A1;
+      border: 1px solid #BAE6FD;
+    }
+
+    .badge-estado-dato.pendiente {
+      background: #F1F5F9;
+      color: #64748B;
+      border: 1px solid #E2E8F0;
+    }
+
+    .alerta-verde-imagenes {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin: 16px 0;
+      padding: 13px 18px;
+      border: 1.5px solid #86EFAC;
+      border-left: 5px solid #16A34A;
+      border-radius: 9px;
+      background: #F0FDF4;
+      color: #166534;
+      font-size: .88rem;
+      line-height: 1.45;
+      box-shadow: 0 2px 8px rgba(22, 163, 74, .08);
+    }
+
+    .alerta-verde-imagenes strong {
+      color: #14532D;
+      font-weight: 700;
+    }
+
+    .alerta-roja-imagenes {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin: 16px 0;
+      padding: 13px 18px;
+      border: 1.5px solid #EF4444;
+      border-left: 5px solid #DC2626;
+      border-radius: 9px;
+      background: #FEF2F2;
+      color: #991B1B;
+      font-size: .88rem;
+      line-height: 1.45;
+      box-shadow: 0 2px 8px rgba(220, 38, 38, .08);
+    }
+
+    .alerta-roja-imagenes strong {
+      color: #7F1D1D;
+      font-weight: 700;
+    }
+
+    .listado-datos-reales .contenido-fila {
+      transition: border-color .2s ease, background-color .2s ease;
+    }
+
+    .listado-datos-reales .contenido-fila.fila-respondida {
+      border-color: #86EFAC;
+      border-left: 4px solid #16A34A;
+      background: rgba(22, 163, 74, .03);
+    }
+
+    .contenedor-campo-editable {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      width: 100%;
+    }
+
+    .listado-datos-reales .dato-real-refinar {
+      cursor: pointer;
+      background: #FFFDF5;
+      min-height: 54px;
+      padding: 8px 11px;
+      border: 1.5px solid var(--linea-fuerte);
+      border-radius: 8px;
+      font: .86rem/1.45 var(--texto);
+      transition: all .2s ease;
+    }
+
+    .listado-datos-reales .dato-real-refinar:hover {
+      border-color: var(--primario);
+      background: #FFFFFF;
+      box-shadow: 0 0 0 2px rgba(26, 86, 219, .12);
+    }
+
+    .btn-expandir-campo {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      align-self: flex-start;
+      padding: 5px 10px;
+      border: 1px solid var(--linea-fuerte);
+      border-radius: 6px;
+      background: #FFFFFF;
+      color: var(--primario);
+      font: 600 .76rem var(--texto);
+      cursor: pointer;
+      transition: all .15s ease;
+    }
+
+    .btn-expandir-campo:hover {
+      background: #EFF6FF;
+      border-color: var(--primario);
+      transform: translateY(-1px);
+    }
+
+    dialog.modal-completar {
+      padding: 0;
+      border: 0;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px -15px rgba(15, 23, 42, 0.45), 0 0 0 1px rgba(15, 23, 42, 0.1);
+      background: var(--superficie);
+      color: var(--tinta);
+      width: min(720px, 94vw);
+      max-height: 90vh;
+      overflow: hidden;
+      margin: auto;
+    }
+
+    dialog.modal-completar[open] {
+      display: flex;
+      flex-direction: column;
+      animation: modalAparecer .22s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    dialog.modal-completar::backdrop {
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(4px);
+    }
+
+    @keyframes modalAparecer {
+      from {
+        opacity: 0;
+        transform: scale(.96) translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .modal-contenido {
+      display: flex;
+      flex-direction: column;
+      max-height: 90vh;
+      width: 100%;
+    }
+
+    .modal-cabecera {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--linea);
+      background: var(--superficie2);
+    }
+
+    .modal-meta {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .modal-numero {
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 9px;
+      background: var(--azul-suave);
+      color: var(--primario);
+      font: 700 .85rem var(--mono);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .modal-titulo {
+      margin: 0;
+      font-size: 1.15rem;
+      font-family: var(--display);
+      color: var(--tinta);
+      line-height: 1.35;
+    }
+
+    .modal-guia {
+      margin: 4px 0 0;
+      font-size: .84rem;
+      color: var(--tinta2);
+      line-height: 1.45;
+    }
+
+    .modal-cerrar {
+      background: transparent;
+      border: 0;
+      cursor: pointer;
+      color: var(--gris);
+      padding: 6px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all .15s ease;
+      flex-shrink: 0;
+    }
+
+    .modal-cerrar:hover {
+      background: rgba(0, 0, 0, .06);
+      color: var(--tinta);
+    }
+
+    .modal-cuerpo {
+      padding: 20px 24px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .modal-label {
+      font-size: .84rem;
+      font-weight: 600;
+      color: var(--tinta2);
+    }
+
+    .modal-textarea {
+      width: 100%;
+      min-height: 220px;
+      padding: 14px 16px;
+      border: 1.5px solid var(--linea-fuerte);
+      border-radius: 10px;
+      background: #FFFDF5;
+      color: var(--tinta);
+      font: .92rem/1.6 var(--texto);
+      resize: vertical;
+      transition: border-color .15s ease, box-shadow .15s ease;
+      box-sizing: border-box;
+    }
+
+    .modal-textarea:focus {
+      outline: none;
+      border-color: var(--primario);
+      box-shadow: 0 0 0 3px rgba(26, 86, 219, .15);
+      background: #FFFFFF;
+    }
+
+    .modal-ayuda {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: .78rem;
+      color: var(--gris);
+    }
+
+    .modal-pie {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 16px 24px;
+      border-top: 1px solid var(--linea);
+      background: var(--superficie2);
+      flex-wrap: wrap;
+    }
+
+    .modal-botones {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-left: auto;
+    }
+
+    .btn-modal-cancelar {
+      padding: 9px 18px;
+      border: 1px solid var(--linea-fuerte);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--tinta2);
+      font: 600 .86rem var(--texto);
+      cursor: pointer;
+      transition: all .15s ease;
+    }
+
+    .btn-modal-cancelar:hover {
+      background: #f1f5f9;
+      color: var(--tinta);
+    }
+
+    .btn-modal-guardar {
+      padding: 9px 20px;
+      border: 0;
+      border-radius: 8px;
+      background: var(--primario);
+      color: #fff;
+      font: 600 .86rem var(--texto);
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(26, 86, 219, .25);
+      transition: all .15s ease;
+    }
+
+    .btn-modal-guardar:hover {
+      background: #1545b3;
+      transform: translateY(-1px);
+    }
+
+    .roles-etapa {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin: 0 0 16px
+    }
+
+    .rol {
+      border: 1px solid var(--linea);
+      border-radius: 14px;
+      padding: 18px 19px;
+      background: var(--superficie2)
+    }
+
+    .rol.ia {
+      border-top: 4px solid var(--violeta);
+      background: linear-gradient(135deg, #F9F7FF, #F1EDFE)
+    }
+
+    .rol.alumno {
+      border-top: 4px solid var(--turquesa);
+      background: linear-gradient(135deg, #F4FCFC, #E7F5F4)
+    }
+
+    .rol h3 {
+      font: 700 .88rem var(--mono);
+      letter-spacing: .07em;
+      color: var(--azul);
+      margin-bottom: 10px
+    }
+
+    .rol ul {
+      margin: 0;
+      padding-left: 19px;
+      color: var(--tinta2);
+      font-size: .9rem
+    }
+
+    .rol li+li {
+      margin-top: 5px
+    }
+
+    .resultado-etapa {
+      margin: 0 0 22px;
+      padding: 19px 21px;
+      border-radius: 14px;
+      background: var(--azul-suave);
+      border: 1px solid #D4E2F5
+    }
+
+    .resultado-etapa .etiqueta {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--azul);
+      font: 700 .76rem var(--mono);
+      letter-spacing: .1em;
+      text-transform: uppercase
+    }
+
+    .resultado-etapa p {
+      color: #264774;
+      font-size: .98rem
+    }
+
+    .pasos-etapa {
+      display: grid;
+      gap: 13px
+    }
+
+    .pasos-etapa>h3 {
+      font-size: 1.12rem;
+      color: var(--azul);
+      margin: 3px 0 1px
+    }
+
+    .paso-etapa {
+      border: 1px solid var(--linea);
+      border-radius: 14px;
+      padding: 18px 19px;
+      background: var(--superficie2)
+    }
+
+    .paso-etapa h4 {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin: 0 0 10px;
+      color: var(--tinta);
+      font-family: var(--display);
+      font-size: 1.03rem
+    }
+
+    .paso-etapa h4 span {
+      width: 25px;
+      height: 25px;
+      flex: none;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      color: white;
+      background: var(--azul);
+      font: 700 .75rem var(--mono)
+    }
+
+    .paso-etapa p {
+      color: var(--tinta2);
+      font-size: .91rem
+    }
+
+    .paso-etapa ul {
+      margin: 10px 0 0;
+      padding-left: 20px;
+      color: var(--tinta2);
+      font-size: .9rem
+    }
+
+    .paso-etapa li+li {
+      margin-top: 5px
+    }
+
+    .listado-contenidos {
+      display: grid;
+      gap: 8px;
+      margin: 14px 0 0;
+      padding: 0;
+      list-style: none
+    }
+
+    .contenido-fila {
+      display: grid;
+      grid-template-columns: 36px minmax(0, 1fr) minmax(180px, .45fr);
+      gap: 12px;
+      align-items: center;
+      padding: 11px 12px;
+      border: 1px solid var(--linea);
+      border-radius: 10px;
+      background: var(--superficie)
+    }
+
+    .contenido-fila .n {
+      display: grid;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: var(--azul-suave);
+      color: var(--azul);
+      font: 700 .7rem var(--mono)
+    }
+
+    .contenido-fila strong {
+      display: block;
+      color: var(--tinta);
+      font-size: .92rem
+    }
+
+    .contenido-fila small {
+      display: block;
+      margin-top: 2px;
+      color: var(--tinta2);
+      font-size: .79rem;
+      line-height: 1.35
+    }
+
+    .contenido-fila input,
+    .contenido-fila select {
+      width: 100%;
+      min-height: 36px;
+      padding: 7px 9px;
+      border: 1px solid var(--linea-fuerte);
+      border-radius: 7px;
+      background: #FFF9DF;
+      color: var(--tinta);
+      font: .84rem var(--texto)
+    }
+
+    .contenido-fila select {
+      cursor: pointer
+    }
+
+    .contenido-fila select:disabled {
+      cursor: not-allowed;
+      color: var(--gris);
+      background: var(--superficie2)
+    }
+
+    .contenido-fila input:focus,
+    .contenido-fila select:focus {
+      outline: 2px solid var(--azul-vivo);
+      outline-offset: 1px
+    }
+
+    .pregunta-fila {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(220px, .7fr);
+      gap: 12px;
+      align-items: center;
+      padding: 9px 0;
+      border-bottom: 1px solid var(--linea)
+    }
+
+    .pregunta-fila:last-child {
+      border-bottom: 0
+    }
+
+    .pregunta-fila input {
+      width: 100%;
+      min-height: 36px;
+      padding: 7px 9px;
+      border: 1px solid var(--linea-fuerte);
+      border-radius: 7px;
+      background: #FFF9DF;
+      color: var(--tinta);
+      font: .84rem var(--texto)
+    }
+
+    .pregunta-fila input:focus {
+      outline: 2px solid var(--azul-vivo);
+      outline-offset: 1px
+    }
+
+    .resultado-generado {
+      width: 100%;
+      min-height: 150px;
+      margin-top: 13px;
+      padding: 11px 12px;
+      border: 1px solid var(--linea-fuerte);
+      border-radius: 8px;
+      resize: vertical;
+      background: #FFF9DF;
+      color: var(--tinta);
+      font: .88rem/1.5 var(--texto)
+    }
+
+    .resultado-generado:focus {
+      outline: 2px solid var(--azul-vivo);
+      outline-offset: 1px
+    }
+
+    .resultado-generado[aria-invalid="true"] {
+      border-color: var(--rojo);
+      background: var(--rojo-suave)
+    }
+
+    .seleccion-canva {
+      display: grid;
+      gap: 16px;
+      margin: 0 0 18px
+    }
+
+    .seleccion-canva fieldset {
+      min-width: 0;
+      margin: 0;
+      padding: 15px 17px;
+      border: 1px solid var(--linea);
+      border-radius: 12px;
+      background: var(--superficie2)
+    }
+
+    .seleccion-canva legend {
+      padding: 0 6px;
+      color: var(--azul);
+      font: 700 .86rem var(--mono)
+    }
+
+    .opciones-canva {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px 14px
+    }
+
+    .titulo-bloque-canva {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin: 3px 0 -5px;
+      color: var(--tinta);
+      font-size: .96rem;
+      font-weight: 800
+    }
+
+    .titulo-bloque-canva span {
+      display: inline-grid;
+      width: 24px;
+      height: 24px;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--azul);
+      color: #fff;
+      font: 700 .76rem var(--mono)
+    }
+
+    .lista-comprobacion {
+      display: grid;
+      gap: 12px;
+      margin-top: 16px
+    }
+
+    .checklist-grupo {
+      padding: 13px 15px;
+      border: 1px solid var(--linea);
+      border-radius: 10px;
+      background: var(--superficie2)
+    }
+
+    .checklist-grupo h5 {
+      margin: 0 0 7px;
+      color: var(--azul);
+      font-size: .91rem
+    }
+
+    .checklist-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin-top: 6px;
+      color: var(--tinta2);
+      font-size: .88rem;
+      line-height: 1.4
+    }
+
+    .checklist-item input {
+      flex: none;
+      width: 16px;
+      height: 16px;
+      margin-top: 2px;
+      accent-color: var(--verde)
+    }
+
+    .checklist-item {
+      position: relative
+    }
+
+    .checklist-item input.indicador-revision {
+      display: block;
+      position: absolute;
+      top: 1px;
+      left: 0;
+      width: 18px;
+      height: 18px;
+      margin: 0;
+      opacity: 0;
+      cursor: pointer;
+      z-index: 1
+    }
+
+    .estado-revision {
+      display: none;
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0
+    }
+
+    .marca-indicador {
+      display: inline-grid;
+      width: 18px;
+      height: 18px;
+      flex: none;
+      place-items: center;
+      border: 2px solid var(--gris);
+      border-radius: 4px;
+      background: var(--superficie);
+      color: transparent;
+      font-weight: 800;
+      line-height: 1
+    }
+
+    .marca-indicador[data-estado="mejora"] {
+      border-color: var(--rojo);
+      background: var(--rojo-suave);
+      color: var(--rojo)
+    }
+
+    .marca-indicador[data-estado="cumple"] {
+      border-color: var(--verde);
+      background: #EFFAF3;
+      color: #17683D
+    }
+
+    .checklist-item:focus-within .marca-indicador {
+      outline: 3px solid #BBD5F6;
+      outline-offset: 2px
+    }
+
+    .registro-revision {
+      display: contents
+    }
+
+    .estado-revision {
+      justify-self: start;
+      min-height: 34px;
+      padding: 0 12px;
+      border: 1px solid var(--verde);
+      border-radius: 7px;
+      background: #EFFAF3;
+      color: #17683D;
+      cursor: pointer;
+      font: 700 .82rem var(--texto)
+    }
+
+    .estado-revision[data-estado="mejora"] {
+      border-color: var(--rojo);
+      background: var(--rojo-suave);
+      color: #9A2F35
+    }
+
+    .estado-revision[data-estado="pendiente"] {
+      border-color: var(--linea-fuerte);
+      background: var(--superficie);
+      color: var(--gris)
+    }
+
+    .campos-revision {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 13px;
+      padding-top: 11px;
+      border-top: 1px solid var(--linea)
+    }
+
+    .formulario-datos {
+      display: grid;
+      gap: 13px;
+      margin-top: 15px
+    }
+
+    .campo-revision {
+      display: grid;
+      gap: 5px;
+      color: var(--tinta2);
+      font-size: .82rem;
+      font-weight: 700
+    }
+
+    .mejora-campo {
+      width: 100%;
+      min-height: 70px;
+      padding: 10px 11px;
+      border: 1px solid var(--linea-fuerte);
+      border-radius: 8px;
+      resize: vertical;
+      background: var(--superficie2);
+      color: var(--tinta);
+      font: .88rem/1.45 var(--texto)
+    }
+
+    .mejora-campo:focus {
+      outline: 2px solid var(--azul-vivo);
+      outline-offset: 1px
+    }
+
+    .mejora-campo:disabled {
+      cursor: not-allowed;
+      opacity: .55
+    }
+
+    .copiar-analisis-construir {
+      margin-top: 17px
+    }
+
+    .opcion-canva {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 7px 8px;
+      border-radius: 7px;
+      color: var(--tinta2);
+      font-size: .88rem;
+      line-height: 1.35;
+      cursor: pointer
+    }
+
+    .opcion-canva:hover {
+      background: var(--azul-suave)
+    }
+
+    .opcion-canva input {
+      flex: none;
+      width: 16px;
+      height: 16px;
+      margin: 2px 0 0;
+      accent-color: var(--azul-vivo)
+    }
+
+    .pregunta-fila input[aria-invalid="true"] {
+      border-color: var(--rojo);
+      background: var(--rojo-suave)
+    }
+
+    .copiar-preguntas {
+      margin-top: 13px
+    }
+
+    .transferido-p2 {
+      margin: 0 0 22px;
+      border: 1px solid var(--linea);
+      border-radius: 14px;
+      overflow: hidden;
+      background: var(--superficie2)
+    }
+
+    .transferido-cuerpo {
+      display: none;
+      padding: 16px 19px;
+      border-top: 3px solid var(--azul)
+    }
+
+    .transferido-p2.abierto .transferido-cuerpo {
+      display: block
+    }
+
+    .transferido-cuerpo pre {
+      margin: 0;
+      color: var(--tinta2);
+      font: .88rem/1.6 var(--texto);
+      white-space: pre-wrap
+    }
+
+    .analisis-editable {
+      min-height: 280px;
+      margin: 0;
+      font-size: .88rem;
+      line-height: 1.6
+    }
+
+    .nota-listado {
+      margin-top: 14px;
+      color: var(--tinta2);
+      font-size: .88rem
+    }
+
+    .reglas-obligatorias ul {
+      display: grid;
+      gap: 5px;
+      margin: 8px 0 0;
+      padding: 0;
+      list-style: none
+    }
+
+    .reglas-obligatorias li::before {
+      margin-right: 7px;
+      color: var(--verde);
+      font-weight: 800;
+      content: '✓'
+    }
+
+    .nota-listado a {
+      color: var(--azul);
+      font-weight: 700;
+      text-decoration: underline
+    }
+
+    .prompt-item {
+      border: 1px solid var(--linea);
+      border-radius: 14px;
+      background: var(--superficie);
+      overflow: hidden;
+      margin-top: 12px
+    }
+
+    .prompt-cabecera {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 15px 18px;
+      border: 0;
+      border-bottom: 4px solid var(--azul);
+      background: var(--superficie);
+      color: var(--tinta);
+      text-align: left;
+      font: 700 1rem var(--display);
+      cursor: pointer
+    }
+
+    .prompt-cabecera:hover {
+      background: var(--superficie2)
+    }
+
+    .prompt-cabecera .flecha {
+      width: 18px;
+      height: 18px;
+      flex: none;
+      transition: transform .18s ease;
+      color: var(--gris)
+    }
+
+    .prompt-item.abierto .prompt-cabecera .flecha {
+      transform: rotate(180deg)
+    }
+
+    .prompt-cuerpo {
+      display: none;
+      padding: 18px;
+      border-top: 1px solid var(--linea)
+    }
+
+    .prompt-item.abierto .prompt-cuerpo {
+      display: block
+    }
+
+    .prompt-desc {
+      margin: 0 0 12px;
+      color: var(--tinta2);
+      font-size: .91rem
+    }
+
+    .prompt-texto {
+      max-height: 360px;
+      margin: 0 0 14px;
+      padding: 14px 16px;
+      overflow-y: auto;
+      border: 1px solid var(--linea);
+      border-radius: 9px;
+      background: var(--superficie2);
+      color: var(--tinta);
+      font: .82rem/1.65 var(--mono);
+      white-space: pre-wrap
+    }
+
+    .prompt-copiar {
+      min-height: 40px;
+      padding: 0 17px;
+      border: 1px solid var(--azul);
+      border-radius: 8px;
+      background: var(--azul);
+      color: white;
+      cursor: pointer;
+      font: 700 .91rem var(--texto)
+    }
+
+    .prompt-copiar:hover {
+      background: #0B4388
+    }
+
+    .prompt-copiar.copiado {
+      background: var(--verde);
+      border-color: var(--verde)
+    }
+
+    .prompt-acciones {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .prompt-destino {
+      font-size: .88rem;
+      color: var(--tinta2);
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
+    .resumen {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 15px
+    }
+
+    .resumen .criterio {
+      min-height: 145px
+    }
+
+    .resumen .punto {
+      margin-top: 8px
+    }
+
+    .fila {
+      display: grid;
+      grid-template-columns: 38px 1fr auto;
+      gap: 12px;
+      align-items: center;
+      padding: 13px 18px;
+      border-top: 1px solid var(--linea)
+    }
+
+    .navpie {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 38px;
+      padding-top: 20px;
+      border-top: 1px solid var(--linea);
+      background: transparent
+    }
+
+    .navpie .lado {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-width: 0
+    }
+
+    .navpie .lado.der {
+      align-items: flex-end;
+      text-align: right
+    }
+
+    .navpie .destino {
+      max-width: 22ch;
+      overflow: hidden;
+      color: var(--gris);
+      font: .76rem var(--mono);
+      letter-spacing: .02em;
+      text-overflow: ellipsis;
+      white-space: nowrap
+    }
+
+    .navpie button {
+      min-height: 40px;
+      padding: 0 17px;
+      border: 1px solid var(--linea-fuerte);
+      border-radius: 8px;
+      background: var(--superficie);
+      cursor: pointer;
+      color: var(--tinta);
+      font: 700 .91rem var(--texto)
+    }
+
+    .navpie .siguiente {
+      border-color: var(--azul);
+      background: var(--azul);
+      color: white
+    }
+
+    .navpie .siguiente:hover {
+      background: #0B4388
+    }
+
+    .navpie button:disabled {
+      color: var(--gris);
+      cursor: default;
+      opacity: .55
+    }
+
+    main {
+      padding: 30px 0 0;
+      min-width: 0
+    }
+
+    .pantalla.hero {
+      border: 0;
+      border-radius: 0;
+      box-shadow: none;
+      background: transparent;
+      overflow: visible
+    }
+
+    .hero .eyebrow {
+      font-family: var(--mono);
+      font-size: 11.5px;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--turquesa);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap
+    }
+
+    .hero .eyebrow::before {
+      width: 26px;
+      height: 2px;
+      background: var(--turquesa)
+    }
+
+    .hero-titulo {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+      margin: 14px 0 0
+    }
+
+    .hero-logo {
+      width: 84px;
+      height: auto;
+      flex: none;
+      margin-top: 4px
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 4.8vw, 3.2rem);
+      font-weight: 800;
+      margin: 0;
+      max-width: 16ch;
+      color: var(--tinta)
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--azul)
+    }
+
+    .hero .sub {
+      max-width: none;
+      color: var(--tinta2);
+      font-size: 1.05rem;
+      margin-top: 14px
+    }
+
+    .objetivo {
+      background: var(--azul-suave);
+      border-radius: 12px;
+      padding: 16px 20px;
+      max-width: none;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      margin-top: 24px
+    }
+
+    .objetivo .etq {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--azul);
+      flex: none;
+      padding-top: 3px
+    }
+
+    .objetivo p {
+      font-size: .94rem;
+      color: var(--tinta)
+    }
+
+    .fases {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1px;
+      margin-top: 26px;
+      background: var(--linea);
+      border: 1px solid var(--linea);
+      border-radius: 12px;
+      overflow: hidden
+    }
+
+    .rutas-sitio {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 24px
+    }
+
+    .ruta-sitio {
+      min-height: 112px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      padding: 18px 20px;
+      border: 1px solid var(--linea-fuerte);
+      border-radius: 13px;
+      background: var(--superficie);
+      color: var(--tinta);
+      text-align: left;
+      text-decoration: none;
+      font: inherit
+    }
+
+    .ruta-sitio.activa {
+      border: 2px solid var(--turquesa);
+      box-shadow: var(--sombra);
+      cursor: pointer
+    }
+
+    .ruta-sitio.activa:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--sombra-alta)
+    }
+
+    .ruta-sitio.en-construccion {
+      opacity: .68;
+      cursor: not-allowed
+    }
+
+    .ruta-sitio .ruta-etiqueta {
+      color: var(--turquesa);
+      font: 700 .72rem var(--mono);
+      letter-spacing: .1em;
+      text-transform: uppercase
+    }
+
+    .ruta-sitio.en-construccion .ruta-etiqueta {
+      color: var(--gris)
+    }
+
+    .ruta-sitio strong {
+      font: 700 1.12rem var(--display)
+    }
+
+    .ruta-sitio small {
+      color: var(--tinta2);
+      font-size: .84rem;
+      line-height: 1.35
+    }
+
+    .fase {
+      padding: 14px 16px 16px;
+      border-top: 3px solid;
+      background: var(--superficie)
+    }
+
+    .fase .n {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase
+    }
+
+    .fase .t {
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: 1rem;
+      margin-top: 2px
+    }
+
+    .fase .d {
+      font-size: .82rem;
+      color: var(--gris);
+      margin-top: 2px
+    }
+
+    .fase.f1 {
+      border-top-color: var(--turquesa)
+    }
+
+    .fase.f1 .n {
+      color: var(--turquesa)
+    }
+
+    .fase.f2 {
+      border-top-color: var(--violeta)
+    }
+
+    .fase.f2 .n {
+      color: var(--violeta)
+    }
+
+    .fase.f3 {
+      border-top-color: var(--ambar)
+    }
+
+    .fase.f3 .n {
+      color: var(--ambar)
+    }
+
+    .fase.f4 {
+      border-top-color: var(--rojo)
+    }
+
+    .fase.f4 .n {
+      color: var(--rojo)
+    }
+
+    @media (max-width: 800px) {
+      .envoltorio {
+        padding: 0 16px 34px
+      }
+
+      .resumen,
+      .roles-etapa {
+        grid-template-columns: 1fr
+      }
+
+      .contenido-fila {
+        grid-template-columns: 32px minmax(0, 1fr)
+      }
+
+      .contenido-fila input,
+      .contenido-fila select {
+        grid-column: 2
+      }
+
+      .pregunta-fila {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .opciones-canva {
+        grid-template-columns: 1fr
+      }
+
+      .campos-revision {
+        grid-template-columns: 1fr
+      }
+
+      .rutas-sitio {
+        grid-template-columns: 1fr
+      }
+
+      .cabecera {
+        padding: 30px 24px
+      }
+
+      .contenido {
+        padding: 24px 20px
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero-logo {
+        display: none
+      }
+    }
+
+    @media (max-width: 560px) {
+      .tb {
+        gap: 11px;
+        padding: 10px 14px
+      }
+
+      .tb-marca .txt,
+      .tb-prog .rot {
+        display: none
+      }
+
+      .tb-prog {
+        gap: 9px
+      }
+
+      .barra {
+        min-width: 30px
+      }
+
+      .btn-mini {
+        padding: 4px 8px
+      }
+
+      .tb-logo {
+        height: 22px
+      }
+
+      .fila {
+        grid-template-columns: 28px 1fr
+      }
+
+      .navpie {
+        padding: 17px 20px
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="saltar" href="#contenido">Ir al contenido</a>
+  <header class="topbar">
+    <div class="tb">
+      <a class="tb-escudo" href="/" aria-label="Ir al inicio"><img class="tb-logo" src="/logos/logo_reducido.png"
+          alt="Logo San Ignacio de Loyola"></a>
+      <a class="tb-marca" href="#inicio"><span class="pt">SIL</span><span class="txt">Sitio web · BATAN</span></a>
+      <div class="tb-prog"><span class="rot">Avance</span>
+        <div class="barra"><i id="barra-avance"></i></div><span class="num"><span id="contador">0</span> / <span
+            id="total-puntos">10</span></span><button class="btn-mini icono" id="tb-menu" aria-expanded="false"
+          aria-label="Índice" title="Índice"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+            aria-hidden="true">
+            <path d="M2 4h12M2 8h12M2 12h12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+          </svg></button><button class="btn-mini icono rojo" id="btn-reiniciar" aria-label="Reiniciar"
+          title="Volver el avance a cero y empezar de nuevo"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+            aria-hidden="true">
+            <path d="M13 3v3.5H9.5M13 6.3A5.5 5.5 0 1 1 12.2 3.6" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+          </svg></button>
+      </div>
+      <div class="tb-cuenta" id="tb-cuenta"><a class="btn-mini" href="/ingresar">Ingresar</a></div>
+    </div>
+  </header>
+
+  <div class="velo" id="velo" aria-hidden="true"></div>
+
+  <div class="envoltorio">
+    <nav class="rail" aria-label="Índice de la guía">
+      <h2>Guía de evaluación</h2>
+      <ol id="indice">
+        <li class="inicio"><a href="#inicio" data-paso="inicio"><span class="n">•</span><span>Cómo usar esta
+              guía</span></a></li>
+      </ol>
+    </nav>
+
+    <main id="contenido">
+      <section class="pantalla hero" id="inicio" data-titulo="Cómo usar esta guía">
+        <div class="eyebrow">Sitio web de la empresa · Proyecto STEAM · BATAN</div>
+        <div class="hero-titulo">
+          <h1>Tu empresa, <em>en una web que funciona</em></h1><img class="hero-logo" src="/logos/logo_reducido.png"
+            alt="Escudo del colegio">
+        </div>
+        <p class="sub">Vas a crear el sitio web de la empresa de tu proyecto con dos herramientas de IA:
+          <strong>NotebookLM</strong> reúne la información de tus documentos y <strong>Gemini con Canvas</strong>
+          construye el sitio. Vos pensás, decidís y revisás; la IA te asiste.</p>
+        <div class="objetivo">
+          <div class="etq">Objetivo</div>
+          <p>Crear un sitio web profesional para la empresa, con información real del proyecto y una tienda virtual
+            simulada, planificándolo antes de pedírselo a la IA.</p>
+        </div>
+        <div class="rutas-sitio" aria-label="Elegí el recorrido del sitio web">
+          <a class="ruta-sitio activa" href="#objetivo" data-paso="objetivo"><span class="ruta-etiqueta">Educación Media ·
+              BATAN</span><strong>Proyecto STEAM</strong><small>Planificá, buscá la información con NotebookLM y construí con Gemini.</small></a>
+          <a class="ruta-sitio" href="/sitio-web"><span class="ruta-etiqueta">Tercer ciclo</span><strong>Proyecto
+              SilEmprende</strong><small>Ir a la guía de SilEmprende.</small></a>
+        </div>
+        <div class="fases">
+          <div class="fase f1">
+            <div class="n">Fase 1</div>
+            <div class="t">Planificar</div>
+            <div class="d">Objetivo, público, páginas, información con NotebookLM, funcionalidades e identidad visual (01 a 05)</div>
+          </div>
+          <div class="fase f2">
+            <div class="n">Fase 2</div>
+            <div class="t">Construir</div>
+            <div class="d">Prompt, primer sitio en Gemini y mejoras del diseño (06 a 08)</div>
+          </div>
+          <div class="fase f3">
+            <div class="n">Fase 3</div>
+            <div class="t">Completar</div>
+            <div class="d">Tienda virtual, prueba y publicación (09 y 10)</div>
+          </div>
+          <div class="fase f4">
+            <div class="n">Fase 4</div>
+            <div class="t">Entregar</div>
+            <div class="d">Criterios de evaluación y entrega (11)</div>
+          </div>
+        </div>
+        <div class="nota" style="margin-top:22px"><strong>Vos pensás, vos decidís, la IA te asiste.</strong> La IA
+          puede equivocarse: revisá todo lo que genera antes de usarlo. Lo que se escribe en esta guía se guarda
+          solo en este navegador.</div>
+      </section>
+
+      <section class="pantalla" id="objetivo" data-titulo="Objetivo y público" hidden>
+        <div class="contenido">
+          <div class="seccion-enc"><span class="numero">00</span>
+            <div>
+              <h2>Objetivo y público del sitio</h2>
+              <p>Primero pensá el sitio: qué querés lograr y para quién lo hacés. Todavía no se usa la IA.</p>
+            </div>
+          </div>
+          <div class="nota"><strong>Primero pensar el sitio, después pedirle a la IA.</strong> Un sitio exitoso empieza con una buena planificación: te ahorra tiempo, evita errores y hace que el sitio cumpla su objetivo.</div>
+          <div class="resultado-etapa"><span class="etiqueta">Resultado esperado</span>
+            <p><strong>El objetivo y el público del sitio</strong>, definidos por vos.</p>
+          </div>
+          <div class="pasos-etapa">
+            <h3>Pasos de la etapa</h3>
+            <article class="paso-etapa">
+              <h4><span>1</span>Completá tus datos</h4>
+              <p>Se usan en el pie de tu sitio («Realizado por») y en el archivo que entregás.</p>
+              <div class="datos-alumno">
+              <label class="pregunta-fila" style="margin-top:14px;display:block"><span
+                  class="pregunta-texto"><strong>Nombre y apellido</strong><br>Tus datos.</span><input type="text" id="alumno-nombre" aria-label="Nombre y apellido" placeholder="Escribí tu nombre y apellido"></label>
+              <label class="pregunta-fila" style="margin-top:14px;display:block"><span
+                  class="pregunta-texto"><strong>Sección</strong><br>Por ejemplo: 2A BATAN.</span><input type="text" id="alumno-seccion" aria-label="Sección" placeholder="Escribí tu sección"></label>
+              <label class="pregunta-fila" style="margin-top:14px;display:block"><span
+                  class="pregunta-texto"><strong>Nombre de la empresa</strong><br>La empresa de tu proyecto STEAM.</span><input type="text" id="empresa-nombre" aria-label="Nombre de la empresa" placeholder="Escribí el nombre de la empresa"></label>
+              </div>
+            </article>
+            <article class="paso-etapa">
+              <h4><span>2</span>Definí el objetivo del sitio</h4>
+              <p>El objetivo es el propósito principal del sitio: qué querés comunicar, a quién y qué acción esperás que hagan los visitantes.</p>
+              <ul class="preguntas">
+                <li>¿Qué quiero lograr con mi sitio?</li>
+                <li>¿Qué mensaje quiero comunicar?</li>
+                <li>¿Qué acción quiero que realicen los visitantes?</li>
+              </ul>
+              <label class="pregunta-fila" style="margin-top:14px;display:block"><span
+                  class="pregunta-texto"><strong>Objetivo del sitio</strong><br>Escribilo con tus palabras.</span><textarea id="objetivo-sitio" class="resultado-generado" aria-label="Objetivo del sitio"
+                  placeholder="Escribí aquí el objetivo de tu sitio web..."></textarea></label>
+              <button class="prompt-copiar guardar-resultado" type="button" data-campo="objetivo-sitio"
+                data-clave="batan-web-objetivo" data-aviso="Escribí el objetivo antes de guardarlo.">Guardar</button>
+            </article>
+            <article class="paso-etapa">
+              <h4><span>3</span>Definí el público</h4>
+              <p>El público es el grupo de personas para las que hacés el sitio. Conocerlo te ayuda a decidir el contenido, el diseño y el lenguaje.</p>
+              <ul class="preguntas">
+                <li>¿A qué grupo de personas quiero llegar? ¿Qué edad tienen?</li>
+                <li>¿Qué intereses o necesidades tienen?</li>
+                <li>¿Dónde y cómo usan internet?</li>
+                <li>¿Qué esperan encontrar en el sitio?</li>
+              </ul>
+              <label class="pregunta-fila" style="margin-top:14px;display:block"><span
+                  class="pregunta-texto"><strong>Público</strong><br>Describí a quién va dirigido el sitio.</span><textarea id="publico-sitio" class="resultado-generado" aria-label="Público"
+                  placeholder="Describí aquí a tu público objetivo..."></textarea></label>
+              <button class="prompt-copiar guardar-resultado" type="button" data-campo="publico-sitio"
+                data-clave="batan-web-publico" data-aviso="Describí el público antes de guardarlo.">Guardar</button>
+            </article>
+          </div>
+
+        </div>
+      </section>
+
+      <section class="pantalla" id="paginas" data-titulo="Secciones y páginas" hidden>
+        <div class="contenido">
+          <div class="seccion-enc"><span class="numero">00</span>
+            <div>
+              <h2>Secciones y páginas</h2>
+              <p>El sitio de una empresa tiene páginas que no pueden faltar. Además, podés sumar otras si te sirven.</p>
+            </div>
+          </div>
+          <div class="nota"><strong>Qué tenés que hacer acá:</strong> revisá las páginas obligatorias y marcá las optativas que quieras sumar. Pensá qué información necesita ver tu público en cada una.</div>
+          <div class="pasos-etapa">
+            <h3>Pasos de la etapa</h3>
+            <article class="paso-etapa">
+              <h4><span>1</span>Elegí las páginas de tu sitio</h4>
+              <p>Las obligatorias ya están marcadas. La página del proyecto STEAM es optativa: sumala si querés contar cómo nació la empresa.</p>
+              <div class="seleccion-canva" id="paginas-sitio">
+                <div class="titulo-bloque-canva">Páginas del sitio</div>
+                <fieldset>
+                  <legend>Marcá las que va a tener tu sitio</legend>
+                  <div class="opciones-canva">
+                  <label class="opcion-canva"><input type="checkbox" name="paginas-sitio" value="Inicio: presentación de la empresa y lo que ofrece" checked disabled><span>Inicio: presentación de la empresa y lo que ofrece <em>(obligatoria)</em></span></label>
+                  <label class="opcion-canva"><input type="checkbox" name="paginas-sitio" value="Nosotros: quiénes somos, misión, visión, valores y equipo" checked disabled><span>Nosotros: quiénes somos, misión, visión, valores y equipo <em>(obligatoria)</em></span></label>
+                  <label class="opcion-canva"><input type="checkbox" name="paginas-sitio" value="Productos o servicios: qué ofrece la empresa" checked disabled><span>Productos o servicios: qué ofrece la empresa <em>(obligatoria)</em></span></label>
+                  <label class="opcion-canva"><input type="checkbox" name="paginas-sitio" value="Tienda virtual: catálogo, carrito y pedido" checked disabled><span>Tienda virtual: catálogo, carrito y pedido <em>(obligatoria)</em></span></label>
+                  <label class="opcion-canva"><input type="checkbox" name="paginas-sitio" value="Contacto: cómo comunicarse con la empresa" checked disabled><span>Contacto: cómo comunicarse con la empresa <em>(obligatoria)</em></span></label>
+                  <label class="opcion-canva"><input type="checkbox" name="paginas-sitio" value="El proyecto STEAM: de qué trata, objetivo y cómo lo hicimos"><span>El proyecto STEAM: de qué trata, objetivo y cómo lo hicimos</span></label>
+                  <label class="opcion-canva"><input type="checkbox" name="paginas-sitio" value="Galería de fotos"><span>Galería de fotos</span></label>
+                  <label class="opcion-canva"><input type="checkbox" name="paginas-sitio" value="Preguntas frecuentes"><span>Preguntas frecuentes</span></label>
+                  <label class="opcion-canva"><input type="checkbox" name="paginas-sitio" value="Opiniones de clientes"><span>Opiniones de clientes</span></label>
+                  <label class="opcion-canva"><input type="checkbox" name="paginas-sitio" value="Novedades"><span>Novedades</span></label>
+                  </div>
+                </fieldset>
+              </div>
+            </article>
+            <article class="paso-etapa">
+              <h4><span>2</span>Pensá cómo se conectan</h4>
+              <ul class="preguntas">
+                <li>¿Qué información necesita ver primero el visitante?</li>
+                <li>¿Cómo se pasa de una página a otra desde el menú?</li>
+                <li>¿Desde qué páginas conviene llegar a la tienda?</li>
+              </ul>
+            </article>
+          </div>
+
+        </div>
+      </section>
+
+      <section class="pantalla" id="informacion" data-titulo="Información con NotebookLM" hidden>
+        <div class="contenido">
+          <div class="seccion-enc"><span class="numero">00</span>
+            <div>
+              <h2>La información del sitio con NotebookLM</h2>
+              <p>Con el objetivo, el público y las páginas definidos, NotebookLM arma la información de cada página a partir de los documentos de tu proyecto.</p>
+            </div>
+          </div>
+          <div class="roles-etapa">
+            <article class="rol ia">
+              <h3>IA · NOTEBOOKLM</h3>
+              <ul>
+                <li>Lee los documentos del proyecto que subís.</li>
+                <li>Redacta la información de cada página.</li>
+                <li>Responde solo con lo que está en tus fuentes.</li>
+              </ul>
+            </article>
+            <article class="rol alumno">
+              <h3>ALUMNO</h3>
+              <ul>
+                <li>Sube los documentos del proyecto.</li>
+                <li>Revisa que cada dato sea correcto.</li>
+                <li>Completa lo que falta y guarda la información.</li>
+              </ul>
+            </article>
+          </div>
+          <div class="nota"><strong>¿Por qué NotebookLM?</strong> Porque responde solo con lo que está en tus documentos. Así el sitio muestra información real del proyecto y no datos inventados por la IA.</div>
+          <div class="resultado-etapa"><span class="etiqueta">Resultado esperado</span>
+            <p><strong>La información de cada página</strong>, lista para el sitio, con los productos y sus precios.</p>
+          </div>
+          <div class="pasos-etapa">
+            <h3>Pasos de la etapa</h3>
+            <article class="paso-etapa">
+              <h4><span>1</span>Creá el cuaderno en NotebookLM</h4>
+              <ol class="lista-instrucciones">
+                <li>Entrá a <strong>notebooklm.google.com</strong> con tu cuenta del colegio.</li>
+                <li>Creá un <strong>cuaderno nuevo</strong> y ponele de nombre «Sitio web – nombre de tu empresa».</li>
+                <li>Agregá como <strong>fuentes</strong> los documentos del proyecto: el trabajo escrito del proyecto STEAM, la presentación de la defensa, las fichas de productos y costos, y otros documentos que tengan información de la empresa.</li>
+                <li>Esperá a que NotebookLM termine de leer las fuentes.</li>
+              </ol>
+              <div class="aviso-importante"><strong>Cuidá los datos personales.</strong> Subí solo documentos del proyecto. No subas teléfonos, direcciones ni documentos de identidad que no deban publicarse.</div>
+            </article>
+            <article class="paso-etapa">
+              <h4><span>2</span>Pedile la información</h4>
+              <p>Apretá <strong>Adjuntar al prompt</strong>: se suman tu objetivo, tu público y las páginas que elegiste. Después copiá el prompt en el chat del cuaderno.</p>
+              <button class="prompt-copiar adjuntar-datos-prompt" type="button" data-destino="prompt-contenido">Adjuntar al
+                prompt</button>
+              <div class="prompt-item">
+                <button class="prompt-cabecera" type="button" aria-expanded="false"><span
+                    data-prompt-titulo="notebook-contenido">Obtener la información del sitio</span><svg class="flecha" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                    <path d="m4 10 4-4 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg></button>
+                <div class="prompt-cuerpo">
+                  <p data-prompt-desc="notebook-contenido" class="prompt-desc">Se completa con tu objetivo, tu público y tus páginas.</p>
+                  <pre data-prompt="notebook-contenido" id="prompt-contenido" class="prompt-texto">Usá únicamente las fuentes de este cuaderno. Necesito la información para el sitio web de la empresa de nuestro proyecto STEAM.
+
+Objetivo del sitio: [OBJETIVO DEL SITIO]
+
+Público: [PÚBLICO]
+
+El sitio va a tener estas páginas:
+[PÁGINAS DEL SITIO]
+
+Para cada página escribí:
+- El título de la página.
+- Un texto breve y claro, pensado para el público del sitio y para leer en pantalla (no un informe).
+- Los datos que tiene que mostrar.
+
+En la página de productos y en la tienda, listá cada producto con nombre, descripción corta y precio. En Contacto, poné solo los datos que aparezcan en las fuentes.
+Si un dato no está en las fuentes, escribí [PENDIENTE]. No inventes información. Al final, hacé una lista de los datos que faltan.</pre>
+                  <div class="prompt-acciones">
+                    <button class="prompt-copiar" type="button">Copiar prompt</button>
+                    <span class="prompt-destino">Pegar en el chat de NotebookLM.</span>
+                  </div>
+                </div>
+              </div>
+            </article>
+            <article class="paso-etapa">
+              <h4><span>3</span>Revisá la información</h4>
+              <ul class="preguntas">
+                <li>¿La información es correcta y está actualizada?</li>
+                <li>¿Sirve para tu objetivo y se entiende para tu público?</li>
+                <li>¿Los textos son cortos y fáciles de leer en pantalla?</li>
+                <li>¿Quedó algún [PENDIENTE]? Buscá el dato, agregalo como fuente o completalo con tu grupo.</li>
+              </ul>
+            </article>
+            <article class="paso-etapa">
+              <h4><span>4</span>Guardá la información del sitio</h4>
+              <label class="pregunta-fila" style="margin-top:14px;display:block"><span
+                  class="pregunta-texto"><strong>Pegá aquí la información del sitio</strong><br>La respuesta de NotebookLM, revisada y corregida.</span><textarea id="info-sitio" class="resultado-generado" aria-label="Pegá aquí la información del sitio"
+                  placeholder="Pegá aquí la información que debe contener tu sitio..."></textarea></label>
+              <button class="prompt-copiar guardar-resultado" type="button" data-campo="info-sitio"
+                data-clave="batan-web-informacion" data-aviso="Pegá la información del sitio antes de guardarla.">Guardar</button>
+              <div class="aviso-importante"><strong>Tené a mano las imágenes:</strong> el logo de la empresa, fotos de los productos y del equipo. Las vas a usar al mejorar el diseño.</div>
+            </article>
+          </div>
+
+        </div>
+      </section>
+
+      <section class="pantalla" id="funcionalidades" data-titulo="Funcionalidades" hidden>
+        <div class="contenido">
+          <div class="seccion-enc"><span class="numero">00</span>
+            <div>
+              <h2>Funcionalidades necesarias</h2>
+              <p>Las funcionalidades son las acciones que el visitante puede hacer en tu sitio.</p>
+            </div>
+          </div>
+          <div class="nota"><strong>Qué tenés que hacer acá:</strong> elegí qué va a poder hacer el visitante. Las obligatorias ya están marcadas; sumá solo las que resuelvan una necesidad real.</div>
+          <div class="pasos-etapa">
+            <h3>Pasos de la etapa</h3>
+            <article class="paso-etapa">
+              <h4><span>1</span>Elegí las funcionalidades</h4>
+              <div class="seleccion-canva" id="funcionalidades-sitio">
+                <div class="titulo-bloque-canva">Funcionalidades</div>
+                <fieldset>
+                  <legend>Marcá las que va a tener tu sitio</legend>
+                  <div class="opciones-canva">
+                  <label class="opcion-canva"><input type="checkbox" name="funcionalidades-sitio" value="Menú de navegación" checked disabled><span>Menú de navegación <em>(obligatoria)</em></span></label>
+                  <label class="opcion-canva"><input type="checkbox" name="funcionalidades-sitio" value="Carrito de compras (tienda simulada)" checked disabled><span>Carrito de compras (tienda simulada) <em>(obligatoria)</em></span></label>
+                  <label class="opcion-canva"><input type="checkbox" name="funcionalidades-sitio" value="Formulario de pedido o de contacto" checked disabled><span>Formulario de pedido o de contacto <em>(obligatoria)</em></span></label>
+                  <label class="opcion-canva"><input type="checkbox" name="funcionalidades-sitio" value="Botón de WhatsApp"><span>Botón de WhatsApp</span></label>
+                  <label class="opcion-canva"><input type="checkbox" name="funcionalidades-sitio" value="Galería de imágenes"><span>Galería de imágenes</span></label>
+                  <label class="opcion-canva"><input type="checkbox" name="funcionalidades-sitio" value="Preguntas frecuentes desplegables"><span>Preguntas frecuentes desplegables</span></label>
+                  <label class="opcion-canva"><input type="checkbox" name="funcionalidades-sitio" value="Buscador de productos"><span>Buscador de productos</span></label>
+                  <label class="opcion-canva"><input type="checkbox" name="funcionalidades-sitio" value="Enlaces a redes sociales"><span>Enlaces a redes sociales</span></label>
+                  <label class="opcion-canva"><input type="checkbox" name="funcionalidades-sitio" value="Mapa de ubicación"><span>Mapa de ubicación</span></label>
+                  <label class="opcion-canva"><input type="checkbox" name="funcionalidades-sitio" value="Botón para volver arriba"><span>Botón para volver arriba</span></label>
+                  </div>
+                </fieldset>
+              </div>
+            </article>
+            <article class="paso-etapa">
+              <h4><span>2</span>Pensá cada una</h4>
+              <ul class="preguntas">
+                <li>¿Qué problema o necesidad resuelve?</li>
+                <li>¿Es indispensable o es un extra?</li>
+                <li>¿Es fácil de usar para todos?</li>
+              </ul>
+            </article>
+          </div>
+
+        </div>
+      </section>
+
+      <section class="pantalla" id="identidad" data-titulo="Identidad visual" hidden>
+        <div class="contenido">
+          <div class="seccion-enc"><span class="numero">00</span>
+            <div>
+              <h2>La identidad visual de tu empresa</h2>
+              <p>A partir del logo, definí los colores, las tipografías y el estilo que va a tener todo el sitio.</p>
+            </div>
+          </div>
+          <div class="roles-etapa">
+            <article class="rol ia">
+              <h3>IA · GEMINI</h3>
+              <ul>
+                <li>Analiza el logo y propone una paleta.</li>
+                <li>Propone tipografías y reglas de estilo.</li>
+              </ul>
+            </article>
+            <article class="rol alumno">
+              <h3>ALUMNO</h3>
+              <ul>
+                <li>Adjunta el logo real de la empresa.</li>
+                <li>Elige y ajusta la paleta y el estilo.</li>
+                <li>Aprueba la identidad visual.</li>
+              </ul>
+            </article>
+          </div>
+          <div class="resultado-etapa"><span class="etiqueta">Resultado esperado</span>
+            <p><strong>La identidad visual aprobada</strong>: paleta de colores, tipografías y estilo para todas las páginas.</p>
+          </div>
+          <div class="pasos-etapa">
+            <h3>Pasos de la etapa</h3>
+            <article class="paso-etapa">
+              <h4><span>1</span>Analizá el logo y obtené la paleta</h4>
+              <p>El prompt usa estos 2 datos. Si ya los escribiste, aparecen solos; podés editarlos si hace falta. Después apretá <strong>Adjuntar al prompt</strong>.</p>
+              <div class="insumos-estilo">
+              <label class="pregunta-fila" style="margin-top:14px;display:block"><span
+                  class="pregunta-texto"><strong>El nombre de la empresa</strong><br>De la página «Objetivo y público».</span><input type="text" id="paleta-empresa" data-espejo="empresa-nombre" aria-label="El nombre de la empresa" placeholder="Escribí el nombre de la empresa"></label>
+              <label class="pregunta-fila" style="margin-top:14px;display:block"><span
+                  class="pregunta-texto"><strong>El objetivo del sitio</strong><br>De la página «Objetivo y público».</span><textarea id="paleta-objetivo" class="resultado-generado" data-espejo="objetivo-sitio" aria-label="El objetivo del sitio"
+                  placeholder="Escribí el objetivo del sitio..."></textarea></label>
+              </div>
+              <button class="prompt-copiar adjuntar-datos-prompt" type="button" data-destino="prompt-paleta">Adjuntar al
+                prompt</button>
+              <div class="prompt-item">
+                <button class="prompt-cabecera" type="button" aria-expanded="false"><span
+                    data-prompt-titulo="gemini-paleta">Extraer la paleta de colores del logo</span><svg class="flecha" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                    <path d="m4 10 4-4 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg></button>
+                <div class="prompt-cuerpo">
+                  <p data-prompt-desc="gemini-paleta" class="prompt-desc">Abrí un chat nuevo en Gemini, adjuntá la imagen del logo y pegá este prompt.</p>
+                  <pre data-prompt="gemini-paleta" id="prompt-paleta" class="prompt-texto">Analizá la imagen del logo adjunto de mi empresa.
+
+Nombre de la empresa: [NOMBRE DE LA EMPRESA]
+Objetivo del sitio web: [OBJETIVO DEL SITIO]
+
+Identificá los colores principales del logo y proponé una paleta para el sitio web con 4 o 5 colores. Para cada color indicá: nombre, código HEX, para qué usarlo en el sitio (fondo, títulos, botones o detalles) y si el texto se lee bien sobre él.
+
+No inventes colores que no tengan relación con el logo. Si no podés analizar la imagen, escribí [PALETA PENDIENTE].</pre>
+                  <div class="prompt-acciones">
+                    <button class="prompt-copiar" type="button">Copiar prompt</button>
+                    <span class="prompt-destino">Pegar en un chat nuevo de Gemini, junto con el logo.</span>
+                  </div>
+                </div>
+              </div>
+            </article>
+            <article class="paso-etapa">
+              <h4><span>2</span>Definí el estilo y las tipografías</h4>
+              <p>Pegá la paleta que te dio Gemini y ajustala si hace falta. Después apretá <strong>Adjuntar al prompt</strong>.</p>
+              <label class="pregunta-fila" style="margin-top:14px;display:block"><span
+                  class="pregunta-texto"><strong>La paleta de colores</strong><br>La respuesta de Gemini del paso 1, revisada.</span><textarea id="paleta-colores" class="resultado-generado" aria-label="La paleta de colores"
+                  placeholder="Pegá aquí la paleta de colores..."></textarea></label>
+              <button class="prompt-copiar adjuntar-datos-prompt" type="button" data-destino="prompt-estilo">Adjuntar al
+                prompt</button>
+              <div class="prompt-item">
+                <button class="prompt-cabecera" type="button" aria-expanded="false"><span
+                    data-prompt-titulo="gemini-estilo">Establecer el estilo visual y las tipografías</span><svg class="flecha" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                    <path d="m4 10 4-4 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg></button>
+                <div class="prompt-cuerpo">
+                  <p data-prompt-desc="gemini-estilo" class="prompt-desc">Pegalo en el mismo chat donde analizaste el logo.</p>
+                  <pre data-prompt="gemini-estilo" id="prompt-estilo" class="prompt-texto">Con esta paleta aprobada, definí el estilo visual del sitio web de mi empresa.
+
+Paleta: [PALETA APROBADA]
+
+Objetivo del sitio: [OBJETIVO DEL SITIO]
+
+Público: [PÚBLICO]
+
+Proponé:
+1. La personalidad visual del sitio en pocas palabras (por ejemplo: moderno y confiable, cercano y colorido).
+2. Dos tipografías de Google Fonts: una para títulos y otra para textos, con los tamaños sugeridos.
+3. Cómo usar los colores en fondos, títulos, botones y tarjetas, cuidando que el texto se lea bien.
+4. El estilo de los botones, las tarjetas, los íconos y las imágenes.
+5. Qué evitar para que el sitio no se vea recargado.
+
+Entregalo como una guía corta, lista para pegar en el prompt que construye el sitio.</pre>
+                  <div class="prompt-acciones">
+                    <button class="prompt-copiar" type="button">Copiar prompt</button>
+                    <span class="prompt-destino">Pegar en el mismo chat de Gemini.</span>
+                  </div>
+                </div>
+              </div>
+            </article>
+            <article class="paso-etapa">
+              <h4><span>3</span>Revisá y aprobá</h4>
+              <ul class="preguntas">
+                <li>¿Los colores combinan con el logo y la empresa?</li>
+                <li>¿El texto se lee bien sobre los colores de fondo?</li>
+                <li>¿El estilo va con tu objetivo y tu público?</li>
+                <li>¿Se puede aplicar igual en todas las páginas?</li>
+              </ul>
+            </article>
+            <article class="paso-etapa">
+              <h4><span>4</span>Guardá la identidad visual</h4>
+              <label class="pregunta-fila" style="margin-top:14px;display:block"><span
+                  class="pregunta-texto"><strong>Pegá aquí la identidad visual aprobada</strong><br>La paleta y el estilo que aprobaste. Pasa sola a la parte «Diseño» del prompt.</span><textarea id="identidad-visual" class="resultado-generado" aria-label="Pegá aquí la identidad visual aprobada"
+                  placeholder="Pegá aquí la identidad visual aprobada..."></textarea></label>
+              <button class="prompt-copiar guardar-resultado" type="button" data-campo="identidad-visual"
+                data-clave="batan-web-identidad" data-aviso="Pegá la identidad visual antes de guardarla.">Guardar</button>
+            </article>
+          </div>
+
+        </div>
+      </section>
+
+      <section class="pantalla" id="prompt" data-titulo="El prompt para Gemini" hidden>
+        <div class="contenido">
+          <div class="seccion-enc"><span class="numero">00</span>
+            <div>
+              <h2>Construí tu prompt</h2>
+              <p>Un buen prompt es como darle un mapa claro a Gemini para que construya el sitio como lo pensaste.</p>
+            </div>
+          </div>
+          <div class="nota"><strong>Un buen prompt es:</strong> claro, completo, específico, organizado y dice qué resultado esperás. No alcanza con «Creame una página web».</div>
+          <div class="pasos-etapa">
+            <h3>Pasos de la etapa</h3>
+            <article class="paso-etapa">
+              <h4><span>1</span>Revisá tu planificación</h4>
+              <p>Estos datos salen de las páginas anteriores. Si corregís algo acá, también cambia allá.</p>
+              <div class="insumos-estilo">
+              <label class="pregunta-fila" style="margin-top:14px;display:block"><span
+                  class="pregunta-texto"><strong>1. Objetivo del sitio</strong><br>De la página «Objetivo y público».</span><textarea id="prompt-objetivo-dato" class="resultado-generado" data-espejo="objetivo-sitio" aria-label="1. Objetivo del sitio"
+                  placeholder="Escribí el objetivo..."></textarea></label>
+              <label class="pregunta-fila" style="margin-top:14px;display:block"><span
+                  class="pregunta-texto"><strong>2. Público</strong><br>De la página «Objetivo y público».</span><textarea id="prompt-publico-dato" class="resultado-generado" data-espejo="publico-sitio" aria-label="2. Público"
+                  placeholder="Describí el público..."></textarea></label>
+              <label class="pregunta-fila" style="margin-top:14px;display:block"><span
+                  class="pregunta-texto"><strong>4. Información</strong><br>De la página «Información con NotebookLM».</span><textarea id="prompt-info-dato" class="resultado-generado" data-espejo="info-sitio" aria-label="4. Información"
+                  placeholder="Pegá la información del sitio..."></textarea></label>
+              <label class="pregunta-fila" style="margin-top:14px;display:block"><span
+                  class="pregunta-texto"><strong>Diseño: identidad visual</strong><br>De la página «Identidad visual». Si la dejás vacía, Gemini propone un diseño.</span><textarea id="diseno-sitio" class="resultado-generado" data-espejo="identidad-visual" aria-label="Diseño: identidad visual"
+                  placeholder="Pegá aquí la identidad visual..."></textarea></label>
+              </div>
+              <p>Las <strong>secciones</strong> (3) y las <strong>funcionalidades</strong> (5) se toman de lo que marcaste.</p>
+            </article>
+            <article class="paso-etapa">
+              <h4><span>2</span>Armá el prompt</h4>
+              <button class="prompt-copiar adjuntar-datos-prompt" type="button" data-destino="prompt-gemini">Adjuntar al
+                prompt</button>
+              <div class="prompt-item">
+                <button class="prompt-cabecera" type="button" aria-expanded="false"><span
+                    data-prompt-titulo="gemini-sitio">Crear el sitio web en Gemini</span><svg class="flecha" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                    <path d="m4 10 4-4 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg></button>
+                <div class="prompt-cuerpo">
+                  <p data-prompt-desc="gemini-sitio" class="prompt-desc">Tiene las 5 partes de tu planificación y los requisitos del sitio.</p>
+                  <pre data-prompt="gemini-sitio" id="prompt-gemini" class="prompt-texto">Actuá como diseñador/a y programador/a web. Construí en Canvas el sitio web de la empresa de nuestro proyecto STEAM.
+
+Quiero crear un sitio web para: [OBJETIVO DEL SITIO]
+
+El sitio está dirigido a: [PÚBLICO]
+
+Debe tener las siguientes secciones o páginas: [SECCIONES Y PÁGINAS]
+
+La información que debe contener es:
+[INFORMACIÓN DEL SITIO]
+
+Las funcionalidades que debe incluir son: [FUNCIONALIDADES]
+
+Diseño (identidad visual aprobada: usá estos colores, tipografías y estilo en todo el sitio): [DISEÑO]
+
+Requisitos:
+- Es el sitio de una empresa: tiene que verse profesional y confiable.
+- Un menú de navegación que lleve a cada sección y que funcione en el celular.
+- Tienda virtual simulada: catálogo con los productos (imagen, nombre, descripción y precio), carrito para agregar y quitar productos, cambiar cantidades y ver el total, y un formulario de pedido con nombre, teléfono y correo que muestre una confirmación con el resumen. No proceses pagos ni pidas datos de tarjetas: es un simulador.
+- Usá solo la información que te doy. Donde falte un dato, escribí [PENDIENTE]. No inventes productos, precios ni integrantes.
+- Donde vaya una foto real, dejá una imagen de ejemplo con una etiqueta que diga qué va (por ejemplo, "Foto del producto 1").
+- Diseño adaptable a celulares, textos breves y buen contraste entre el texto y el fondo.
+- En el pie de página de todas las secciones: «Realizado por: [NOMBRE Y APELLIDO]».</pre>
+                  <div class="prompt-acciones">
+                    <button class="prompt-copiar" type="button" data-guardar="batan-web-prompt-copiado">Copiar prompt</button>
+                    <span class="prompt-destino">Pegar en Gemini con Canvas (página siguiente).</span>
+                  </div>
+                </div>
+              </div>
+            </article>
+            <article class="paso-etapa">
+              <h4><span>3</span>Guardá el prompt final</h4>
+              <label class="pregunta-fila" style="margin-top:14px;display:block"><span
+                  class="pregunta-texto"><strong>Pegá aquí el prompt final</strong><br>El que vas a usar en Gemini, con tus ajustes.</span><textarea id="prompt-final" class="resultado-generado" aria-label="Pegá aquí el prompt final"
+                  placeholder="Pegá aquí el prompt final..."></textarea></label>
+              <button class="prompt-copiar guardar-resultado" type="button" data-campo="prompt-final"
+                data-clave="batan-web-prompt-final" data-aviso="Pegá el prompt final antes de guardarlo.">Guardar</button>
+            </article>
+          </div>
+
+        </div>
+      </section>
+
+      <section class="pantalla" id="crear" data-titulo="Crear el primer sitio" hidden>
+        <div class="contenido">
+          <div class="seccion-enc"><span class="numero">00</span>
+            <div>
+              <h2>Creá el primer sitio con Gemini</h2>
+              <p>Usá Gemini con Canvas para generar la primera versión del sitio con el prompt que preparaste.</p>
+            </div>
+          </div>
+          <div class="roles-etapa">
+            <article class="rol ia">
+              <h3>IA · GEMINI CON CANVAS</h3>
+              <ul>
+                <li>Construye el sitio a partir del prompt.</li>
+                <li>Genera el código y lo muestra funcionando.</li>
+                <li>Aplica los cambios que le pedís.</li>
+              </ul>
+            </article>
+            <article class="rol alumno">
+              <h3>ALUMNO</h3>
+              <ul>
+                <li>Pega el prompt y genera el sitio.</li>
+                <li>Revisa el resultado con mirada crítica.</li>
+                <li>Pide cambios concretos.</li>
+              </ul>
+            </article>
+          </div>
+          <div class="pasos-etapa">
+            <h3>Pasos de la etapa</h3>
+            <article class="paso-etapa">
+              <h4><span>1</span>Generá el sitio</h4>
+              <ol class="lista-instrucciones">
+                <li>Entrá a <strong>gemini.google.com</strong> e iniciá sesión con tu cuenta del colegio.</li>
+                <li>Hacé clic en <strong>Nuevo chat</strong>.</li>
+                <li>Abajo del cuadro de texto, elegí <strong>Canvas</strong>.</li>
+                <li>Pegá el prompt que preparaste.</li>
+                <li>Enviá el mensaje y esperá: Gemini arma el sitio en Canvas.</li>
+                <li>Revisá la primera versión y seguí mejorándola.</li>
+              </ol>
+            </article>
+            <article class="paso-etapa">
+              <h4><span>2</span>Revisá lo que generó</h4>
+              <ul class="preguntas">
+                <li>¿Tiene todas las secciones que definiste?</li>
+                <li>¿Incluye la información que planeaste?</li>
+                <li>¿Tiene las funcionalidades elegidas?</li>
+                <li>¿Aparece «Realizado por» con tu nombre?</li>
+              </ul>
+              <div class="aviso-importante"><strong>El primer prompt no tiene que ser perfecto.</strong> El sitio que obtenés es una primera versión creada por IA. Está bien si no queda perfecto: es la base sobre la que vas a trabajar.</div>
+            </article>
+            <article class="paso-etapa">
+              <h4><span>3</span>Pedí cambios de a uno</h4>
+              <p>Conversá con Gemini como si trabajaran juntos. Cuanto más claro sea el pedido, mejor el resultado. Por ejemplo:</p>
+              <ul class="preguntas">
+                <li>«En la página Nosotros, agregá la misión y la visión que están en la información.»</li>
+                <li>«El menú no se ve en el celular. Hacé que se abra con un botón.»</li>
+                <li>«Cambiá el título del inicio por el eslogan de la empresa.»</li>
+              </ul>
+            </article>
+          </div>
+
+        </div>
+      </section>
+
+      <section class="pantalla" id="diseno" data-titulo="Mejorar el diseño" hidden>
+        <div class="contenido">
+          <div class="seccion-enc"><span class="numero">00</span>
+            <div>
+              <h2>Mejorá el diseño</h2>
+              <p>Con la primera versión lista, mejorá el diseño para que el sitio sea atractivo, claro y fácil de usar.</p>
+            </div>
+          </div>
+          <div class="nota"><strong>El diseño se mejora en varias rondas:</strong> observar, detectar lo que querés cambiar, pedirlo con claridad, revisar el resultado y repetir.</div>
+          <div class="pasos-etapa">
+            <h3>Pasos de la etapa</h3>
+            <article class="paso-etapa">
+              <h4><span>1</span>Mirá estos 8 aspectos</h4>
+              <ul class="preguntas">
+                <li><strong>Colores:</strong> que combinen entre sí y permitan leer los textos.</li>
+                <li><strong>Tipografías:</strong> que los títulos se distingan de los textos.</li>
+                <li><strong>Distribución:</strong> que la información sea clara y fácil de encontrar.</li>
+                <li><strong>Imágenes:</strong> relacionadas con el proyecto, del tamaño y en el lugar adecuados.</li>
+                <li><strong>Botones:</strong> visibles y que muestren qué acción hacen.</li>
+                <li><strong>Menús:</strong> que el visitante pueda moverse fácil por el sitio.</li>
+                <li><strong>Organización visual:</strong> que se entienda rápido.</li>
+                <li><strong>Estilo coherente:</strong> el mismo estilo en todas las secciones.</li>
+              </ul>
+            </article>
+            <article class="paso-etapa">
+              <h4><span>2</span>Pedile a Gemini una revisión</h4>
+              <p>Gemini revisa el sitio y propone mejoras. Vos elegís cuáles aplicar.</p>
+              <div class="prompt-item">
+                <button class="prompt-cabecera" type="button" aria-expanded="false"><span
+                    data-prompt-titulo="gemini-revision">Revisar el diseño del sitio</span><svg class="flecha" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                    <path d="m4 10 4-4 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg></button>
+                <div class="prompt-cuerpo">
+                  <p data-prompt-desc="gemini-revision" class="prompt-desc">Pegalo en el mismo chat de Gemini donde está tu sitio.</p>
+                  <pre data-prompt="gemini-revision" id="prompt-revision" class="prompt-texto">Revisá el sitio que creaste en Canvas como si fueras un visitante nuevo y un diseñador. Analizá estos 8 aspectos: colores, tipografías, distribución, imágenes, botones, menús, organización visual y estilo coherente entre las secciones.
+
+Para cada aspecto, decime qué está bien y qué mejorarías, con una propuesta concreta. Todavía no cambies nada: esperá a que yo elija qué mejoras aplicar.</pre>
+                  <div class="prompt-acciones">
+                    <button class="prompt-copiar" type="button">Copiar prompt</button>
+                    <span class="prompt-destino">Pegar en el mismo chat de Gemini.</span>
+                  </div>
+                </div>
+              </div>
+            </article>
+            <article class="paso-etapa">
+              <h4><span>3</span>Sumá el logo y las imágenes</h4>
+              <ul class="preguntas">
+                <li>Adjuntá el logo en el chat del sitio y pedile: «Poné este logo en el menú y en el pie de página».</li>
+                <li>Para cada foto, adjuntala y decile en qué lugar va, por ejemplo: «Usá esta foto en la tarjeta del producto 1».</li>
+                <li>Si Canvas no puede usar tu foto, pedile que deje la imagen de ejemplo más parecida y anotá en tu tarea qué foto iría.</li>
+              </ul>
+              <div class="aviso-importante"><strong>Probalo en el celular.</strong> Verificá que el diseño también se vea bien en pantallas chicas.</div>
+            </article>
+          </div>
+
+        </div>
+      </section>
+
+      <section class="pantalla" id="tienda" data-titulo="Tienda virtual" hidden>
+        <div class="contenido">
+          <div class="seccion-enc"><span class="numero">00</span>
+            <div>
+              <h2>La tienda virtual</h2>
+              <p>Dejá funcionando la tienda con los productos reales de la empresa. No es una tienda real: simula una compra.</p>
+            </div>
+          </div>
+          <div class="nota"><strong>Es un simulador:</strong> no se cobra, no se entregan productos y no se piden tarjetas ni contraseñas. Sirve para mostrar cómo se compraría en tu empresa.</div>
+          <div class="pasos-etapa">
+            <h3>Pasos de la etapa</h3>
+            <article class="paso-etapa">
+              <h4><span>1</span>Juntá los productos</h4>
+              <p>Copiá de tu información los productos con su nombre, una descripción corta y el precio.</p>
+              <label class="pregunta-fila" style="margin-top:14px;display:block"><span
+                  class="pregunta-texto"><strong>Productos de la tienda</strong><br>Uno por línea: nombre — descripción — precio.</span><textarea id="productos-tienda" class="resultado-generado" aria-label="Productos de la tienda"
+                  placeholder="Ej.: Kit de siembra — semillas y maceta biodegradable — $5.000"></textarea></label>
+              <button class="prompt-copiar guardar-resultado" type="button" data-campo="productos-tienda"
+                data-clave="batan-web-productos" data-aviso="Escribí los productos antes de guardarlos.">Guardar</button>
+            </article>
+            <article class="paso-etapa">
+              <h4><span>2</span>Pedile a Gemini que arme la tienda</h4>
+              <button class="prompt-copiar adjuntar-datos-prompt" type="button" data-destino="prompt-tienda">Adjuntar al
+                prompt</button>
+              <div class="prompt-item">
+                <button class="prompt-cabecera" type="button" aria-expanded="false"><span
+                    data-prompt-titulo="gemini-tienda">Dejar funcionando la tienda virtual</span><svg class="flecha" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                    <path d="m4 10 4-4 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg></button>
+                <div class="prompt-cuerpo">
+                  <p data-prompt-desc="gemini-tienda" class="prompt-desc">Se completa con tus productos.</p>
+                  <pre data-prompt="gemini-tienda" id="prompt-tienda" class="prompt-texto">Revisá la tienda virtual del sitio y dejala funcionando con estos productos:
+[PRODUCTOS]
+
+La tienda tiene que tener:
+1. Catálogo: una tarjeta por producto con imagen, nombre, descripción breve, precio y botón "Agregar al carrito".
+2. Carrito: agregar y quitar productos, cambiar cantidades (+ / −) y ver el total actualizado.
+3. Pedido: formulario con nombre y apellido, teléfono o WhatsApp y correo; todos obligatorios.
+4. Confirmación: un mensaje que agradezca el pedido y muestre el resumen (productos, cantidades y total).
+
+Es un simulador escolar: no proceses pagos ni pidas datos de tarjetas. No cambies el resto del sitio.</pre>
+                  <div class="prompt-acciones">
+                    <button class="prompt-copiar" type="button">Copiar prompt</button>
+                    <span class="prompt-destino">Pegar en el mismo chat de Gemini.</span>
+                  </div>
+                </div>
+              </div>
+            </article>
+            <article class="paso-etapa">
+              <h4><span>3</span>Hacé una compra de prueba</h4>
+              <ul class="preguntas">
+                <li>Agregá productos al carrito y cambiá las cantidades.</li>
+                <li>¿El total se calcula bien?</li>
+                <li>Completá el pedido con datos de ejemplo: ¿aparece la confirmación con el resumen?</li>
+                <li>Probalo también en el celular.</li>
+              </ul>
+            </article>
+          </div>
+
+        </div>
+      </section>
+
+      <section class="pantalla" id="publicar" data-titulo="Probar y publicar" hidden>
+        <div class="contenido">
+          <div class="seccion-enc"><span class="numero">00</span>
+            <div>
+              <h2>Probá y publicá el sitio</h2>
+              <p>Recorré el sitio como si fueras un visitante real y publicalo para compartir el enlace.</p>
+            </div>
+          </div>
+          <div class="pasos-etapa">
+            <h3>Pasos de la etapa</h3>
+            <article class="paso-etapa">
+              <h4><span>1</span>Probá como visitante</h4>
+              <ul class="preguntas">
+                <li>¿Funcionan los enlaces y los botones del menú?</li>
+                <li>¿Funcionan los formularios y la tienda?</li>
+                <li>¿Se ve bien en la computadora y en el celular?</li>
+                <li>¿La información es correcta y no quedó ningún [PENDIENTE]?</li>
+                <li>¿Aparece «Realizado por» con tu nombre?</li>
+              </ul>
+            </article>
+            <article class="paso-etapa">
+              <h4><span>2</span>Publicá el sitio</h4>
+              <ol class="lista-instrucciones">
+                <li>En Canvas, usá el botón <strong>Compartir</strong> para crear el enlace público del sitio.</li>
+                <li>Copiá el enlace y abrilo en una ventana privada para comprobar que cualquiera lo puede ver.</li>
+              </ol>
+              <label class="pregunta-fila" style="margin-top:14px;display:block"><span
+                  class="pregunta-texto"><strong>Enlace público de tu sitio</strong><br>Pegalo acá: se guarda y aparece en el archivo que entregás.</span><input type="url" id="enlace-sitio-publicado" aria-label="Enlace público de tu sitio" placeholder="https://..."></label>
+            </article>
+          </div>
+
+        </div>
+      </section>
+
+      <section class="pantalla" id="criterios" data-titulo="Criterios de evaluación" hidden>
+        <div class="contenido">
+          <div class="seccion-enc"><span class="numero">00</span>
+            <div>
+              <h2>Criterios de evaluación</h2>
+              <p>Estos son los puntos que se usan para corregir el sitio web.</p>
+            </div>
+          </div>
+          <div class="nota"><strong>Qué tenés que hacer acá:</strong> repasá tu trabajo con esta lista y marcá cada
+            punto que cumplas para estimar tu puntaje.</div>
+          <div class="nota"
+            style="display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap">
+            <strong>Puntaje estimado</strong>
+            <span id="criterios-puntaje" style="font-family:var(--mono);font-weight:700;font-size:1.05rem">0 / 10
+              puntos</span>
+          </div>
+          <ul id="criterios-lista" style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:13px">
+            <li style="display:flex;align-items:center;justify-content:space-between;gap:10px">
+              <label style="display:flex;align-items:flex-start;gap:10px;flex:1;cursor:pointer"><input type="checkbox"
+                  data-pts="1" style="margin-top:3px;flex-shrink:0;width:18px;height:18px;accent-color:var(--azul)"><span><strong>1.
+                    Objetivo y público.</strong> Define con claridad el objetivo del sitio y el público al que se dirige.</span></label>
+              <span style="flex-shrink:0;font-family:var(--mono);font-size:.82rem;color:var(--gris)">1 pt</span>
+            </li>
+            <li style="display:flex;align-items:center;justify-content:space-between;gap:10px">
+              <label style="display:flex;align-items:flex-start;gap:10px;flex:1;cursor:pointer"><input type="checkbox"
+                  data-pts="1" style="margin-top:3px;flex-shrink:0;width:18px;height:18px;accent-color:var(--azul)"><span><strong>2.
+                    Estructura de empresa.</strong> El sitio tiene las páginas de una empresa (inicio, nosotros, productos, tienda y contacto) y las optativas elegidas.</span></label>
+              <span style="flex-shrink:0;font-family:var(--mono);font-size:.82rem;color:var(--gris)">1 pt</span>
+            </li>
+            <li style="display:flex;align-items:center;justify-content:space-between;gap:10px">
+              <label style="display:flex;align-items:flex-start;gap:10px;flex:1;cursor:pointer"><input type="checkbox"
+                  data-pts="1" style="margin-top:3px;flex-shrink:0;width:18px;height:18px;accent-color:var(--azul)"><span><strong>3.
+                    Cuaderno de NotebookLM.</strong> Crea el cuaderno con los documentos del proyecto y obtiene la información de cada página.</span></label>
+              <span style="flex-shrink:0;font-family:var(--mono);font-size:.82rem;color:var(--gris)">1 pt</span>
+            </li>
+            <li style="display:flex;align-items:center;justify-content:space-between;gap:10px">
+              <label style="display:flex;align-items:flex-start;gap:10px;flex:1;cursor:pointer"><input type="checkbox"
+                  data-pts="1" style="margin-top:3px;flex-shrink:0;width:18px;height:18px;accent-color:var(--azul)"><span><strong>4.
+                    Información real.</strong> Los textos muestran información real del proyecto, sin datos inventados ni [PENDIENTE] sin completar.</span></label>
+              <span style="flex-shrink:0;font-family:var(--mono);font-size:.82rem;color:var(--gris)">1 pt</span>
+            </li>
+            <li style="display:flex;align-items:center;justify-content:space-between;gap:10px">
+              <label style="display:flex;align-items:flex-start;gap:10px;flex:1;cursor:pointer"><input type="checkbox"
+                  data-pts="1" style="margin-top:3px;flex-shrink:0;width:18px;height:18px;accent-color:var(--azul)"><span><strong>5.
+                    Prompt completo.</strong> Escribe el prompt con las cinco partes de la planificación.</span></label>
+              <span style="flex-shrink:0;font-family:var(--mono);font-size:.82rem;color:var(--gris)">1 pt</span>
+            </li>
+            <li style="display:flex;align-items:center;justify-content:space-between;gap:10px">
+              <label style="display:flex;align-items:flex-start;gap:10px;flex:1;cursor:pointer"><input type="checkbox"
+                  data-pts="1" style="margin-top:3px;flex-shrink:0;width:18px;height:18px;accent-color:var(--azul)"><span><strong>6.
+                    Identidad visual.</strong> Define la paleta y el estilo a partir del logo y los aplica en todo el sitio; se lee bien.</span></label>
+              <span style="flex-shrink:0;font-family:var(--mono);font-size:.82rem;color:var(--gris)">1 pt</span>
+            </li>
+            <li style="display:flex;align-items:center;justify-content:space-between;gap:10px">
+              <label style="display:flex;align-items:flex-start;gap:10px;flex:1;cursor:pointer"><input type="checkbox"
+                  data-pts="1" style="margin-top:3px;flex-shrink:0;width:18px;height:18px;accent-color:var(--azul)"><span><strong>7.
+                    Tienda virtual.</strong> Catálogo con productos y precios reales, carrito que calcula el total y confirmación del pedido.</span></label>
+              <span style="flex-shrink:0;font-family:var(--mono);font-size:.82rem;color:var(--gris)">1 pt</span>
+            </li>
+            <li style="display:flex;align-items:center;justify-content:space-between;gap:10px">
+              <label style="display:flex;align-items:flex-start;gap:10px;flex:1;cursor:pointer"><input type="checkbox"
+                  data-pts="1" style="margin-top:3px;flex-shrink:0;width:18px;height:18px;accent-color:var(--azul)"><span><strong>8.
+                    Funcionalidades.</strong> Las funcionalidades elegidas funcionan: menú, botones y formularios.</span></label>
+              <span style="flex-shrink:0;font-family:var(--mono);font-size:.82rem;color:var(--gris)">1 pt</span>
+            </li>
+            <li style="display:flex;align-items:center;justify-content:space-between;gap:10px">
+              <label style="display:flex;align-items:flex-start;gap:10px;flex:1;cursor:pointer"><input type="checkbox"
+                  data-pts="1" style="margin-top:3px;flex-shrink:0;width:18px;height:18px;accent-color:var(--azul)"><span><strong>9.
+                    Celular y publicación.</strong> Se ve bien en el celular y tiene un enlace público que funciona.</span></label>
+              <span style="flex-shrink:0;font-family:var(--mono);font-size:.82rem;color:var(--gris)">1 pt</span>
+            </li>
+            <li style="display:flex;align-items:center;justify-content:space-between;gap:10px">
+              <label style="display:flex;align-items:flex-start;gap:10px;flex:1;cursor:pointer"><input type="checkbox"
+                  data-pts="1" style="margin-top:3px;flex-shrink:0;width:18px;height:18px;accent-color:var(--azul)"><span><strong>10.
+                    Autoría.</strong> Aparece «Realizado por» con su nombre y entrega el archivo con su trabajo.</span></label>
+              <span style="flex-shrink:0;font-family:var(--mono);font-size:.82rem;color:var(--gris)">1 pt</span>
+            </li>
+          </ul>
+          <article class="paso-etapa" style="margin-top:26px">
+            <h4><span>✓</span>Descargá tu trabajo y entregalo</h4>
+            <p>Cuando termines de marcar los criterios, descargá un archivo con todo lo que completaste en esta guía,
+              ordenado por página. Subilo a la tarea junto con el enlace de tu sitio.</p>
+            <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+              <button class="prompt-copiar descargar-trabajo" type="button">Descargar mi trabajo</button>
+              <button class="btn-mini rojo borrar-datos" type="button">Borrar mis datos</button>
+            </div>
+            <p class="nota-listado">El archivo se arma con lo guardado en este navegador. Si usás una computadora
+              compartida, cuando termines apretá <strong>Borrar mis datos</strong> para que el próximo alumno empiece de
+              cero.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+      var pantallas = Array.prototype.slice.call(document.querySelectorAll('.pantalla'));
+      var criterios = pantallas.filter(function (pantalla) { return pantalla.id !== 'inicio'; });
+      var indice = document.getElementById('indice');
+      var total = criterios.length;
+      var clave = 'batan-web-avance';
+      var estado = { max: 0 };
+      try {
+        var guardado = JSON.parse(localStorage.getItem(clave) || '{}');
+        if (guardado && typeof guardado.max === 'number') estado.max = Math.min(Math.max(0, guardado.max), total);
+      } catch (error) { }
+      function guardarAvance() { try { localStorage.setItem(clave, JSON.stringify(estado)); } catch (error) { } }
+      document.getElementById('total-puntos').textContent = total;
+
+      /* índice y pie de navegación */
+      criterios.forEach(function (pantalla, posicion) {
+        var numero = String(posicion + 1).padStart(2, '0');
+        pantalla.dataset.numeroPaso = String(posicion + 1);
+        var badge = pantalla.querySelector('.seccion-enc .numero');
+        if (badge) badge.textContent = numero;
+        indice.insertAdjacentHTML('beforeend', '<li><a href="#' + pantalla.id + '" data-paso="' + pantalla.id + '"><span class="n">' + numero + '</span><span>' + pantalla.dataset.titulo + '</span></a></li>');
+      });
+      pantallas.forEach(function (pantalla) {
+        var pie = document.createElement('footer'); pie.className = 'navpie';
+        pie.innerHTML = '<div class="lado izq"><span class="destino ant-t"></span><button class="anterior">← Anterior</button></div><div class="lado der"><span class="destino sig-t"></span><button class="siguiente">Siguiente →</button></div>';
+        pantalla.appendChild(pie);
+      });
+      function mostrar(id) {
+        if (!document.getElementById(id)) id = 'inicio';
+        pantallas.forEach(function (pantalla) { pantalla.hidden = pantalla.id !== id; });
+        var pantalla = document.getElementById(id);
+        var paso = parseInt(pantalla.dataset.numeroPaso || '0', 10);
+        if (paso > estado.max) { estado.max = paso; guardarAvance(); }
+        document.getElementById('contador').textContent = estado.max;
+        document.getElementById('barra-avance').style.width = (estado.max / total * 100) + '%';
+        indice.querySelectorAll('a[data-paso]').forEach(function (enlace) { enlace.classList.toggle('activo', enlace.dataset.paso === id); });
+        var orden = ['inicio'].concat(criterios.map(function (s) { return s.id; }));
+        var i = orden.indexOf(id);
+        var ant = document.getElementById(orden[i - 1]), sig = document.getElementById(orden[i + 1]);
+        pantalla.querySelector('.ant-t').textContent = ant ? ant.dataset.titulo : '';
+        pantalla.querySelector('.sig-t').textContent = sig ? sig.dataset.titulo : 'Página de inicio';
+        var anterior = pantalla.querySelector('.anterior'), siguiente = pantalla.querySelector('.siguiente');
+        anterior.disabled = i === 0;
+        anterior.onclick = function () { if (i > 0) mostrar(orden[i - 1]); };
+        siguiente.textContent = sig ? 'Siguiente →' : 'Volver al inicio';
+        siguiente.onclick = function () { mostrar(sig ? orden[i + 1] : 'inicio'); };
+        cerrarMenu();
+        history.replaceState(null, '', '#' + id); window.scrollTo({ top: 0, behavior: 'instant' });
+      }
+      function cerrarMenu() { document.body.classList.remove('menu'); document.getElementById('tb-menu').setAttribute('aria-expanded', 'false'); }
+      document.getElementById('tb-menu').addEventListener('click', function () { var abierto = document.body.classList.toggle('menu'); this.setAttribute('aria-expanded', abierto ? 'true' : 'false'); });
+      document.getElementById('velo').addEventListener('click', cerrarMenu);
+      document.getElementById('btn-reiniciar').addEventListener('click', function () {
+        if (window.confirm('¿Reiniciar el avance y volver al inicio?')) { estado.max = 0; guardarAvance(); mostrar('inicio'); }
+      });
+      document.addEventListener('click', function (evento) { var enlace = evento.target.closest('a[data-paso]'); if (enlace) { evento.preventDefault(); mostrar(enlace.dataset.paso); } });
+      document.addEventListener('keydown', function (evento) { if (evento.key === 'Escape') cerrarMenu(); });
+      window.addEventListener('hashchange', function () { mostrar(location.hash.slice(1) || 'inicio'); });
+
+      /* datos que completan los prompts */
+      function textoDe(id) {
+        var el = document.getElementById(id);
+        if (!el) return '';
+        if (/^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName)) return el.value.trim();
+        return Array.prototype.slice.call(el.querySelectorAll('input:checked')).map(function (c) { return c.value; }).join('; ');
+      }
+      var promptsConDatos = [
+        { prompt: document.getElementById('prompt-contenido'), datos: { '[OBJETIVO DEL SITIO]': 'objetivo-sitio', '[PÚBLICO]': 'publico-sitio', '[PÁGINAS DEL SITIO]': 'paginas-sitio' } },
+        { prompt: document.getElementById('prompt-paleta'), datos: { '[NOMBRE DE LA EMPRESA]': 'empresa-nombre', '[OBJETIVO DEL SITIO]': 'objetivo-sitio' } },
+        { prompt: document.getElementById('prompt-estilo'), datos: { '[PALETA APROBADA]': 'paleta-colores', '[OBJETIVO DEL SITIO]': 'objetivo-sitio', '[PÚBLICO]': 'publico-sitio' } },
+        { prompt: document.getElementById('prompt-gemini'), datos: { '[OBJETIVO DEL SITIO]': 'objetivo-sitio', '[PÚBLICO]': 'publico-sitio', '[SECCIONES Y PÁGINAS]': 'paginas-sitio', '[INFORMACIÓN DEL SITIO]': 'info-sitio', '[FUNCIONALIDADES]': 'funcionalidades-sitio', '[DISEÑO]': 'diseno-sitio', '[NOMBRE Y APELLIDO]': 'alumno-nombre' } },
+        { prompt: document.getElementById('prompt-tienda'), datos: { '[PRODUCTOS]': 'productos-tienda' } }
+      ].filter(function (item) { return item.prompt; });
+      var porDefecto = { '[DISEÑO]': 'proponé vos colores y tipografías que combinen con la empresa.' };
+      promptsConDatos.forEach(function (item) { item.prompt.dataset.plantilla = item.prompt.textContent; });
+      function adjuntarDatosAlPrompt(item) {
+        var texto = item.prompt.dataset.plantilla;
+        Object.keys(item.datos).forEach(function (marca) {
+          var valor = textoDe(item.datos[marca]) || porDefecto[marca] || '';
+          texto = texto.replace(marca, valor ? (valor.indexOf('\n') !== -1 ? '\n' + valor : valor) : marca);
+        });
+        item.prompt.textContent = texto;
+      }
+
+      /* campos que muestran lo mismo en dos páginas (data-espejo) */
+      var espejos = Array.prototype.slice.call(document.querySelectorAll('[data-espejo]'));
+      function sincronizarEspejos() {
+        espejos.forEach(function (campo) {
+          var origen = document.getElementById(campo.dataset.espejo);
+          if (origen && origen.value) campo.value = origen.value;
+        });
+      }
+      document.addEventListener('input', function (evento) {
+        var campo = evento.target;
+        if (!campo.id) return;
+        var idOrigen = campo.dataset.espejo || campo.id;
+        var origen = document.getElementById(idOrigen);
+        if (origen && origen !== campo) origen.value = campo.value;
+        espejos.forEach(function (espejo) { if (espejo !== campo && espejo.dataset.espejo === idOrigen) espejo.value = campo.value; });
+      });
+
+      /* recuadros con botón Guardar: al cargar, recuperar lo guardado */
+      Array.prototype.slice.call(document.querySelectorAll('.guardar-resultado')).forEach(function (boton) {
+        var campo = document.getElementById(boton.dataset.campo);
+        try {
+          var valor = localStorage.getItem(boton.dataset.clave);
+          if (campo && valor && !campo.value) campo.value = valor;
+        } catch (error) { }
+      });
+      sincronizarEspejos();
+
+      /* archivo para entregar */
+      function textoPlano(elemento) { return elemento ? elemento.textContent.replace(/\s+/g, ' ').trim() : ''; }
+      function etiquetaCampo(campo) {
+        var etiqueta = campo.closest('label');
+        if (etiqueta) {
+          var fuerte = etiqueta.querySelector('.pregunta-texto strong') || etiqueta.querySelector('span');
+          if (fuerte) return textoPlano(fuerte);
+        }
+        return campo.getAttribute('aria-label') || '';
+      }
+      function armarTrabajo() {
+        var renglones = [
+          { texto: 'SITIO WEB DE LA EMPRESA · PROYECTO STEAM BATAN', tipo: 'titulo' },
+          { texto: 'Descargado el ' + new Date().toLocaleString('es-AR'), tipo: 'normal' },
+          { texto: '', tipo: 'normal' }
+        ];
+        criterios.forEach(function (seccion) {
+          var bloque = [];
+          var marcados = {};
+          Array.prototype.slice.call(seccion.querySelectorAll('input, textarea, select')).forEach(function (campo) {
+            if (campo.dataset.espejo || campo.type === 'hidden') return;
+            if (campo.type === 'checkbox' && campo.dataset.pts) {
+              bloque.push((campo.checked ? '[✓] ' : '[ ] ') + etiquetaCampo(campo));
+              return;
+            }
+            if (campo.type === 'checkbox' || campo.type === 'radio') {
+              if (!campo.checked) return;
+              var leyenda = campo.closest('fieldset') ? textoPlano(campo.closest('fieldset').querySelector('legend')) : 'Selección';
+              (marcados[leyenda] = marcados[leyenda] || []).push(campo.value);
+              return;
+            }
+            var valor = (campo.value || '').trim();
+            if (!valor) return;
+            bloque.push(etiquetaCampo(campo) + ':' + (valor.indexOf('\n') !== -1 ? '\n' + valor : ' ' + valor));
+          });
+          Object.keys(marcados).forEach(function (leyenda) { bloque.push(leyenda + ': ' + marcados[leyenda].join('; ')); });
+          var puntaje = seccion.querySelector('#criterios-puntaje');
+          if (puntaje) bloque.push('Puntaje estimado: ' + textoPlano(puntaje));
+          if (!bloque.length) return;
+          renglones.push({ texto: 'PÁGINA ' + textoPlano(seccion.querySelector('.numero')) + ' · ' + seccion.dataset.titulo.toUpperCase(), tipo: 'titulo' });
+          bloque.forEach(function (texto) {
+            texto.split('\n').forEach(function (linea) { renglones.push({ texto: linea, tipo: 'normal' }); });
+            renglones.push({ texto: '', tipo: 'normal' });
+          });
+        });
+        // Al final, el nombre del alumno en blanco (no se ve, pero identifica el archivo)
+        var nombreAlumno = textoDe('alumno-nombre');
+        if (nombreAlumno) renglones.push({ texto: nombreAlumno, tipo: 'oculto' });
+        return renglones;
+      }
+      function textoRtf(texto) {
+        var salida = '';
+        for (var i = 0; i < texto.length; i++) {
+          var codigo = texto.charCodeAt(i), caracter = texto.charAt(i);
+          if (caracter === '\\' || caracter === '{' || caracter === '}') salida += '\\' + caracter;
+          else if (caracter === '\t') salida += '\\tab ';
+          else if (codigo > 127) salida += '\\u' + (codigo > 32767 ? codigo - 65536 : codigo) + '?';
+          else salida += caracter;
+        }
+        return salida;
+      }
+      function descargarTrabajo() {
+        var cuerpo = armarTrabajo().map(function (renglon) {
+          if (renglon.tipo === 'titulo') return '\\pard\\sb240\\sa120{\\b\\fs28 ' + textoRtf(renglon.texto) + '}\\par';
+          if (renglon.tipo === 'oculto') return '\\pard{\\cf2 ' + textoRtf(renglon.texto) + '}\\par';
+          return '\\pard ' + textoRtf(renglon.texto) + '\\par';
+        }).join('\n');
+        var rtf = '{\\rtf1\\ansi\\ansicpg1252\\deff0{\\fonttbl{\\f0 Calibri;}}{\\colortbl;\\red0\\green0\\blue0;\\red255\\green255\\blue255;}\\f0\\fs22\n' + cuerpo + '\n}';
+        var nombre = ('Sitio web BATAN - ' + (textoDe('empresa-nombre') || 'mi trabajo')).replace(/[\\/:*?"<>|]+/g, '').slice(0, 80) + '.rtf';
+        var enlace = document.createElement('a');
+        enlace.href = URL.createObjectURL(new Blob([rtf], { type: 'application/rtf' }));
+        enlace.download = nombre;
+        document.body.appendChild(enlace);
+        enlace.click();
+        window.setTimeout(function () { URL.revokeObjectURL(enlace.href); enlace.remove(); }, 1000);
+      }
+
+      /* borrar lo guardado en este navegador (computadoras compartidas) */
+      document.addEventListener('click', function (evento) {
+        if (!evento.target.closest('.borrar-datos')) return;
+        if (!window.confirm('¿Borrar todo lo que escribiste en esta guía en esta computadora? Descargá tu trabajo antes: después no se puede recuperar.')) return;
+        window.autoguardadoPausado = true;
+        try {
+          Object.keys(localStorage).forEach(function (k) {
+            if (k.indexOf('batan-web-') === 0 || k === 'autoguardado:' + location.pathname) localStorage.removeItem(k);
+          });
+        } catch (error) { }
+        location.replace(location.pathname);
+      });
+
+      /* botones de los prompts */
+      function confirmar(boton, texto, original) {
+        boton.textContent = texto; boton.classList.add('copiado');
+        window.setTimeout(function () { boton.textContent = original; boton.classList.remove('copiado'); }, 1800);
+      }
+      document.addEventListener('click', function (evento) {
+        var cabecera = evento.target.closest('.prompt-cabecera');
+        if (cabecera) {
+          var item = cabecera.closest('.prompt-item'); var abierto = item.classList.toggle('abierto');
+          cabecera.setAttribute('aria-expanded', abierto ? 'true' : 'false'); return;
+        }
+        var boton = evento.target.closest('.prompt-copiar');
+        if (!boton) return;
+        if (boton.classList.contains('descargar-trabajo')) { descargarTrabajo(); confirmar(boton, '¡Descargado!', 'Descargar mi trabajo'); return; }
+        if (boton.classList.contains('adjuntar-datos-prompt')) {
+          var itemDatos = promptsConDatos.filter(function (item) { return item.prompt.id === boton.dataset.destino; })[0];
+          if (!itemDatos) return;
+          adjuntarDatosAlPrompt(itemDatos);
+          var itemPrompt = itemDatos.prompt.closest('.prompt-item');
+          if (itemPrompt) { itemPrompt.classList.add('abierto'); itemPrompt.querySelector('.prompt-cabecera').setAttribute('aria-expanded', 'true'); }
+          confirmar(boton, '¡Adjuntado al prompt!', 'Adjuntar al prompt'); return;
+        }
+        if (boton.classList.contains('guardar-resultado')) {
+          var campo = document.getElementById(boton.dataset.campo);
+          var valor = campo ? campo.value.trim() : '';
+          if (!valor) {
+            if (campo) { campo.setAttribute('aria-invalid', 'true'); campo.focus(); }
+            window.alert(boton.dataset.aviso); return;
+          }
+          campo.setAttribute('aria-invalid', 'false');
+          try { localStorage.setItem(boton.dataset.clave, valor); } catch (error) { }
+          confirmar(boton, '¡Guardado!', 'Guardar'); return;
+        }
+        var texto = boton.closest('.prompt-cuerpo').querySelector('.prompt-texto').textContent;
+        if (boton.dataset.guardar) { try { localStorage.setItem(boton.dataset.guardar, texto); } catch (error) { } }
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(texto).then(function () { confirmar(boton, '¡Copiado!', 'Copiar prompt'); }).catch(function () { window.prompt('Copiá este prompt:', texto); });
+        } else { window.prompt('Copiá este prompt:', texto); }
+      });
+
+      /* criterios: puntaje estimado */
+      var listaCriterios = document.getElementById('criterios-lista');
+      var marcador = document.getElementById('criterios-puntaje');
+      function recalcular() {
+        var casillas = Array.prototype.slice.call(listaCriterios.querySelectorAll('input[type="checkbox"]'));
+        var puntos = casillas.filter(function (c) { return c.checked; }).length;
+        marcador.textContent = puntos + ' / ' + casillas.length + ' puntos';
+      }
+      if (listaCriterios && marcador) { listaCriterios.addEventListener('change', recalcular); recalcular(); }
+
+      /* cuenta (Ingresar / Panel / Salir) */
+      if (window.fetch) {
+        fetch('/api/yo', { headers: { Accept: 'application/json' } })
+          .then(function (respuesta) { return respuesta.ok ? respuesta.json() : null; })
+          .then(function (yo) {
+            var cuenta = document.getElementById('tb-cuenta');
+            if (!cuenta || !yo || !yo.autenticado) return;
+            cuenta.innerHTML = '';
+            if (yo.docente) {
+              var panel = document.createElement('a'); panel.className = 'btn-mini'; panel.href = '/panel'; panel.textContent = 'Panel'; cuenta.appendChild(panel);
+            }
+            var formulario = document.createElement('form'); formulario.method = 'POST'; formulario.action = '/salir';
+            var token = document.createElement('input'); token.type = 'hidden'; token.name = '_token'; token.value = yo.csrf || ''; formulario.appendChild(token);
+            var salir = document.createElement('button'); salir.className = 'btn-mini'; salir.type = 'submit'; salir.textContent = 'Salir'; formulario.appendChild(salir);
+            cuenta.appendChild(formulario);
+          })
+          .catch(function () { });
+      }
+      function medirBarra() { var barra = document.querySelector('.topbar'); if (barra) document.documentElement.style.setProperty('--tbh', barra.offsetHeight + 'px'); }
+      medirBarra(); window.addEventListener('resize', medirBarra);
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(medirBarra);
+      mostrar(location.hash.slice(1) || 'inicio');
+    })();
+  </script>
+  <script>
+    /* Guardado automático: lo que se escribe o marca en la página queda guardado
+       en este navegador y se recupera al recargar. */
+    (function () {
+      "use strict";
+      var CLAVE = "autoguardado:" + location.pathname;
+      var marcable = /^(checkbox|radio)$/;
+      function campos() {
+        return [].slice.call(document.querySelectorAll("input, textarea, select")).filter(function (c) {
+          return !/^(hidden|file|password|search|submit|button|reset|image)$/.test(c.type) && !c.closest("form");
+        });
+      }
+      // Identifica cada campo por algo que no cambie entre recargas.
+      function claves(lista) {
+        var usadas = {};
+        return lista.map(function (c) {
+          if (c.id) return "#" + c.id;
+          var base = c.closest("[id]");
+          var detalle = marcable.test(c.type) ? (c.value !== "on" ? c.value : "") : (c.getAttribute("aria-label") || c.dataset.etiqueta || c.dataset.categoria || "");
+          var firma = [base ? base.id : "", c.tagName, c.type, c.name, detalle].join("|");
+          usadas[firma] = (usadas[firma] || 0) + 1;
+          return firma + "|" + usadas[firma];
+        });
+      }
+            function guardar() {
+        if (window.autoguardadoPausado) return;
+        var lista = campos(), k = claves(lista), datos = {};
+        lista.forEach(function (c, i) {
+          datos[k[i]] = marcable.test(c.type) ? (c.dataset.estado || c.checked) : c.value;
+        });
+        try { localStorage.setItem(CLAVE, JSON.stringify(datos)); } catch (e) { }
+      }
+      var datos = {};
+      try { datos = JSON.parse(localStorage.getItem(CLAVE) || "{}") || {}; } catch (e) { }
+      var lista = campos(), k = claves(lista);
+      lista.forEach(function (c, i) {
+        if (!Object.prototype.hasOwnProperty.call(datos, k[i])) return;
+        var v = datos[k[i]];
+        if (c.dataset.estado && typeof v === "string") {
+          // Indicadores de tres estados (sin revisar / requiere mejora / correcto): cada clic avanza uno.
+          for (var n = 0; n < 3 && c.dataset.estado !== v; n++) c.click();
+          return;
+        }
+        if (marcable.test(c.type)) {
+          if (c.checked === !!v) return;
+          c.checked = !!v;
+        } else {
+          if (c.value === v) return;
+          c.value = v;
+          if (c.value !== v) return; // la opción ya no existe en la lista
+        }
+        c.dispatchEvent(new Event("input", { bubbles: true }));
+        c.dispatchEvent(new Event("change", { bubbles: true }));
+      });
+      var espera = null;
+      function programar() { clearTimeout(espera); espera = setTimeout(guardar, 300); }
+      document.addEventListener("input", programar);
+      document.addEventListener("change", programar);
+      document.addEventListener("click", programar);
+      window.addEventListener("pagehide", guardar);
+      document.addEventListener("visibilitychange", function () { if (document.visibilityState === "hidden") guardar(); });
+    })();
+  </script>
+</body>
+
+</html>

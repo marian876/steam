@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proyecto STEAM · SIL</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&family=Public+Sans:ital,wght@0,400;0,500;0,700;1,400&family=IBM+Plex+Mono:wght@400;600&display=swap">
+  <style>
+    :root {
+      --azul: #00306B;
+      /* azul del escudo */
+      --azul-vivo: #1668E0;
+      /* azul de "STEAM" */
+      --azul-suave: #E9F1FB;
+      --turquesa: #0B7D7B;
+      --turquesa-suave: #DCF0EF;
+      --tinta: #14172B;
+      --tinta2: #474D69;
+      --gris: #787E9B;
+      --linea: #DBDEEC;
+      --linea-fuerte: #C0C5DC;
+      --fondo: #F2F6FD;
+      --superficie: #FFFFFF;
+      --sombra: 0 1px 2px rgba(20, 23, 43, .05), 0 10px 28px -16px rgba(20, 23, 43, .30);
+      --sombra-alta: 0 2px 4px rgba(20, 23, 43, .06), 0 22px 48px -24px rgba(20, 23, 43, .42);
+      --display: "Bricolage Grotesque", system-ui, sans-serif;
+      --texto: "Public Sans", system-ui, sans-serif;
+      --mono: "IBM Plex Mono", ui-monospace, monospace;
+      --r: 14px;
+      --r-l: 22px;
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: var(--texto);
+      color: var(--tinta);
+      background: var(--fondo);
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Fondo decorativo del sitio, fijo detrás del contenido */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background: url("/logos/fondo.jpg") center center / cover no-repeat fixed;
+    }
+
+    .envoltorio {
+      position: relative;
+      z-index: 1;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: clamp(22px, 4vw, 44px) clamp(20px, 4vw, 40px) clamp(30px, 5vw, 54px);
+    }
+
+    /* ---------- barra superior (marca + cuenta) ---------- */
+    .barra-sup {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: clamp(26px, 4vw, 40px);
+    }
+
+    .cuenta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Menú desplegable en el nombre del usuario */
+    .menu-usuario {
+      position: relative;
+    }
+
+    .btn-usuario {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--texto);
+      font-size: .95rem;
+      font-weight: 700;
+      color: var(--azul);
+      cursor: pointer;
+      background: var(--superficie);
+      border: 1px solid var(--linea-fuerte);
+      border-radius: 999px;
+      padding: 9px 16px;
+      transition: background .18s ease, border-color .18s ease;
+    }
+
+    .btn-usuario:hover {
+      background: var(--azul-suave);
+      border-color: var(--azul);
+    }
+
+    .btn-usuario .flecha {
+      flex: none;
+      transition: transform .18s ease;
+    }
+
+    .menu-usuario.abierto .btn-usuario .flecha {
+      transform: rotate(180deg);
+    }
+
+    .menu-desplegable {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      min-width: 170px;
+      background: var(--superficie);
+      border: 1px solid var(--linea);
+      border-radius: 14px;
+      box-shadow: var(--sombra-alta);
+      padding: 6px;
+      z-index: 20;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .menu-desplegable[hidden] {
+      display: none;
+    }
+
+    .menu-desplegable a,
+    .menu-desplegable button {
+      display: block;
+      width: 100%;
+      text-align: left;
+      font-family: var(--texto);
+      font-size: .92rem;
+      font-weight: 600;
+      color: var(--tinta);
+      text-decoration: none;
+      cursor: pointer;
+      background: none;
+      border: 0;
+      border-radius: 9px;
+      padding: 9px 12px;
+    }
+
+    .menu-desplegable a:hover,
+    .menu-desplegable button:hover {
+      background: var(--azul-suave);
+      color: var(--azul);
+    }
+
+    .menu-desplegable form {
+      margin: 0;
+    }
+
+    .btn-cuenta {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-family: var(--texto);
+      font-size: .92rem;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      color: #fff;
+      background: var(--azul-vivo);
+      border: 1px solid var(--azul-vivo);
+      border-radius: 999px;
+      padding: 9px 18px;
+      transition: background .18s ease, transform .18s ease;
+    }
+
+    .btn-cuenta:hover {
+      background: var(--azul);
+      border-color: var(--azul);
+      transform: translateY(-1px);
+    }
+
+    /* Botón secundario (salir): más discreto */
+    .btn-cuenta.sec {
+      color: var(--azul);
+      background: var(--superficie);
+      border-color: var(--linea-fuerte);
+    }
+
+    .btn-cuenta.sec:hover {
+      background: var(--azul-suave);
+      border-color: var(--azul);
+    }
+
+    /* ---------- marca del colegio ---------- */
+    .marca {
+      display: inline-flex;
+      align-items: center;
+      gap: 13px;
+      text-decoration: none;
+    }
+
+    .marca img {
+      height: 58px;
+      width: auto;
+      flex: none
+    }
+
+    .marca .nombre {
+      font-family: var(--display);
+      font-weight: 800;
+      color: var(--azul);
+      line-height: 1.08;
+      font-size: .95rem;
+      letter-spacing: .01em;
+      text-transform: uppercase;
+    }
+
+    .marca .nombre small {
+      display: block;
+      font-weight: 600;
+      font-size: .72rem;
+      letter-spacing: .22em;
+      color: var(--azul);
+      opacity: .85;
+      margin-top: 3px;
+    }
+
+    /* ---------- hero ---------- */
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+      gap: clamp(24px, 4vw, 48px);
+      align-items: center;
+      margin-bottom: clamp(34px, 5vw, 58px);
+    }
+
+    .hero-texto {
+      min-width: 0
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--mono);
+      font-size: .78rem;
+      font-weight: 600;
+      letter-spacing: .26em;
+      text-transform: uppercase;
+      color: var(--azul);
+      margin-bottom: 14px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 34px;
+      height: 3px;
+      border-radius: 2px;
+      background: var(--azul-vivo);
+      flex: none;
+    }
+
+    h1 {
+      font-family: var(--display);
+      font-weight: 800;
+      line-height: .92;
+      margin: 0 0 20px;
+      font-size: clamp(2.8rem, 8.5vw, 5.4rem);
+      letter-spacing: -.035em;
+    }
+
+    h1 .l1 {
+      display: block;
+      color: var(--tinta)
+    }
+
+    h1 .l2 {
+      display: block;
+      color: var(--azul-vivo)
+    }
+
+    .sub {
+      font-size: clamp(1.02rem, 2.2vw, 1.28rem);
+      color: var(--tinta2);
+      line-height: 1.45;
+      margin: 0;
+      max-width: 26ch;
+      text-wrap: balance;
+    }
+
+    .hero-arte {
+      min-width: 0
+    }
+
+    .hero-arte img {
+      width: 100%;
+      height: auto;
+      display: block
+    }
+
+    /* ---------- categoría ---------- */
+    .categoria {
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: 1.5rem;
+      color: var(--tinta);
+      letter-spacing: -.01em;
+      margin: 0 0 16px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--azul-vivo);
+      display: inline-block;
+    }
+
+    /* ---------- tarjetas ---------- */
+    .opciones {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 22px;
+    }
+
+    /* Una tarjeta con [hidden] tiene que ocultarse aunque .tarjeta use display:flex. */
+    .tarjeta[hidden] {
+      display: none;
+    }
+
+    .tarjeta {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: inherit;
+      background: var(--superficie);
+      border: 1px solid var(--linea);
+      border-radius: var(--r-l);
+      padding: 30px 30px 28px;
+      box-shadow: var(--sombra);
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+
+    .tarjeta:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--sombra-alta);
+      border-color: var(--linea-fuerte)
+    }
+
+    .tarjeta:focus-visible {
+      outline: 3px solid var(--azul-vivo);
+      outline-offset: 3px
+    }
+
+    .tarjeta .badge {
+      align-self: flex-start;
+      font-family: var(--mono);
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .04em;
+      padding: 5px 11px;
+      border-radius: 999px;
+      margin-bottom: 18px;
+    }
+
+    .tarjeta.info .badge {
+      background: var(--turquesa-suave);
+      color: var(--turquesa)
+    }
+
+    .tarjeta.pasos .badge {
+      background: var(--azul-suave);
+      color: var(--azul)
+    }
+
+    .tarjeta.web .badge {
+      background: var(--turquesa-suave);
+      color: var(--turquesa)
+    }
+
+    .tarjeta .icono {
+      font-size: 1.9rem;
+      line-height: 1;
+      margin-bottom: 14px
+    }
+
+    .tarjeta .icono.icono-carpeta {
+      display: inline-flex;
+      align-items: center;
+      line-height: 1;
+    }
+
+    .carpeta-wrap {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 34px;
+    }
+
+    .carpeta-wrap .carpeta-svg {
+      width: 42px;
+      height: 34px;
+      display: block;
+      filter: drop-shadow(0 2px 4px rgba(20, 23, 43, 0.12));
+    }
+
+    .carpeta-wrap .logo-sil-carpeta {
+      position: absolute;
+      width: 17px;
+      height: 22px;
+      top: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      object-fit: contain;
+      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.22));
+      pointer-events: none;
+      transition: transform .18s ease;
+    }
+
+    .tarjeta:hover .carpeta-wrap .logo-sil-carpeta {
+      transform: translateX(-50%) scale(1.08);
+    }
+
+    .tarjeta h2 {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 1.42rem;
+      line-height: 1.15;
+      margin: 0 0 10px;
+      letter-spacing: -.01em;
+    }
+
+    .tarjeta p {
+      font-size: .95rem;
+      color: var(--tinta2);
+      line-height: 1.55;
+      margin: 0 0 22px;
+      flex: 1
+    }
+
+    .tarjeta .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: .95rem;
+    }
+
+    .tarjeta.info .cta {
+      color: var(--turquesa)
+    }
+
+    .tarjeta.pasos .cta {
+      color: var(--azul-vivo)
+    }
+
+    .tarjeta.web .cta {
+      color: var(--turquesa)
+    }
+
+    .tarjeta .cta .fl {
+      font-family: var(--mono);
+      transition: transform .18s ease
+    }
+
+    .tarjeta:hover .cta .fl {
+      transform: translateX(4px)
+    }
+
+    .seccion-proyectos {
+      margin-top: clamp(34px, 5vw, 52px)
+    }
+
+    /* Mismo ancho de columna que "Materiales de apoyo", aunque haya una sola tarjeta. */
+    #proyectos-colecciones {
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr))
+    }
+
+    .proyectos-vacio {
+      color: var(--tinta2);
+      margin: 0
+    }
+
+    footer {
+      margin-top: clamp(30px, 5vw, 48px);
+      font-size: .82rem;
+      color: var(--gris);
+      text-align: center;
+    }
+
+    /* Sin ilustración, el texto ocupa todo el ancho */
+    .hero.sin-arte {
+      grid-template-columns: 1fr
+    }
+
+    .hero.sin-arte h1 {
+      font-size: clamp(3rem, 12vw, 6.5rem)
+    }
+
+    .hero.sin-arte .sub {
+      max-width: 42ch
+    }
+
+    @media (max-width:860px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 24px
+      }
+
+      .sub {
+        max-width: none
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="envoltorio">
+    <div class="barra-sup">
+      <div class="marca">
+        <img src="/logos/logo_reducido.png" alt="Escudo del Colegio San Ignacio de Loyola">
+        <div class="nombre">San Ignacio<br>de Loyola<small>School</small></div>
+      </div>
+      <div class="cuenta" id="cuenta-inicio">
+        <a class="btn-cuenta" href="/ingresar">Iniciar sesión</a>
+      </div>
+    </div>
+
+    <header class="hero">
+      <div class="hero-texto">
+        <div class="eyebrow">Ciencia · Tecnología · Ingeniería · Arte · Matemática</div>
+        <h1><span class="l1">Proyecto</span><span class="l2">STEAM</span></h1>
+        <p class="sub">Ideas, conocimiento y tecnología para un mundo mejor.</p>
+      </div>
+      <div class="hero-arte">
+        <!-- Ilustración del proyecto. WebP liviano con respaldo PNG.
+             Si el archivo todavía no está, se quita y el texto ocupa todo el ancho. -->
+        <picture>
+          <source srcset="/logos/banner-steam.webp" type="image/webp">
+          <img src="/logos/banner-steam.png" alt="Estudiantes del colegio trabajando juntos en un proyecto STEAM"
+            onerror="var h=this.closest('.hero'); this.closest('.hero-arte').remove(); h.classList.add('sin-arte');">
+        </picture>
+      </div>
+    </header>
+
+    <h2 class="categoria">Materiales de apoyo</h2>
+    <main class="opciones">
+      <a class="tarjeta info" href="/formato">
+        <div class="badge">Guía del documento escrito</div>
+        <div class="icono">📘</div>
+        <h2>Formato STEAM</h2>
+        <p>Qué pide el formato, página por página: medidas, estilos y estructura. La referencia de cómo tiene que quedar
+          el trabajo, sin los pasos.</p>
+        <span class="cta">Ver el formato <span class="fl">→</span></span>
+      </a>
+
+      <a class="tarjeta pasos" href="/defensa-oral">
+        <div class="badge">Guía de diapositivas</div>
+        <div class="icono">🎤</div>
+        <h2>Defensa oral</h2>
+        <p>Cómo diseñar las diapositivas de la defensa: diseño visual, ejemplos de contenido, criterios de
+          evaluación, un prompt para mejorarlas y cómo ensayar.</p>
+        <span class="cta">Ver la guía <span class="fl">→</span></span>
+      </a>
+
+      <a class="tarjeta web" href="/sitio-web">
+        <div class="badge">Guía del sitio web</div>
+        <div class="icono">💻</div>
+        <h2>Sitio web de la empresa</h2>
+        <p>Cómo presentar la web de la empresa del proyecto: identidad, organización, diseño, uso en celular y
+          funcionamiento.</p>
+        <span class="cta">Ver la guía <span class="fl">→</span></span>
+      </a>
+    </main>
+
+    <!-- Proyectos anteriores: una tarjeta por especialidad y año con proyectos cargados en el panel. -->
+    <section class="seccion-proyectos" id="seccion-proyectos">
+      <h2 class="categoria">Proyectos Presentados</h2>
+      <div class="opciones" id="proyectos-colecciones"></div>
+      <p class="proyectos-vacio" id="proyectos-vacio" hidden>Observá aquí los proyectos Presentados del año.</p>
+    </section>
+
+    <footer>MEG - 2026</footer>
+  </div>
+
+  <script>
+    // Proyectos Presentados: arma las tarjetas desde el panel (ej. BATAN 2026).
+    if (window.fetch) {
+      fetch("/api/proyectos/colecciones", { headers: { "Accept": "application/json" } })
+        .then(function (r) { return r.ok ? r.json() : []; })
+        .catch(function () { return []; })
+        .then(function (lista) {
+          if (!Array.isArray(lista) || !lista.length) {
+            document.getElementById("proyectos-vacio").hidden = false;
+            return;
+          }
+          var cont = document.getElementById("proyectos-colecciones");
+          lista.forEach(function (c) {
+            var a = document.createElement("a");
+            a.className = "tarjeta info";
+            a.href = c.url;
+            var badge = document.createElement("div");
+            badge.className = "badge"; badge.textContent = "Conocer los proyectos ";
+            var ico = document.createElement("div");
+            ico.className = "icono icono-carpeta";
+            ico.innerHTML = '<div class="carpeta-wrap" aria-hidden="true">' +
+              '<svg class="carpeta-svg" viewBox="0 0 42 34" fill="none" xmlns="http://www.w3.org/2000/svg">' +
+                '<path d="M3 5C3 3.89543 3.89543 3 5 3H14.5C15.25 3 16 3.32 16.55 3.88L18.45 5.75C19 6.3 19.75 6.6 20.5 6.6H37C38.1 6.6 39 7.5 39 8.6V27C39 28.1 38.1 29 37 29H5C3.9 29 3 28.1 3 27V5Z" fill="#D97706"/>' +
+                '<rect x="7" y="4.5" width="28" height="9" rx="2" fill="#FFFFFF" fill-opacity="0.95"/>' +
+                '<path d="M2 10.5C2 9.4 2.9 8.5 4 8.5H38C39.1 8.5 40 9.4 40 10.5V27C40 28.1 39.1 29 38 29H4C2.9 29 2 28.1 2 27V10.5Z" fill="#FBBF24"/>' +
+                '<path d="M2 14.5L20 20.5L40 14.5V27C40 28.1 39.1 29 38 29H4C2.9 29 2 28.1 2 27V14.5Z" fill="#F59E0B" fill-opacity="0.25"/>' +
+              '</svg>' +
+              '<img class="logo-sil-carpeta" src="/logos/logo_reducido.png" alt="SIL">' +
+            '</div>';
+            var h = document.createElement("h2");
+            h.textContent = c.titulo;
+            var p = document.createElement("p");
+            p.textContent = c.cantidad
+              ? "Proyectos: " + c.cantidad
+              : "Observá aquí los proyectos Presentados del año.";
+            var cta = document.createElement("span");
+            cta.className = "cta";
+            cta.innerHTML = 'Ver los proyectos <span class="fl">→</span>';
+            a.appendChild(badge); a.appendChild(ico); a.appendChild(h); a.appendChild(p); a.appendChild(cta);
+            cont.appendChild(a);
+          });
+        });
+    }
+
+    // Botón de cuenta del inicio.
+    if (window.fetch) {
+      fetch("/api/yo", { headers: { "Accept": "application/json" } })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (yo) {
+          if (!yo) return;
+
+          // Menú de cuenta arriba a la derecha.
+          var cont = document.getElementById("cuenta-inicio");
+          if (!cont) return;
+          if (yo.autenticado) {
+            cont.innerHTML = "";
+
+            var wrap = document.createElement("div");
+            wrap.className = "menu-usuario";
+
+            var btn = document.createElement("button");
+            btn.className = "btn-usuario";
+            btn.type = "button";
+            btn.setAttribute("aria-haspopup", "true");
+            btn.setAttribute("aria-expanded", "false");
+            var nom = document.createElement("span");
+            nom.textContent = yo.nombre || "Mi cuenta";
+            btn.appendChild(nom);
+            btn.insertAdjacentHTML("beforeend",
+              '<svg class="flecha" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">' +
+              '<path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+            wrap.appendChild(btn);
+
+            var menu = document.createElement("div");
+            menu.className = "menu-desplegable";
+            menu.hidden = true;
+
+            if (yo.docente) {
+              var aP = document.createElement("a");
+              aP.href = "/panel"; aP.textContent = "Panel";
+              menu.appendChild(aP);
+            } else {
+              var aG = document.createElement("a");
+              aG.href = "/mis-grupos"; aG.textContent = "Mis grupos";
+              menu.appendChild(aG);
+            }
+
+            var f = document.createElement("form");
+            f.method = "POST"; f.action = "/salir";
+            var tok = document.createElement("input");
+            tok.type = "hidden"; tok.name = "_token"; tok.value = yo.csrf || "";
+            f.appendChild(tok);
+            var b = document.createElement("button");
+            b.type = "submit"; b.textContent = "Salir";
+            f.appendChild(b);
+            menu.appendChild(f);
+
+            wrap.appendChild(menu);
+            cont.appendChild(wrap);
+
+            function cerrarMenuUsuario() {
+              wrap.classList.remove("abierto");
+              menu.hidden = true;
+              btn.setAttribute("aria-expanded", "false");
+            }
+            btn.addEventListener("click", function (e) {
+              e.stopPropagation();
+              var ab = !wrap.classList.contains("abierto");
+              wrap.classList.toggle("abierto", ab);
+              menu.hidden = !ab;
+              btn.setAttribute("aria-expanded", ab ? "true" : "false");
+            });
+            document.addEventListener("click", cerrarMenuUsuario);
+            document.addEventListener("keydown", function (e) { if (e.key === "Escape") cerrarMenuUsuario(); });
+          }
+          // Si no está autenticado, queda el botón "Iniciar sesión" que ya está en el HTML.
+        })
+        .catch(function () { });
+    }
+  </script>
+</body>
+
+</html>

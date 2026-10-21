@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Muestra · Formato STEAM</title>
+  <style>
+    :root {
+      --fondo: #4a4f57;
+      --barra: #23262d;
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    html,
+    body {
+      margin: 0;
+      background: var(--fondo);
+      font-family: "Segoe UI", system-ui, sans-serif;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    .barra {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: var(--barra);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 11px 18px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, .3);
+    }
+
+    .barra .t {
+      font-weight: 600;
+      font-size: .95rem;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      min-width: 0;
+    }
+
+    .barra .t .txt {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .barra .t .pill {
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      background: #b45309;
+      color: #fff;
+      padding: 3px 9px;
+      border-radius: 999px;
+      white-space: nowrap;
+      flex: none;
+    }
+
+    .barra a.cerrar {
+      color: #fff;
+      text-decoration: none;
+      border: 1px solid #6b7280;
+      border-radius: 7px;
+      padding: 6px 14px;
+      font-size: .85rem;
+      white-space: nowrap;
+      flex: none;
+    }
+
+    .barra a.cerrar:hover {
+      background: #333842;
+    }
+
+    #estado {
+      color: #e8eaf0;
+      text-align: center;
+      padding: 50px 20px;
+      font-size: .95rem;
+    }
+
+    #doc {
+      padding: 22px 8px 60px;
+      text-align: center;
+      overflow-x: auto;
+    }
+
+    #doc img {
+      display: block;
+      margin: 0 auto 16px;
+      height: auto;
+      background: #fff;
+      box-shadow: 0 4px 22px rgba(0, 0, 0, .35);
+      /* nada de arrastrar ni interactuar con las imágenes */
+      -webkit-user-drag: none;
+      user-drag: none;
+      pointer-events: none;
+      /* ancho de una página vertical (A4 en pie) */
+      width: min(820px, 92vw);
+    }
+
+    /* las páginas horizontales (apaisadas) van más anchas, como en el documento */
+    #doc img.horiz {
+      width: min(1160px, 97vw);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="barra">
+    <span class="t"><span class="pill">Solo lectura</span> <span class="txt">Muestra ya formateada — Proyecto
+        STEAM</span></span>
+    <a class="cerrar" href="/formato#inicio">Cerrar</a>
+  </div>
+
+  <div id="estado">Cargando la muestra…</div>
+  <div id="doc"></div>
+
+  <script>
+    (function () {
+      "use strict";
+
+      // Cantidad de páginas de la muestra (imágenes pg-01.webp … pg-NN.webp)
+      var TOTAL = 22;
+
+      // ---- Bloqueos anti-copia / anti-descarga (disuasivos) ----
+      ["contextmenu", "copy", "cut", "dragstart", "selectstart"].forEach(function (ev) {
+        document.addEventListener(ev, function (e) { e.preventDefault(); }, true);
+      });
+      document.addEventListener("keydown", function (e) {
+        var k = (e.key || "").toLowerCase();
+        if ((e.ctrlKey || e.metaKey) && ["s", "p", "c", "u", "a"].indexOf(k) > -1) e.preventDefault();
+      }, true);
+
+      var doc = document.getElementById("doc");
+      var estado = document.getElementById("estado");
+
+      for (var i = 1; i <= TOTAL; i++) {
+        var n = (i < 10 ? "0" : "") + i;
+        var img = document.createElement("img");
+        img.src = "/ejemplos/formatoSteam/muestra-nueva/pg-" + n + ".webp?v=1";
+        img.alt = "Página " + i + " de la muestra";
+        img.loading = "lazy";
+        img.draggable = false;
+        img.addEventListener("contextmenu", function (e) { e.preventDefault(); });
+        // Al cargar, si la página es más ancha que alta, se marca como horizontal.
+        img.addEventListener("load", function () {
+          if (this.naturalWidth > this.naturalHeight) this.classList.add("horiz");
+          if (estado) estado.remove();
+        });
+        if (i === 1) {
+          img.addEventListener("error", function () {
+            if (estado) estado.textContent = "No se pudo abrir la muestra en este momento.";
+          });
+        }
+        doc.appendChild(img);
+      }
+    })();
+  </script>
+</body>
+
+</html>

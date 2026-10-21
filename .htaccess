@@ -1,0 +1,44 @@
+# ====================================================================
+#  Laravel en una sola carpeta (public_html)
+#  Enruta todo a index.php y BLOQUEA el acceso web a los archivos
+#  sensibles de la aplicación (.env, código, vendor, etc.)
+# ====================================================================
+
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+
+    RewriteEngine On
+
+    # --- Seguridad: 403 a carpetas internas de Laravel ---
+    RewriteRule ^(app|bootstrap|config|database|resources|routes|storage|tests|vendor|node_modules|docs)/ - [F,L]
+
+    # --- Seguridad: 403 a archivos sensibles de la raíz ---
+    RewriteRule ^(\.env.*|composer\.(json|lock)|package(-lock)?\.json|artisan|phpunit\.xml|vite\.config\.js|\.editorconfig|\.npmrc|.*\.md)$ - [F,L]
+
+    # Header Authorization
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Quitar barra final si no es carpeta
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
+    # Front controller: todo lo que no sea archivo/carpeta real -> index.php
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+</IfModule>
+
+# --- Doble candado: bloquear cualquier archivo oculto (.env, .git, etc.) ---
+<FilesMatch "^\.">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>

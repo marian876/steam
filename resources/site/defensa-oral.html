@@ -1,0 +1,4854 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Defensa oral · STEAM · SIL</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&family=Public+Sans:ital,wght@0,400;0,500;0,700;1,400&family=IBM+Plex+Mono:wght@400;600&display=swap">
+
+  <style>
+    /* ============ TOKENS ============ */
+    :root {
+      --azul: #00306B;
+      --azul-suave: #E9F1FB;
+      --turquesa: #0B7D7B;
+      --turquesa-suave: #DCF0EF;
+      --violeta: #6234CE;
+      --violeta-suave: #ECE5FC;
+      --ambar: #B96C12;
+      --ambar-suave: #FBEEDA;
+      --rosa: #B32A73;
+      --rosa-suave: #FBE4EF;
+      --verde: #1B8049;
+      --verde-suave: #DFF2E6;
+      --rojo: #C0392A;
+      --rojo-suave: #FBE5E1;
+
+      --tinta: #14172B;
+      --tinta2: #474D69;
+      --gris: #787E9B;
+      --linea: #DBDEEC;
+      --linea-fuerte: #C0C5DC;
+      --fondo: #F0F1F8;
+      --superficie: #FFFFFF;
+      --superficie2: #F7F8FD;
+
+      --papel: #FFFFFF;
+      --papel-tinta: #1A1A1A;
+      --papel-borde: #C8CCDD;
+
+      --sombra: 0 1px 2px rgba(20, 23, 43, .05), 0 10px 28px -16px rgba(20, 23, 43, .30);
+      --sombra-alta: 0 2px 4px rgba(20, 23, 43, .06), 0 22px 48px -24px rgba(20, 23, 43, .42);
+
+      --display: "Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif;
+      --texto: "Public Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+      --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+
+      --r-s: 6px;
+      --r-m: 12px;
+      --r-l: 20px;
+      --col: 100%;
+    }
+
+    @media (prefers-color-scheme:dark) {
+      :root:not([data-theme="light"]) {
+        --azul: #86BAF9;
+        --azul-suave: #16273B;
+        --turquesa: #4CCFCB;
+        --turquesa-suave: #0C2D2C;
+        --violeta: #B39CFF;
+        --violeta-suave: #241B44;
+        --ambar: #EFAD63;
+        --ambar-suave: #33230E;
+        --rosa: #F58FC0;
+        --rosa-suave: #37132A;
+        --verde: #5BD48D;
+        --verde-suave: #0F2B1C;
+        --rojo: #FF8E7A;
+        --rojo-suave: #331612;
+        --tinta: #E9EBF6;
+        --tinta2: #AFB5D0;
+        --gris: #858BA9;
+        --linea: #2A2F48;
+        --linea-fuerte: #3B4265;
+        --fondo: #0E1018;
+        --superficie: #161926;
+        --superficie2: #1C2030;
+        --papel-borde: #3B4265;
+        --sombra: 0 1px 2px rgba(0, 0, 0, .4), 0 10px 28px -16px rgba(0, 0, 0, .8);
+        --sombra-alta: 0 2px 4px rgba(0, 0, 0, .45), 0 22px 48px -24px rgba(0, 0, 0, .9);
+      }
+    }
+
+    :root[data-theme="dark"] {
+      --azul: #86BAF9;
+      --azul-suave: #16273B;
+      --turquesa: #4CCFCB;
+      --turquesa-suave: #0C2D2C;
+      --violeta: #B39CFF;
+      --violeta-suave: #241B44;
+      --ambar: #EFAD63;
+      --ambar-suave: #33230E;
+      --rosa: #F58FC0;
+      --rosa-suave: #37132A;
+      --verde: #5BD48D;
+      --verde-suave: #0F2B1C;
+      --rojo: #FF8E7A;
+      --rojo-suave: #331612;
+      --tinta: #E9EBF6;
+      --tinta2: #AFB5D0;
+      --gris: #858BA9;
+      --linea: #2A2F48;
+      --linea-fuerte: #3B4265;
+      --fondo: #0E1018;
+      --superficie: #161926;
+      --superficie2: #1C2030;
+      --papel-borde: #3B4265;
+      --sombra: 0 1px 2px rgba(0, 0, 0, .4), 0 10px 28px -16px rgba(0, 0, 0, .8);
+      --sombra-alta: 0 2px 4px rgba(0, 0, 0, .45), 0 22px 48px -24px rgba(0, 0, 0, .9);
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    body {
+      margin: 0;
+      background: var(--fondo);
+      color: var(--tinta);
+      font-family: var(--texto);
+      font-size: 16px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased
+    }
+
+    /* Fondo decorativo del sitio, fijo detrás del contenido */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background: url("/logos/fondo.jpg") center center / cover no-repeat fixed
+    }
+
+    /* En modo oscuro no va la imagen clara: queda el color de fondo del body */
+    :root[data-theme="dark"] body::before {
+      display: none
+    }
+
+    @media (prefers-color-scheme:dark) {
+      :root:not([data-theme="light"]) body::before {
+        display: none
+      }
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-family: var(--display);
+      text-wrap: balance;
+      margin: 0;
+      line-height: 1.15;
+      letter-spacing: -.015em
+    }
+
+    p {
+      margin: 0
+    }
+
+    a {
+      color: var(--azul)
+    }
+
+    :focus-visible {
+      outline: 2.5px solid var(--azul);
+      outline-offset: 2px;
+      border-radius: 4px
+    }
+
+    @media (prefers-reduced-motion:reduce) {
+      * {
+        animation: none !important;
+        transition: none !important
+      }
+    }
+
+    [hidden] {
+      display: none !important
+    }
+
+    .saltar {
+      position: absolute;
+      left: -9999px;
+      top: 0;
+      background: var(--azul);
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 0 0 8px 0;
+      z-index: 99
+    }
+
+    .saltar:focus {
+      left: 0
+    }
+
+    .rot {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+      color: var(--gris)
+    }
+
+    .num {
+      font-family: var(--mono);
+      font-size: .9rem;
+      font-weight: 600;
+      color: var(--tinta);
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap
+    }
+
+    .num-actual {
+      color: var(--azul);
+      text-decoration: none;
+      cursor: pointer;
+      padding: 1px 5px;
+      border-radius: 6px;
+      transition: background .15s
+    }
+
+    .num-actual:hover {
+      background: var(--azul-suave)
+    }
+
+    .num-actual:focus-visible {
+      outline: 2px solid var(--azul);
+      outline-offset: 1px
+    }
+
+    .barra {
+      height: 7px;
+      background: var(--linea);
+      border-radius: 99px;
+      overflow: hidden
+    }
+
+    .barra i {
+      display: block;
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--turquesa), var(--azul));
+      border-radius: 99px;
+      transition: width .35s ease
+    }
+
+    button {
+      font-family: var(--texto);
+      cursor: pointer;
+      border-radius: var(--r-s);
+      font-size: .85rem;
+      font-weight: 600;
+      padding: 9px 15px;
+      border: 1px solid transparent;
+      transition: .18s
+    }
+
+    .btn-p {
+      background: var(--azul);
+      color: #fff
+    }
+
+    .btn-p:hover {
+      filter: brightness(1.12)
+    }
+
+    .btn-s {
+      background: var(--superficie);
+      color: var(--tinta);
+      border-color: var(--linea-fuerte)
+    }
+
+    .btn-s:hover {
+      border-color: var(--tinta2)
+    }
+
+    .btn-s[disabled] {
+      opacity: .4;
+      cursor: default;
+      border-color: var(--linea)
+    }
+
+    :root[data-theme="dark"] .btn-p {
+      color: #0E1018
+    }
+
+    @media (prefers-color-scheme:dark) {
+      :root:not([data-theme="light"]) .btn-p {
+        color: #0E1018
+      }
+    }
+
+    .download-material {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 38px;
+      padding: 8px 10px 8px 13px;
+      border: 1px solid var(--linea-fuerte);
+      border-radius: 999px;
+      background: var(--superficie2);
+      color: var(--azul);
+      font-size: .82rem;
+      font-weight: 800;
+      line-height: 1;
+      text-decoration: none;
+      white-space: nowrap;
+      box-shadow: 0 1px 2px rgba(20, 23, 43, .04);
+      transition: background .18s ease, border-color .18s ease, color .18s ease, transform .18s ease
+    }
+
+    .download-material:hover {
+      background: var(--azul);
+      border-color: var(--azul);
+      color: #fff;
+      transform: translateY(-1px)
+    }
+
+    .download-material:focus-visible {
+      outline: 2px solid var(--azul);
+      outline-offset: 3px
+    }
+
+    .download-material svg {
+      width: 16px;
+      height: 16px;
+      flex: none
+    }
+
+    .download-ext {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 22px;
+      padding: 0 8px;
+      border-radius: 999px;
+      background: var(--azul-suave);
+      color: var(--azul);
+      font-family: var(--mono);
+      font-size: .68rem;
+      font-weight: 600;
+      letter-spacing: .04em
+    }
+
+    .download-material:hover .download-ext {
+      background: rgba(255, 255, 255, .18);
+      color: inherit
+    }
+
+    :root[data-theme="dark"] .download-material:hover,
+    :root[data-theme="dark"] .download-material:hover .download-ext {
+      color: #0E1018
+    }
+
+    @media (prefers-color-scheme:dark) {
+
+      :root:not([data-theme="light"]) .download-material:hover,
+      :root:not([data-theme="light"]) .download-material:hover .download-ext {
+        color: #0E1018
+      }
+    }
+
+    /* ============ BARRA SUPERIOR ============ */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: color-mix(in srgb, var(--superficie) 92%, transparent);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--linea)
+    }
+
+    .tb {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 11px 22px;
+      display: flex;
+      align-items: center;
+      gap: 20px
+    }
+
+    .tb-escudo {
+      display: flex;
+      align-items: center;
+      flex: none;
+      margin-right: -11px;
+      text-decoration: none
+    }
+
+    .tb-marca {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: .95rem;
+      color: var(--tinta);
+      text-decoration: none;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 9px
+    }
+
+    .tb-marca .pt {
+      font-family: var(--mono);
+      font-size: 9.5px;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--azul);
+      background: var(--azul-suave);
+      padding: 3px 7px;
+      border-radius: 99px;
+      display: none
+    }
+
+    .tb-cuenta {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      flex: none;
+      margin-left: auto
+    }
+
+    .tb-cuenta a {
+      text-decoration: none
+    }
+
+    .tb-cuenta form {
+      display: flex;
+      margin: 0
+    }
+
+    .btn-mini.icono {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      padding: 0;
+      flex: none
+    }
+
+    .btn-mini.icono svg {
+      width: 16px;
+      height: 16px
+    }
+
+    .tb-prog {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0
+    }
+
+    .tb-prog .barra {
+      flex: 1;
+      min-width: 60px;
+      max-width: 340px
+    }
+
+    .tb-menu {}
+
+    @media (max-width:960px) {
+      .tb-marca span.txt {
+        display: none
+      }
+    }
+
+    .tb-logo {
+      height: 26px;
+      width: auto;
+      flex: none;
+      opacity: .92
+    }
+
+    @media (max-width:560px) {
+      .tb {
+        gap: 11px;
+        padding: 10px 14px
+      }
+
+      .tb-prog {
+        gap: 9px
+      }
+
+      .tb-prog .rot {
+        display: none
+      }
+
+      .tb-prog .barra {
+        min-width: 30px
+      }
+
+      .btn-mini {
+        padding: 4px 8px
+      }
+
+      .tb-logo {
+        height: 22px
+      }
+    }
+
+    /* ============ ESTRUCTURA ============ */
+    .envoltorio {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 22px 70px
+    }
+
+    .velo {
+      position: fixed;
+      inset: var(--tbh, 54px) 0 0 0;
+      background: rgba(20, 23, 43, .30);
+      z-index: 38;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s ease
+    }
+
+    body.menu .velo {
+      opacity: 1;
+      pointer-events: auto
+    }
+
+    .rail {
+      position: fixed;
+      top: var(--tbh, 54px);
+      left: 0;
+      bottom: 0;
+      width: 274px;
+      max-width: 86vw;
+      z-index: 39;
+      background: var(--superficie);
+      border-right: 1px solid var(--linea);
+      box-shadow: var(--sombra-alta);
+      padding: 20px 16px 34px;
+      overflow-y: auto;
+      transform: translateX(-101%);
+      transition: transform .22s ease;
+      visibility: hidden;
+    }
+
+    body.menu .rail {
+      transform: none;
+      visibility: visible
+    }
+
+    @media (prefers-reduced-motion:reduce) {
+
+      .rail,
+      .velo {
+        transition: none
+      }
+    }
+
+    .rail .gt {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--gris);
+      margin-bottom: 8px
+    }
+
+    .btn-mini {
+      font-family: var(--mono);
+      font-size: 9.5px;
+      font-weight: 600;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      height: 30px;
+      padding: 0 12px;
+      border-radius: 99px;
+      background: var(--superficie);
+      border: 1px solid var(--linea-fuerte);
+      color: var(--gris);
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1
+    }
+
+    .btn-mini:hover {
+      border-color: var(--tinta2);
+      color: var(--tinta)
+    }
+
+    .btn-mini.rojo {
+      color: var(--rojo);
+      border-color: color-mix(in srgb, var(--rojo) 42%, transparent)
+    }
+
+    .btn-mini.rojo:hover {
+      border-color: var(--rojo);
+      background: var(--rojo-suave);
+      color: var(--rojo)
+    }
+
+    .btn-mini.confirmar {
+      border-color: var(--rojo);
+      color: var(--rojo);
+      background: var(--rojo-suave)
+    }
+
+    .btn-mini[aria-expanded=true] {
+      border-color: var(--azul);
+      color: var(--azul);
+      background: var(--azul-suave)
+    }
+
+    /* Foquito de ayuda: se "prende" en turquesa cuando la ayuda está visible */
+    .btn-mini.foco[aria-pressed=true] {
+      border-color: var(--turquesa);
+      color: var(--turquesa);
+      background: var(--turquesa-suave)
+    }
+
+    .tb .btn-mini {
+      flex: none;
+      margin-left: 2px
+    }
+
+    .seg {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      margin-bottom: 22px
+    }
+
+    .seg button {
+      text-align: left;
+      background: var(--superficie);
+      border: 1px solid var(--linea);
+      color: var(--tinta2);
+      font-size: .82rem;
+      font-weight: 500;
+      padding: 7px 11px;
+      border-radius: var(--r-s)
+    }
+
+    .seg button b {
+      font-weight: 600;
+      color: var(--tinta)
+    }
+
+    .seg button small {
+      display: block;
+      font-size: .7rem;
+      color: var(--gris);
+      font-family: var(--mono)
+    }
+
+    .seg button:hover {
+      border-color: var(--tinta2)
+    }
+
+    .seg button[aria-pressed=true] {
+      border-color: var(--azul);
+      background: var(--azul-suave)
+    }
+
+    .seg button[aria-pressed=true] b {
+      color: var(--azul)
+    }
+
+    .rail ol {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1px
+    }
+
+    .rail li.sep {
+      font-family: var(--mono);
+      font-size: 9.5px;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--gris);
+      padding: 13px 10px 4px
+    }
+
+    .rail a {
+      display: flex;
+      gap: 9px;
+      align-items: center;
+      padding: 5px 10px;
+      border-radius: var(--r-s);
+      text-decoration: none;
+      color: var(--tinta2);
+      font-size: .85rem;
+      line-height: 1.3;
+      border-left: 2px solid transparent
+    }
+
+    .rail a:hover {
+      background: var(--superficie2);
+      color: var(--tinta)
+    }
+
+    .rail a.activo {
+      background: var(--superficie);
+      color: var(--tinta);
+      font-weight: 600;
+      border-left-color: var(--azul);
+      box-shadow: var(--sombra)
+    }
+
+    .rail .pt {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      color: var(--gris);
+      flex: none;
+      width: 16px;
+      font-variant-numeric: tabular-nums
+    }
+
+    .rail a.activo .pt {
+      color: var(--azul)
+    }
+
+    .rail .pin {
+      width: 7px;
+      height: 7px;
+      border-radius: 99px;
+      border: 1.5px solid var(--linea-fuerte);
+      flex: none;
+      margin-left: auto
+    }
+
+    .rail a.hecho .pin {
+      background: var(--verde);
+      border-color: var(--verde)
+    }
+
+    .rail a.hecho {
+      color: var(--gris)
+    }
+
+    main {
+      padding: 30px 0 0;
+      min-width: 0
+    }
+
+    /* ============ PANTALLA ============ */
+    .pantalla {
+      animation: entra .28s ease both
+    }
+
+    @keyframes entra {
+      from {
+        opacity: 0;
+        transform: translateY(6px)
+      }
+
+      to {
+        opacity: 1;
+        transform: none
+      }
+    }
+
+    @media (prefers-reduced-motion:reduce) {
+      .pantalla {
+        animation: none
+      }
+    }
+
+    .enc {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      margin-bottom: 22px
+    }
+
+    .chip {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 600;
+      flex: none;
+      width: 36px;
+      height: 36px;
+      border-radius: 11px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      letter-spacing: -.02em;
+      margin-top: 2px
+    }
+
+    .f1 .chip {
+      background: var(--turquesa)
+    }
+
+    .f2 .chip {
+      background: var(--violeta)
+    }
+
+    .f3 .chip {
+      background: var(--ambar)
+    }
+
+    .f4 .chip {
+      background: var(--rosa)
+    }
+
+    /* Color de cada fase, para el chip y la línea del encabezado */
+    .f1 {
+      --fase: var(--turquesa)
+    }
+
+    .f2 {
+      --fase: var(--violeta)
+    }
+
+    .f3 {
+      --fase: var(--ambar)
+    }
+
+    .f4 {
+      --fase: var(--rosa)
+    }
+
+    .enc {
+      position: relative;
+      padding-bottom: 20px;
+      margin-bottom: 26px
+    }
+
+    .enc::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 46px;
+      height: 3px;
+      border-radius: 2px;
+      background: var(--fase, var(--azul))
+    }
+
+    .enc .chip {
+      width: 44px;
+      height: 44px;
+      border-radius: 13px;
+      font-size: 13.5px;
+      margin-top: 3px
+    }
+
+    .enc h2 {
+      font-size: clamp(1.7rem, 3.6vw, 2.4rem);
+      font-weight: 800;
+      letter-spacing: -.02em;
+      line-height: 1.1
+    }
+
+    .enc .bajada {
+      color: var(--gris);
+      font-size: .87rem;
+      margin-top: 4px;
+      font-family: var(--mono);
+      letter-spacing: .03em;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap
+    }
+
+    .etiq {
+      font-family: var(--mono);
+      font-size: 9.5px;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 99px
+    }
+
+    .etiq.n2 {
+      background: var(--ambar-suave);
+      color: var(--ambar)
+    }
+
+    .etiq.n3 {
+      background: var(--rosa-suave);
+      color: var(--rosa)
+    }
+
+    .cuerpo {
+      max-width: var(--col);
+      display: flex;
+      flex-direction: column;
+      gap: 16px
+    }
+
+    .cuerpo h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-top: 10px;
+      color: var(--tinta)
+    }
+
+    ol.pasos {
+      counter-reset: p;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px
+    }
+
+    ol.pasos li {
+      counter-increment: p;
+      position: relative;
+      padding-left: 34px;
+      font-size: .97rem
+    }
+
+    ol.pasos li::before {
+      content: counter(p);
+      position: absolute;
+      left: 0;
+      top: 1px;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--tinta2);
+      background: var(--superficie);
+      border: 1px solid var(--linea-fuerte);
+      width: 22px;
+      height: 22px;
+      border-radius: 7px;
+      display: grid;
+      place-items: center
+    }
+
+    ul.marca {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 7px
+    }
+
+    ul.marca li {
+      position: relative;
+      padding-left: 22px;
+      font-size: .97rem
+    }
+
+    ul.marca li::before {
+      content: "";
+      position: absolute;
+      left: 4px;
+      top: .62em;
+      width: 6px;
+      height: 6px;
+      border-radius: 2px;
+      background: var(--linea-fuerte)
+    }
+
+    .cmd {
+      font-family: var(--mono);
+      font-size: .82rem;
+      font-weight: 600;
+      background: var(--superficie);
+      border: 1px solid var(--linea-fuerte);
+      padding: 2px 7px;
+      border-radius: 5px;
+      white-space: nowrap;
+      color: var(--tinta);
+      box-shadow: 0 1px 0 var(--linea-fuerte)
+    }
+
+    .ruta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      font-size: .85rem;
+      color: var(--gris)
+    }
+
+    .ruta .fl {
+      font-family: var(--mono);
+      color: var(--linea-fuerte);
+      font-weight: 600
+    }
+
+    .tecla {
+      font-family: var(--mono);
+      font-size: .78rem;
+      font-weight: 600;
+      background: var(--tinta);
+      color: var(--fondo);
+      padding: 3px 8px;
+      border-radius: 5px
+    }
+
+    /* Notas: fondo suave con un ícono redondo a la izquierda.
+       El ícono se arma con CSS, así no hay que tocar el HTML de cada nota. */
+    .nota {
+      --nota-color: var(--azul);
+      --nota-icono: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M12 16.5v-5.5M12 7.7h.01'/%3E%3C/svg%3E");
+      position: relative;
+      background: var(--azul-suave);
+      padding: 17px 20px 17px 70px;
+      border-radius: var(--r-m);
+      font-size: .93rem
+    }
+
+    .nota::before {
+      content: "";
+      position: absolute;
+      left: 18px;
+      top: 15px;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: color-mix(in srgb, var(--nota-color) 15%, transparent)
+    }
+
+    .nota::after {
+      content: "";
+      position: absolute;
+      left: 27px;
+      top: 24px;
+      width: 20px;
+      height: 20px;
+      background-color: var(--nota-color);
+      -webkit-mask: var(--nota-icono) center / contain no-repeat;
+      mask: var(--nota-icono) center / contain no-repeat
+    }
+
+    .nota strong {
+      color: var(--nota-color)
+    }
+
+    .nota.alerta {
+      --nota-color: var(--ambar);
+      --nota-icono: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 18h6M10 21.5h4M12 2.5a6.5 6.5 0 0 0-3.8 11.8V16h7.6v-1.7A6.5 6.5 0 0 0 12 2.5z'/%3E%3C/svg%3E");
+      background: var(--ambar-suave)
+    }
+
+    .nota.dato {
+      --nota-color: var(--turquesa);
+      --nota-icono: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M8.2 12.3l2.6 2.6 5-5.4'/%3E%3C/svg%3E");
+      background: var(--turquesa-suave)
+    }
+
+    /* ===== Contenido a dos columnas con ilustración al costado ===== */
+    /* Una sola columna por defecto; el arte al costado solo si entra cómodo. */
+    .cols {
+      display: grid;
+      gap: clamp(20px, 3vw, 38px);
+      align-items: start;
+      margin-bottom: 18px
+    }
+
+    .cols>*>*:first-child {
+      margin-top: 0
+    }
+
+    .arte {
+      max-width: 330px;
+      margin: 0 auto;
+      width: 100%
+    }
+
+    @media (min-width:1040px) {
+      .cols {
+        grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr)
+      }
+
+      .arte {
+        max-width: none;
+        margin: 0
+      }
+    }
+
+    /* --- hoja de papel de muestra --- */
+    .hoja {
+      background: var(--papel);
+      border: 1px solid var(--papel-borde);
+      border-radius: 10px;
+      box-shadow: var(--sombra);
+      aspect-ratio: 21 / 29.7;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      color: var(--tinta)
+    }
+
+    .hoja .a4 {
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: clamp(2rem, 6vw, 3.1rem);
+      letter-spacing: -.02em;
+      color: var(--azul);
+      line-height: 1
+    }
+
+    .hoja .medida {
+      font-family: var(--mono);
+      font-size: .8rem;
+      color: var(--tinta2);
+      margin-top: 8px
+    }
+
+    /* cotas con flechas alrededor de la hoja */
+    .cotas {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      grid-template-rows: auto 1fr;
+      gap: 9px;
+      align-items: center
+    }
+
+    .cota {
+      font-family: var(--mono);
+      font-size: .78rem;
+      color: var(--azul);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      white-space: nowrap
+    }
+
+    .cota.horizontal::before,
+    .cota.horizontal::after {
+      content: "";
+      height: 1px;
+      flex: 1;
+      background: repeating-linear-gradient(90deg, var(--azul) 0 5px, transparent 5px 9px)
+    }
+
+    .cota.vertical {
+      flex-direction: column;
+      writing-mode: vertical-rl;
+      height: 100%
+    }
+
+    .cota.vertical::before,
+    .cota.vertical::after {
+      content: "";
+      width: 1px;
+      flex: 1;
+      background: repeating-linear-gradient(180deg, var(--azul) 0 5px, transparent 5px 9px)
+    }
+
+    /* Notas que llevan una imagen o botones adentro: el ícono estorba */
+    .nota.sin-icono {
+      padding-left: 20px
+    }
+
+    .nota.sin-icono::before,
+    .nota.sin-icono::after {
+      display: none
+    }
+
+    .tabla-caja {
+      overflow-x: auto;
+      border: 1px solid var(--linea);
+      border-radius: var(--r-m);
+      background: var(--superficie)
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      font-size: .9rem;
+      min-width: 340px
+    }
+
+    th,
+    td {
+      padding: 9px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--linea)
+    }
+
+    td {
+      line-height: 1.9
+    }
+
+    tbody tr:last-child td {
+      border-bottom: 0
+    }
+
+    th {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--gris);
+      background: var(--superficie2)
+    }
+
+    td.val {
+      font-family: var(--mono);
+      font-variant-numeric: tabular-nums;
+      text-align: right;
+      font-weight: 600;
+      white-space: nowrap
+    }
+
+    /* Tabla de ejemplo con formato APA real: solo líneas horizontales,
+       tipografía serif y encabezados planos (sin sombreado ni mayúsculas). */
+    .apa-tabla {
+      margin: 8px 0 6px;
+      overflow-x: auto;
+      font-family: "Times New Roman", Georgia, serif;
+      color: var(--tinta)
+    }
+
+    .apa-tabla .num {
+      font-weight: 700
+    }
+
+    .apa-tabla .tit {
+      font-style: italic;
+      margin-bottom: 8px
+    }
+
+    .apa-tabla table {
+      border-collapse: collapse;
+      width: 100%;
+      min-width: 320px;
+      font-family: inherit;
+      font-size: .98rem;
+      border-top: 1.5px solid var(--tinta);
+      border-bottom: 1.5px solid var(--tinta)
+    }
+
+    .apa-tabla th,
+    .apa-tabla td {
+      padding: 7px 14px;
+      text-align: left;
+      border: 0;
+      line-height: 1.5;
+      font-family: inherit;
+      font-size: inherit;
+      font-weight: 400;
+      letter-spacing: normal;
+      text-transform: none;
+      color: inherit;
+      background: none;
+      white-space: normal
+    }
+
+    .apa-tabla thead th {
+      border-bottom: 1px solid var(--tinta)
+    }
+
+    .apa-tabla .nota-apa {
+      margin-top: 8px;
+      font-size: .9rem;
+      color: var(--tinta2);
+      font-style: italic
+    }
+
+    .duo {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px
+    }
+
+    @media (max-width:620px) {
+      .duo {
+        grid-template-columns: 1fr
+      }
+    }
+
+    .caso {
+      border-radius: var(--r-m);
+      padding: 16px 18px;
+      border: 1px solid
+    }
+
+    .caso .rot2 {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      display: flex;
+      gap: 7px;
+      align-items: center;
+      margin-bottom: 9px
+    }
+
+    .caso ol,
+    .caso ul {
+      margin: 0;
+      padding-left: 18px;
+      font-size: .9rem;
+      display: flex;
+      flex-direction: column;
+      gap: 3px
+    }
+
+    .caso.mal {
+      background: var(--rojo-suave);
+      border-color: color-mix(in srgb, var(--rojo) 30%, transparent)
+    }
+
+    .caso.mal .rot2 {
+      color: var(--rojo)
+    }
+
+    .caso.bien {
+      background: var(--verde-suave);
+      border-color: color-mix(in srgb, var(--verde) 30%, transparent)
+    }
+
+    .caso.bien .rot2 {
+      color: var(--verde)
+    }
+
+    .fichas {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 8px
+    }
+
+    .ficha {
+      background: var(--superficie);
+      border: 1px solid var(--linea);
+      border-radius: var(--r-s);
+      padding: 9px 12px;
+      font-size: .85rem;
+      display: flex;
+      gap: 9px;
+      align-items: center
+    }
+
+    .ficha b {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--gris);
+      font-weight: 600
+    }
+
+    .portada {
+      border: 1px solid var(--linea);
+      border-radius: var(--r-m);
+      background: var(--papel);
+      color: var(--papel-tinta);
+      padding: 26px 34px;
+      font-family: "Times New Roman", Times, serif;
+      text-align: center;
+      line-height: 1.5;
+      position: relative;
+      overflow: hidden
+    }
+
+    .portada .pg {
+      position: absolute;
+      top: 10px;
+      right: 16px;
+      font-size: 13px
+    }
+
+    .portada .tt {
+      font-weight: 700;
+      margin-top: 34px
+    }
+
+    .portada .sep {
+      height: 2em
+    }
+
+    .portada .sep-s {
+      height: 1em
+    }
+
+    .portada .logo {
+      width: 64px;
+      height: 64px;
+      margin: 4px auto 12px;
+      border: 1.5px dashed var(--papel-borde);
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: .05em;
+      color: var(--gris);
+      text-align: center;
+      line-height: 1.2
+    }
+
+    .portada .izq {
+      text-align: left;
+      margin-left: .9cm
+    }
+
+    .portada .rot {
+      font-weight: 700;
+      margin-left: 0;
+      margin-top: .4em
+    }
+
+    .portada-img {
+      border: 1px solid var(--linea);
+      border-radius: var(--r-m);
+      background: #fff;
+      padding: 20px;
+      display: flex;
+      justify-content: center
+    }
+
+    .portada-img img {
+      max-width: 440px;
+      width: 100%;
+      height: auto;
+      border: 1px solid #e4e6ef;
+      box-shadow: 0 2px 12px -4px rgba(20, 23, 43, .25)
+    }
+
+    .muestra {
+      border: 1px solid var(--linea);
+      border-radius: var(--r-m);
+      background: var(--papel);
+      color: var(--papel-tinta);
+      padding: 26px 30px;
+      font-family: "Times New Roman", Times, serif;
+      font-size: 15.5px;
+      line-height: 1.5
+    }
+
+    .muestra div,
+    .muestra p {
+      margin: 0
+    }
+
+    .muestra .m1 {
+      font-weight: 700;
+      text-align: center;
+      font-size: 18.1px
+    }
+
+    .muestra .m2 {
+      font-weight: 700;
+      font-size: 15.5px
+    }
+
+    .muestra .m3 {
+      font-weight: 700;
+      font-style: italic;
+      font-size: 15.5px
+    }
+
+    .muestra .mn {
+      text-indent: 1.27cm
+    }
+
+    .muestra .et {
+      font-family: var(--mono);
+      font-size: 9.5px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--azul);
+      opacity: .7;
+      margin-top: 14px
+    }
+
+    .muestra .et:first-child {
+      margin-top: 0
+    }
+
+    .tabla-mock {
+      border: 1px solid var(--linea);
+      border-radius: var(--r-m);
+      background: var(--papel);
+      color: var(--papel-tinta);
+      padding: 22px 24px;
+      font-family: "Times New Roman", Times, serif;
+      overflow-x: auto
+    }
+
+    .tabla-mock table {
+      border-collapse: collapse;
+      width: 100%;
+      min-width: 300px
+    }
+
+    .tabla-mock th,
+    .tabla-mock td {
+      border: 0;
+      padding: 5px 12px;
+      line-height: 1.25;
+      font-size: 15.5px;
+      font-family: inherit;
+      background: none;
+      text-transform: none;
+      letter-spacing: 0;
+      color: var(--papel-tinta);
+      font-weight: 400
+    }
+
+    .tabla-mock thead th {
+      font-weight: 700;
+      text-align: center;
+      border-top: 1.1px solid var(--papel-tinta);
+      border-bottom: 1.1px solid var(--papel-tinta)
+    }
+
+    .tabla-mock tbody tr td {
+      border-bottom: 0
+    }
+
+    .tabla-mock tbody tr:last-child td {
+      border-bottom: 1.1px solid var(--papel-tinta)
+    }
+
+    .tabla-mock td {
+      text-align: left
+    }
+
+    /* ============ PIE DE NAVEGACIÓN ============ */
+    .navpie {
+      margin-top: 38px;
+      padding-top: 20px;
+      border-top: 1px solid var(--linea);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      max-width: none
+    }
+
+    .navpie .lado {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0
+    }
+
+    .navpie .lado.der {
+      align-items: flex-end;
+      text-align: right
+    }
+
+    .navpie .destino {
+      font-size: .76rem;
+      color: var(--gris);
+      font-family: var(--mono);
+      letter-spacing: .02em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 22ch
+    }
+
+    /* ============ INICIO ============ */
+    .hero .eyebrow {
+      font-family: var(--mono);
+      font-size: 11.5px;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--turquesa);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap
+    }
+
+    .hero .eyebrow::before {
+      content: "";
+      width: 26px;
+      height: 2px;
+      background: var(--turquesa);
+      display: block;
+      flex: none
+    }
+
+    .hero-titulo {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+      margin: 14px 0 0
+    }
+
+    .hero-logo {
+      width: 84px;
+      height: auto;
+      flex: none;
+      margin-top: 4px
+    }
+
+    @media (max-width:640px) {
+      .hero-logo {
+        display: none
+      }
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 4.8vw, 3.2rem);
+      font-weight: 800;
+      margin: 0;
+      max-width: 16ch
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--azul)
+    }
+
+    .hero .sub {
+      max-width: none;
+      color: var(--tinta2);
+      font-size: 1.05rem;
+      margin-top: 14px
+    }
+
+    .objetivo {
+      background: var(--azul-suave);
+      border-radius: var(--r-m);
+      padding: 16px 20px;
+      max-width: none;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      margin-top: 24px
+    }
+
+    .objetivo .etq {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--azul);
+      flex: none;
+      padding-top: 3px
+    }
+
+    .objetivo p {
+      font-size: .94rem;
+      color: var(--tinta)
+    }
+
+    .fases {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1px;
+      margin-top: 26px;
+      background: var(--linea);
+      border: 1px solid var(--linea);
+      border-radius: var(--r-m);
+      overflow: hidden
+    }
+
+    .fase {
+      padding: 14px 16px 16px;
+      border-top: 3px solid;
+      background: var(--superficie)
+    }
+
+    .fase .n {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase
+    }
+
+    .fase .t {
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: 1rem;
+      margin-top: 2px
+    }
+
+    .fase .d {
+      font-size: .82rem;
+      color: var(--gris);
+      margin-top: 2px
+    }
+
+    .fase.f1 {
+      border-top-color: var(--turquesa)
+    }
+
+    .fase.f1 .n {
+      color: var(--turquesa)
+    }
+
+    .fase.f2 {
+      border-top-color: var(--violeta)
+    }
+
+    .fase.f2 .n {
+      color: var(--violeta)
+    }
+
+    .fase.f3 {
+      border-top-color: var(--ambar)
+    }
+
+    .fase.f3 .n {
+      color: var(--ambar)
+    }
+
+    .fase.f4 {
+      border-top-color: var(--rosa)
+    }
+
+    .fase.f4 .n {
+      color: var(--rosa)
+    }
+
+    /* ============ DEMO ESTILOS ============ */
+    .demo {
+      border: 1px solid var(--linea);
+      border-radius: var(--r-m);
+      overflow: hidden;
+      background: var(--superficie);
+      max-width: var(--col)
+    }
+
+    .demo-tabs {
+      display: flex;
+      border-bottom: 1px solid var(--linea);
+      background: var(--superficie2);
+      overflow-x: auto
+    }
+
+    .demo-tabs button {
+      border: 0;
+      background: none;
+      border-radius: 0;
+      padding: 11px 15px;
+      color: var(--gris);
+      border-bottom: 2px solid transparent;
+      white-space: nowrap;
+      font-family: var(--mono);
+      font-size: .76rem;
+      letter-spacing: .02em
+    }
+
+    .demo-tabs button[aria-selected=true] {
+      color: var(--violeta);
+      border-bottom-color: var(--violeta);
+      background: var(--superficie)
+    }
+
+    .demo-vista {
+      padding: 22px;
+      background: var(--papel);
+      color: var(--papel-tinta);
+      font-family: "Times New Roman", Times, serif;
+      font-size: 15px;
+      line-height: 1.5;
+      border-bottom: 1px solid var(--linea)
+    }
+
+    .demo-vista .cont {
+      font-weight: 400;
+      font-style: normal
+    }
+
+    .demo-props {
+      padding: 14px 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px
+    }
+
+    .prop {
+      font-family: var(--mono);
+      font-size: 11px;
+      background: var(--violeta-suave);
+      color: var(--violeta);
+      padding: 3px 9px;
+      border-radius: 99px;
+      font-weight: 600
+    }
+
+    /* ============ COMPROBACIÓN ============ */
+    .check {
+      background: var(--superficie);
+      border: 1px solid var(--linea);
+      border-radius: var(--r-l);
+      box-shadow: var(--sombra);
+      overflow: hidden
+    }
+
+    .check-cab {
+      padding: 22px 26px;
+      border-bottom: 1px solid var(--linea);
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      align-items: flex-end
+    }
+
+    .check-cab h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin: 0
+    }
+
+    .check-cab p {
+      color: var(--tinta2);
+      font-size: .92rem;
+      margin-top: 5px;
+      max-width: 52ch
+    }
+
+    .check-med {
+      min-width: 200px;
+      flex: 0 1 240px
+    }
+
+    .check-med .barra i {
+      background: linear-gradient(90deg, var(--verde), var(--turquesa))
+    }
+
+    .check-lista {
+      padding: 8px 0
+    }
+
+    .check-grupo {
+      padding: 12px 26px 6px
+    }
+
+    .check-grupo>.gt {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--gris);
+      margin-bottom: 6px
+    }
+
+    .item {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: var(--r-s);
+      cursor: pointer;
+      transition: background .15s
+    }
+
+    .item:hover {
+      background: var(--superficie2)
+    }
+
+    .item input {
+      accent-color: var(--verde);
+      width: 17px;
+      height: 17px;
+      flex: none;
+      margin: 0;
+      cursor: pointer
+    }
+
+    .item .et {
+      font-size: .9rem;
+      flex: 1;
+      min-width: 0
+    }
+
+    .item .vl {
+      font-family: var(--mono);
+      font-size: .8rem;
+      font-weight: 600;
+      color: var(--tinta2);
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums
+    }
+
+    .item input:checked~.et {
+      text-decoration: line-through;
+      color: var(--gris)
+    }
+
+    .item input:checked~.vl {
+      color: var(--gris)
+    }
+
+    .check-pie {
+      padding: 16px 26px 22px;
+      border-top: 1px solid var(--linea);
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: space-between
+    }
+
+    .check-pie .msg {
+      font-size: .85rem;
+      color: var(--gris)
+    }
+
+    .check-pie .msg.listo {
+      color: var(--verde);
+      font-weight: 600
+    }
+
+    /* ============ REVISIÓN DEL DOCX ============ */
+    .zona {
+      border: 2px dashed var(--linea-fuerte);
+      border-radius: var(--r-l);
+      background: var(--superficie);
+      padding: 34px 26px;
+      text-align: center;
+      transition: .18s;
+      cursor: pointer;
+      display: block
+    }
+
+    .zona:hover,
+    .zona.sobre {
+      border-color: var(--azul);
+      background: var(--azul-suave)
+    }
+
+    .zona .ic {
+      font-family: var(--mono);
+      font-size: 1.6rem;
+      color: var(--azul);
+      font-weight: 600
+    }
+
+    .zona .tt {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-top: 8px
+    }
+
+    .zona .ds {
+      font-size: .87rem;
+      color: var(--gris);
+      margin-top: 5px
+    }
+
+    .zona input {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+      pointer-events: none
+    }
+
+    .estado-an {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: .9rem;
+      color: var(--tinta2);
+      padding: 14px 0
+    }
+
+    .spin {
+      width: 15px;
+      height: 15px;
+      border: 2px solid var(--linea-fuerte);
+      border-top-color: var(--azul);
+      border-radius: 99px;
+      animation: gira .7s linear infinite;
+      flex: none
+    }
+
+    @keyframes gira {
+      to {
+        transform: rotate(360deg)
+      }
+    }
+
+    @media (prefers-reduced-motion:reduce) {
+      .spin {
+        animation-duration: 2s
+      }
+    }
+
+    .err-caja {
+      background: var(--rojo-suave);
+      border: 1px solid color-mix(in srgb, var(--rojo) 30%, transparent);
+      border-radius: var(--r-m);
+      padding: 14px 18px;
+      font-size: .9rem
+    }
+
+    .err-caja strong {
+      color: var(--rojo)
+    }
+
+    .resumen {
+      display: flex;
+      gap: 22px;
+      align-items: center;
+      flex-wrap: wrap;
+      background: var(--superficie);
+      border: 1px solid var(--linea);
+      border-radius: var(--r-l);
+      padding: 20px 24px;
+      box-shadow: var(--sombra)
+    }
+
+    .marcador {
+      width: 96px;
+      height: 96px;
+      border-radius: 99px;
+      display: grid;
+      place-items: center;
+      flex: none;
+      position: relative
+    }
+
+    .marcador .n {
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: 1.5rem;
+      line-height: 1;
+      font-variant-numeric: tabular-nums
+    }
+
+    .marcador .d {
+      font-family: var(--mono);
+      font-size: 9.5px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-top: 3px;
+      opacity: .75
+    }
+
+    .resumen .txt {
+      flex: 1;
+      min-width: 200px
+    }
+
+    .resumen .txt h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin: 0
+    }
+
+    .resumen .txt p {
+      font-size: .88rem;
+      color: var(--tinta2);
+      margin-top: 4px
+    }
+
+    .resumen .arch {
+      font-family: var(--mono);
+      font-size: .76rem;
+      color: var(--gris);
+      margin-top: 7px;
+      word-break: break-all
+    }
+
+    .pills {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+      margin-top: 10px
+    }
+
+    .pill {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      font-weight: 600;
+      padding: 3px 9px;
+      border-radius: 99px;
+      letter-spacing: .03em
+    }
+
+    .pill.ok {
+      background: var(--verde-suave);
+      color: var(--verde)
+    }
+
+    .pill.er {
+      background: var(--rojo-suave);
+      color: var(--rojo)
+    }
+
+    .pill.av {
+      background: var(--ambar-suave);
+      color: var(--ambar)
+    }
+
+    .pill.na {
+      background: var(--superficie2);
+      color: var(--gris)
+    }
+
+    .rev-grupo {
+      margin-top: 20px
+    }
+
+    .rev-grupo>.gt {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--gris);
+      margin-bottom: 7px
+    }
+
+    .rev-lista {
+      border: 1px solid var(--linea);
+      border-radius: var(--r-m);
+      background: var(--superficie);
+      overflow: hidden
+    }
+
+    .rev-item {
+      display: flex;
+      gap: 12px;
+      padding: 11px 16px;
+      border-bottom: 1px solid var(--linea);
+      align-items: flex-start
+    }
+
+    .rev-item:last-child {
+      border-bottom: 0
+    }
+
+    .rev-item .ic {
+      font-family: var(--mono);
+      font-weight: 600;
+      flex: none;
+      width: 16px;
+      text-align: center;
+      font-size: .9rem;
+      margin-top: 2px
+    }
+
+    .rev-item.ok .ic {
+      color: var(--verde)
+    }
+
+    .rev-item.error .ic {
+      color: var(--rojo)
+    }
+
+    .rev-item.aviso .ic {
+      color: var(--ambar)
+    }
+
+    .rev-item.na .ic {
+      color: var(--gris)
+    }
+
+    .rev-item .cont {
+      flex: 1;
+      min-width: 0
+    }
+
+    .rev-item .tt {
+      font-size: .92rem;
+      font-weight: 500
+    }
+
+    .rev-item.na .tt {
+      color: var(--gris)
+    }
+
+    .rev-item .vals {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 3px;
+      font-family: var(--mono);
+      font-size: .76rem;
+      color: var(--gris)
+    }
+
+    .rev-item .vals b {
+      font-weight: 600;
+      color: var(--tinta2)
+    }
+
+    .rev-item.error .vals .hall {
+      color: var(--rojo)
+    }
+
+    .rev-item .ayuda {
+      font-size: .82rem;
+      color: var(--tinta2);
+      margin-top: 5px
+    }
+
+    .rev-item .ayuda a {
+      font-weight: 600
+    }
+
+    .ia {
+      margin-top: 26px;
+      border: 1px solid var(--linea);
+      border-radius: var(--r-l);
+      background: var(--superficie);
+      overflow: hidden
+    }
+
+    .ia-cab {
+      padding: 18px 22px;
+      border-bottom: 1px solid var(--linea);
+      background: linear-gradient(180deg, var(--violeta-suave), var(--superficie));
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: space-between
+    }
+
+    .ia-cab h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin: 0
+    }
+
+    .ia-cab p {
+      font-size: .83rem;
+      color: var(--tinta2);
+      margin-top: 3px;
+      max-width: 52ch
+    }
+
+    .ia-cuerpo {
+      padding: 20px 22px;
+      font-size: .93rem;
+      display: flex;
+      flex-direction: column;
+      gap: 12px
+    }
+
+    .ia-cuerpo p {
+      white-space: pre-wrap
+    }
+
+    .ia-hall {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 11px 14px;
+      border-radius: var(--r-m);
+      font-size: .88rem
+    }
+
+    .ia-hall .ic {
+      font-family: var(--mono);
+      font-weight: 600;
+      flex: none
+    }
+
+    .ia-hall.error {
+      background: var(--rojo-suave)
+    }
+
+    .ia-hall.error .ic {
+      color: var(--rojo)
+    }
+
+    .ia-hall.aviso {
+      background: var(--ambar-suave)
+    }
+
+    .ia-hall.aviso .ic {
+      color: var(--ambar)
+    }
+
+    .ia-hall.bien {
+      background: var(--verde-suave)
+    }
+
+    .ia-hall.bien .ic {
+      color: var(--verde)
+    }
+
+    .ia-hall b {
+      display: block
+    }
+
+    .cierre {
+      margin-top: 26px;
+      padding: 32px 30px;
+      border-radius: var(--r-l);
+      background: #14172B;
+      color: #E9EBF6
+    }
+
+    .cierre h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: inherit;
+      margin: 0
+    }
+
+    .cierre ul {
+      margin: 16px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 8px
+    }
+
+    .cierre li {
+      font-size: .9rem;
+      opacity: .85;
+      padding-left: 18px;
+      position: relative
+    }
+
+    .cierre li::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      font-family: var(--mono);
+      opacity: .6
+    }
+
+    .lema {
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, .16);
+      font-family: var(--display);
+      font-size: clamp(1.05rem, 2.4vw, 1.4rem);
+      font-weight: 600;
+      line-height: 1.3;
+      text-wrap: balance
+    }
+
+    .lema b {
+      color: #8FA2FF
+    }
+
+    /* ===== AYUDA (foquito) =====
+       La ayuda para hacer cada cosa en Word (rutas de menú, pasos y los recuadros
+       "Cómo hacerlo") está oculta por defecto. El foquito de la barra superior
+       agrega la clase .ayuda al body y entonces se muestra. */
+    /* En esta página no hay foquito de ayuda: las listas y bloques se ven siempre.
+       (En el sitio del Formato, ul.marca/.solo-paso solo aparecen con el foquito.) */
+
+    /* Bloque "Cómo hacerlo en Word": la ayuda que va debajo de cada requisito.
+       Lleva la clase .solo-paso, así solo aparece en la versión "Cómo aplicar". */
+    .ayuda {
+      margin-top: 18px;
+      padding: 15px 17px 15px 18px;
+      border-radius: var(--r-m);
+      background: var(--turquesa-suave);
+      border-left: 3px solid var(--turquesa);
+    }
+
+    .ayuda .ayuda-tt {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--turquesa);
+      margin-bottom: 11px;
+    }
+
+    .ayuda> :not(.ayuda-tt)+* {
+      margin-top: 10px;
+    }
+
+    .ayuda p {
+      font-size: .95rem;
+      color: var(--tinta2);
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    .ayuda .ruta {
+      background: var(--superficie);
+      padding: 8px 11px;
+      border-radius: 8px;
+    }
+
+    /* ===== MODAL DE INSTALACIÓN (estilo de citas APA 7) ===== */
+    .btn-instalar {
+      margin: 4px 8px 4px 0
+    }
+
+    .modal-velo {
+      position: fixed;
+      inset: 0;
+      background: rgba(20, 23, 43, .55);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s ease
+    }
+
+    .modal-velo.abierto {
+      opacity: 1;
+      pointer-events: auto
+    }
+
+    .modal-caja {
+      background: var(--superficie);
+      border: 1px solid var(--linea);
+      border-radius: var(--r-l);
+      box-shadow: var(--sombra-alta);
+      max-width: 540px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 26px 28px 28px;
+      transform: translateY(10px) scale(.98);
+      transition: transform .2s ease
+    }
+
+    .modal-velo.abierto .modal-caja {
+      transform: none
+    }
+
+    .modal-enc {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 6px
+    }
+
+    .modal-enc h3 {
+      margin: 0;
+      font-family: var(--display);
+      font-size: 1.15rem
+    }
+
+    .modal-cerrar {
+      background: var(--superficie2);
+      border: 1px solid var(--linea);
+      color: var(--tinta2);
+      width: 30px;
+      height: 30px;
+      padding: 0;
+      border-radius: 99px;
+      font-size: 1.1rem;
+      line-height: 1;
+      flex: none
+    }
+
+    .modal-cerrar:hover {
+      color: var(--tinta);
+      border-color: var(--linea-fuerte)
+    }
+
+    .modal-cuerpo ol {
+      margin: 10px 0 0;
+      padding-left: 22px
+    }
+
+    .modal-cuerpo li {
+      margin-bottom: 9px;
+      line-height: 1.5
+    }
+
+    .modal-cuerpo code {
+      background: var(--superficie2);
+      border: 1px solid var(--linea);
+      border-radius: 4px;
+      padding: 1px 6px;
+      font-size: .85em
+    }
+
+    @media (prefers-reduced-motion:reduce) {
+
+      .modal-velo,
+      .modal-caja {
+        transition: none
+      }
+    }
+
+    /* ===== PROMPTS DESPLEGABLES ===== */
+    .prompt-item {
+      border: 1px solid var(--linea);
+      border-radius: var(--r-m);
+      background: var(--superficie);
+      overflow: hidden;
+      margin-bottom: 12px
+    }
+
+    .prompt-cabecera {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 18px;
+      background: none;
+      border: 0;
+      border-radius: 0;
+      text-align: left;
+      font-family: var(--texto);
+      font-size: .95rem;
+      font-weight: 700;
+      color: var(--tinta)
+    }
+
+    .prompt-cabecera:hover {
+      background: var(--superficie2)
+    }
+
+    .prompt-cabecera .flecha {
+      flex: none;
+      transition: transform .18s ease;
+      color: var(--gris)
+    }
+
+    .prompt-item.abierto .prompt-cabecera .flecha {
+      transform: rotate(180deg)
+    }
+
+    .prompt-cuerpo {
+      display: none;
+      padding: 0 18px 18px;
+      border-top: 1px solid var(--linea)
+    }
+
+    .prompt-item.abierto .prompt-cuerpo {
+      display: block;
+      padding-top: 14px
+    }
+
+    .prompt-desc {
+      color: var(--tinta2);
+      font-size: .9rem;
+      margin: 0 0 12px
+    }
+
+    .prompt-texto {
+      background: var(--superficie2);
+      border: 1px solid var(--linea);
+      border-radius: var(--r-s);
+      padding: 14px 16px;
+      font-family: var(--mono);
+      font-size: .78rem;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      color: var(--tinta);
+      max-height: 320px;
+      overflow-y: auto;
+      margin: 0 0 12px
+    }
+
+    .prompt-copiar.copiado {
+      background: var(--verde);
+      border-color: var(--verde)
+    }
+
+    /* El machete: subtítulos y párrafos un poco más compactos */
+    .machete h3 {
+      margin: 18px 0 8px
+    }
+
+    .machete h3:first-child {
+      margin-top: 4px
+    }
+
+    /* Impresión: deja solo el contenido visible (pensado para el Machete). */
+    @media print {
+
+      .saltar,
+      .topbar,
+      .rail,
+      .velo,
+      .modal-velo,
+      .navpie,
+      .no-print {
+        display: none !important
+      }
+
+      .envoltorio {
+        display: block !important;
+        max-width: none !important;
+        margin: 0 !important;
+        padding: 0 !important
+      }
+
+      main,
+      #contenido {
+        display: block !important
+      }
+
+      .pantalla[hidden] {
+        display: none !important
+      }
+
+      .pantalla {
+        box-shadow: none !important;
+        border: 0 !important
+      }
+
+      body {
+        background: #fff !important;
+        color: #000 !important
+      }
+
+      @page {
+        margin: 1.2cm
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="saltar" href="#contenido">Ir al contenido</a>
+
+  <div class="topbar">
+    <div class="tb">
+      <a class="tb-escudo" href="/" title="Ir a la página de inicio" aria-label="Ir a la página de inicio"><img
+          class="tb-logo" src="/logos/logo_reducido.png" alt="Logo San Ignacio de Loyola"></a><a class="tb-marca"
+        href="#inicio"><span class="pt">SIL</span><span class="txt">Defensa oral</span></a>
+      <div class="tb-prog">
+        <span class="rot">Avance</span>
+        <div class="barra"><i id="pasos-barra"></i></div>
+        <span class="num"><a class="num-actual" id="pasos-actual" href="#inicio" title="Ir a mi paso actual">0</a> /
+          <span id="pasos-total">0</span></span>
+        <button class="btn-mini icono tb-menu" id="tb-menu" aria-expanded="false" aria-label="Índice" title="Índice">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M2 4h12M2 8h12M2 12h12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+          </svg>
+        </button>
+        <button class="btn-mini icono rojo" id="btn-reiniciar" aria-label="Reiniciar"
+          title="Volver el avance a cero y empezar de nuevo">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M13 3v3.5H9.5M13 6.3A5.5 5.5 0 1 1 12.2 3.6" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+      </div>
+      <div class="tb-cuenta" id="tb-cuenta"></div>
+    </div>
+  </div>
+
+  <div class="velo" id="velo" aria-hidden="true"></div>
+
+  <div class="envoltorio">
+
+    <nav class="rail" id="rail" aria-label="Índice de la defensa oral">
+      <div class="gt">Índice</div>
+      <ol id="indice"></ol>
+    </nav>
+
+    <main id="contenido">
+
+      <!-- ═══ INICIO ═══ -->
+      <section class="pantalla hero" id="inicio" data-tipo="inicio">
+        <div class="eyebrow">Defensa oral del Proyecto STEAM · SIL · Diseño de la presentación</div>
+        <div class="hero-titulo">
+          <h1>La defensa, <em>diapositiva por diapositiva</em></h1>
+          <img class="hero-logo" src="/logos/logo_reducido.png" alt="Escudo del colegio">
+        </div>
+        <p class="sub">Acá te ayudamos con lo <strong>visual</strong>: que tus diapositivas se vean prolijas,
+          se lean bien y te sirvan de apoyo cuando expongas. No revisamos si la investigación está bien
+          —eso lo ves con tus profes—, sino cómo <strong>mostrás</strong> tu proyecto.</p>
+
+        <div class="objetivo">
+          <div class="etq">Objetivo</div>
+          <p>Armar una presentación clara, ordenada y profesional para la defensa: buena tipografía, poco
+            texto, imágenes de calidad y una identidad visual coherente.</p>
+        </div>
+
+        <div class="fases">
+          <div class="fase f1">
+            <div class="n">Fase 1</div>
+            <div class="t">La plantilla</div>
+            <div class="d">Elegir plantilla, marca, colores, tipografía y composición</div>
+          </div>
+          <div class="fase f2">
+            <div class="n">Fase 2</div>
+            <div class="t">Las diapositivas</div>
+            <div class="d">Jerarquía, síntesis, imágenes y animación</div>
+          </div>
+          <div class="fase f3">
+            <div class="n">Fase 3</div>
+            <div class="t">El contenido</div>
+            <div class="d">Ejemplos de contenido para descargar</div>
+          </div>
+          <div class="fase f4">
+            <div class="n">Fase 4</div>
+            <div class="t">La revisión</div>
+            <div class="d">Criterios, prompt para mejorar y ensayo</div>
+          </div>
+        </div>
+
+        <div class="cuerpo" style="margin-top:26px;max-width:none">
+          <div class="nota"><strong>Qué es esto.</strong> Una guía para diseñar las diapositivas de tu defensa
+            oral, en el orden en que conviene armarlas: primero la <strong>plantilla</strong> (marca, colores,
+            tipografía y composición), después el diseño de <strong>cada diapositiva</strong> (jerarquía, poco texto,
+            imágenes y animaciones), luego los <strong>ejemplos</strong> de contenido y, al final, los
+            <strong>criterios de evaluación</strong>, un prompt para que una IA te ayude a mejorarla y cómo
+            <strong>ensayar</strong> la defensa.
+          </div>
+          <div class="nota dato"><strong>Ojo.</strong> Esta página evalúa la <strong>presentación</strong> (cómo se
+            ven y comunican tus diapositivas) y la <strong>corrección del lenguaje</strong>. No juzga si tu
+            investigación científica o tu modelo de negocio son correctos: eso corresponde a las otras materias.
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ FASE 1 · LA PLANTILLA ═══ -->
+
+      <section class="pantalla f1" id="plantilla" data-paso="plantilla" data-fase="1" hidden>
+        <div class="enc" style="flex-wrap:wrap">
+          <div class="chip"></div>
+          <div>
+            <h2>Selección de plantilla</h2>
+            <div class="bajada"><span>Fase 1 · La plantilla</span></div>
+          </div>
+          <div
+            style="margin-left:auto;display:flex;align-items:center;gap:10px;background:var(--azul-suave);color:var(--azul);border-radius:14px;padding:10px 15px;font-size:.85rem;font-weight:600;max-width:250px;line-height:1.3">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="flex:none">
+              <path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2v.1h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3Z"
+                stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
+            </svg>
+            <span>La plantilla es la base de tu presentación.</span>
+          </div>
+        </div>
+        <div class="cuerpo">
+          <div class="nota"><strong>Qué tenés que hacer acá:</strong> elegí una plantilla simple, que tenga diseños
+            para títulos, textos e imágenes y que puedas adaptar con el logo y los colores de tu empresa.</div>
+          <h3 style="margin-top:0">¿Cómo elegir una buena plantilla?</h3>
+          <p style="margin-top:0">Elegí una plantilla que te ayude a comunicar tu proyecto de forma clara y
+            profesional.</p>
+
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin:6px 0 8px">
+            <div
+              style="background:var(--superficie);border:1px solid var(--linea);border-radius:16px;box-shadow:var(--sombra);padding:22px 16px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px">
+              <div
+                style="width:56px;height:56px;border-radius:50%;background:var(--turquesa-suave);color:var(--turquesa);display:flex;align-items:center;justify-content:center">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8" />
+                  <path d="M8.2 12.3l2.4 2.4 5.2-5.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                </svg>
+              </div>
+              <div style="font-weight:800;font-size:1rem">Acorde al tema</div>
+              <div style="font-size:.88rem;color:var(--tinta2);line-height:1.45">Se adapta al contenido de tu proyecto.
+              </div>
+            </div>
+
+            <div
+              style="background:var(--superficie);border:1px solid var(--linea);border-radius:16px;box-shadow:var(--sombra);padding:22px 16px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px">
+              <div
+                style="width:56px;height:56px;border-radius:50%;background:var(--azul-suave);color:var(--azul-vivo);display:flex;align-items:center;justify-content:center">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <rect x="3.5" y="4.5" width="17" height="15" rx="2" stroke="currentColor" stroke-width="1.8" />
+                  <path d="M3.5 9.5h17M10 9.5v10" stroke="currentColor" stroke-width="1.8" />
+                </svg>
+              </div>
+              <div style="font-weight:800;font-size:1rem">Organiza la información</div>
+              <div style="font-size:.88rem;color:var(--tinta2);line-height:1.45">Tiene diseños para títulos, texto,
+                imágenes y gráficos.</div>
+            </div>
+
+            <div
+              style="background:var(--superficie);border:1px solid var(--linea);border-radius:16px;box-shadow:var(--sombra);padding:22px 16px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px">
+              <div
+                style="width:56px;height:56px;border-radius:50%;background:#F0E6FB;color:#7C3AED;display:flex;align-items:center;justify-content:center">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path
+                    d="M12 3a9 9 0 1 0 0 18c1 0 1.6-.8 1.6-1.6 0-.5-.2-.8-.5-1.1-.3-.3-.5-.7-.5-1.1 0-.9.7-1.6 1.6-1.6H16a5 5 0 0 0 5-5c0-3.9-4-6-9-6Z"
+                    stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" />
+                  <circle cx="7.5" cy="11" r="1.1" fill="currentColor" />
+                  <circle cx="11" cy="7.5" r="1.1" fill="currentColor" />
+                  <circle cx="15" cy="8.5" r="1.1" fill="currentColor" />
+                </svg>
+              </div>
+              <div style="font-weight:800;font-size:1rem">Personalizable</div>
+              <div style="font-size:.88rem;color:var(--tinta2);line-height:1.45">Permite cambiar colores y agregar tu
+                logo.</div>
+            </div>
+
+            <div
+              style="background:var(--superficie);border:1px solid var(--linea);border-radius:16px;box-shadow:var(--sombra);padding:22px 16px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px">
+              <div
+                style="width:56px;height:56px;border-radius:50%;background:#FFF1D6;color:#C77800;display:flex;align-items:center;justify-content:center">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M12 3.5l2.6 5.3 5.8.85-4.2 4.1 1 5.75L12 16.9l-5.2 2.7 1-5.75-4.2-4.1 5.8-.85z"
+                    stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" />
+                </svg>
+              </div>
+              <div style="font-weight:800;font-size:1rem">Simple y limpia</div>
+              <div style="font-size:.88rem;color:var(--tinta2);line-height:1.45">No es recargada ni distrae del
+                contenido.</div>
+            </div>
+          </div>
+
+          <h3>Ejemplos de plantillas</h3>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin:6px 0 4px">
+            <div style="border:1px solid var(--linea);border-radius:12px;overflow:hidden;box-shadow:var(--sombra)">
+              <img src="/ejemplos/defensaOral/p01_1.png" alt="Ejemplo de plantilla adecuada: portada clara con imagen"
+                loading="lazy" style="display:block;width:100%;height:auto">
+              <div
+                style="display:flex;align-items:center;justify-content:space-between;gap:8px;background:var(--turquesa-suave);color:var(--turquesa);border-top:1px solid var(--linea);padding:10px 12px;font-weight:700;font-size:.88rem">
+                <span style="display:flex;align-items:center;gap:6px">✓ Buena opción</span><span
+                  style="font-family:var(--mono)">›</span>
+              </div>
+            </div>
+
+            <div style="border:1px solid var(--linea);border-radius:12px;overflow:hidden;box-shadow:var(--sombra)">
+              <img src="/ejemplos/defensaOral/p01_2.png" alt="Ejemplo de plantilla adecuada: diseño con color y foto"
+                loading="lazy" style="display:block;width:100%;height:auto">
+              <div
+                style="display:flex;align-items:center;justify-content:space-between;gap:8px;background:var(--turquesa-suave);color:var(--turquesa);border-top:1px solid var(--linea);padding:10px 12px;font-weight:700;font-size:.88rem">
+                <span style="display:flex;align-items:center;gap:6px">✓ Buena opción</span><span
+                  style="font-family:var(--mono)">›</span>
+              </div>
+            </div>
+
+            <div style="border:1px solid var(--linea);border-radius:12px;overflow:hidden;box-shadow:var(--sombra)">
+              <img src="/ejemplos/defensaOral/p01_3.png" alt="Ejemplo de plantilla a evitar: solo texto sobre el fondo"
+                loading="lazy" style="display:block;width:100%;height:auto">
+              <div
+                style="display:flex;align-items:center;justify-content:space-between;gap:8px;background:var(--rojo-suave);color:var(--rojo);border-top:1px solid var(--linea);padding:10px 12px;font-weight:700;font-size:.88rem">
+                <span style="display:flex;align-items:center;gap:6px">✕ Evitar</span><span
+                  style="font-family:var(--mono)">›</span>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="nota"><strong>Recordá:</strong> no adaptes tu proyecto a la plantilla. Adaptá la plantilla a tu
+            proyecto.</div>
+        </div>
+      </section>
+
+      <section class="pantalla f1" id="identidad" data-paso="identidad" data-fase="1" hidden>
+        <div class="enc" style="flex-wrap:wrap">
+          <div class="chip"></div>
+          <div>
+            <h2>Identidad de marca</h2>
+            <div class="bajada"><span>Fase 1 · La plantilla</span></div>
+          </div>
+          <div
+            style="margin-left:auto;display:flex;align-items:center;gap:10px;background:var(--azul-suave);color:var(--azul);border-radius:14px;padding:10px 15px;font-size:.85rem;font-weight:600;max-width:250px;line-height:1.3">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="flex:none">
+              <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6" />
+              <path d="M12 8v4M12 16h.01" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+            </svg>
+            <span>Tu presentación debe verse como una empresa de verdad, no como diapositivas sueltas.</span>
+          </div>
+        </div>
+        <div class="cuerpo">
+          <div class="nota">
+            <strong>Qué tenés que hacer acá:</strong> que el <strong>logo</strong> aparezca en todas
+            las diapositivas y que se mantengan los <strong>colores</strong> de tu empresa de principio a fin.
+          </div>
+
+          <h3 style="margin-top:4px">La identidad da coherencia</h3>
+          <p style="margin-top:0">La identidad <strong>de marca</strong> hace que tu presentación se vea profesional,
+            confiable y fácil de reconocer. Todos los elementos (logo, colores, nombre y tipografía) deben usarse
+            siempre de la misma manera.</p>
+
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin:6px 0 8px">
+            <div
+              style="background:var(--superficie);border:1px solid var(--linea);border-radius:16px;box-shadow:var(--sombra);padding:22px 16px;display:flex;flex-direction:column;align-items:flex-start;gap:10px">
+              <div
+                style="width:52px;height:52px;border-radius:50%;background:var(--azul-suave);color:var(--azul);display:flex;align-items:center;justify-content:center;flex:none">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="1.8" />
+                  <path d="M7 8h4M7 12h2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                  <rect x="13" y="7" width="4" height="4" rx="1" stroke="currentColor" stroke-width="1.5" />
+                </svg>
+              </div>
+              <div style="font-weight:800;font-size:.95rem;line-height:1.3">Logo en todas<br>las diapositivas</div>
+              <div style="font-size:.85rem;color:var(--tinta2);line-height:1.45">Siempre en el mismo lugar y con el
+                mismo tamaño.</div>
+            </div>
+
+            <div
+              style="background:var(--superficie);border:1px solid var(--linea);border-radius:16px;box-shadow:var(--sombra);padding:22px 16px;display:flex;flex-direction:column;align-items:flex-start;gap:10px">
+              <div
+                style="width:52px;height:52px;border-radius:50%;background:var(--turquesa-suave);color:var(--turquesa);display:flex;align-items:center;justify-content:center;flex:none">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8" />
+                  <circle cx="8.5" cy="10" r="2" stroke="currentColor" stroke-width="1.5" />
+                  <circle cx="15.5" cy="10" r="2" stroke="currentColor" stroke-width="1.5" />
+                  <path d="M8 15c1 1.5 7 1.5 8 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                </svg>
+              </div>
+              <div style="font-weight:800;font-size:.95rem;line-height:1.3">Colores consistentes</div>
+              <div style="font-size:.85rem;color:var(--tinta2);line-height:1.45">Usá los colores de tu empresa en
+                títulos, detalles y elementos gráficos.</div>
+            </div>
+
+            <div
+              style="background:var(--superficie);border:1px solid var(--linea);border-radius:16px;box-shadow:var(--sombra);padding:22px 16px;display:flex;flex-direction:column;align-items:flex-start;gap:10px">
+              <div
+                style="width:52px;height:52px;border-radius:50%;background:#F0E6FB;color:#7C3AED;display:flex;align-items:center;justify-content:center;flex:none">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M9 4h6M12 4v16M8 20h8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                  <path d="M7 8h4M7 13h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                </svg>
+              </div>
+              <div style="font-weight:800;font-size:.95rem;line-height:1.3">Misma tipografía</div>
+              <div style="font-size:.85rem;color:var(--tinta2);line-height:1.45">Usá las mismas fuentes en toda la
+                presentación.</div>
+            </div>
+
+            <div
+              style="background:var(--superficie);border:1px solid var(--linea);border-radius:16px;box-shadow:var(--sombra);padding:22px 16px;display:flex;flex-direction:column;align-items:flex-start;gap:10px">
+              <div
+                style="width:52px;height:52px;border-radius:50%;background:#FFF1D6;color:#C77800;display:flex;align-items:center;justify-content:center;flex:none">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M12 3.5l2.6 5.3 5.8.85-4.2 4.1 1 5.75L12 16.9l-5.2 2.7 1-5.75-4.2-4.1 5.8-.85z"
+                    stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" />
+                </svg>
+              </div>
+              <div style="font-weight:800;font-size:.95rem;line-height:1.3">Coherencia visual</div>
+              <div style="font-size:.85rem;color:var(--tinta2);line-height:1.45">Todos los elementos deben formar un
+                conjunto reconocible.</div>
+            </div>
+          </div>
+
+          <!-- Comparativa Cómo NO / Cómo SÍ con imágenes reales -->
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin:20px 0 4px">
+
+            <!-- Cómo NO -->
+            <div style="border-radius:16px;overflow:hidden;border:1px solid var(--linea);box-shadow:var(--sombra)">
+              <div style="display:flex;align-items:center;gap:10px;background:var(--rojo-suave);padding:11px 16px">
+                <span
+                  style="width:28px;height:28px;border-radius:50%;background:var(--rojo);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1rem;flex:none">✕</span>
+                <span style="font-weight:800;color:var(--rojo);letter-spacing:.03em;font-size:.9rem">CÓMO NO</span>
+              </div>
+              <div style="background:var(--superficie)">
+                <img src="/ejemplos/defensaOral/p2_01.png"
+                  alt="Ejemplo de diapositiva sin identidad de marca: sin logo, colores inconsistentes" loading="lazy"
+                  style="display:block;width:100%;height:auto">
+              </div>
+              <div style="background:var(--rojo-suave);padding:12px 16px">
+                <ul style="margin:0;padding-left:16px;font-size:.85rem;color:var(--rojo);line-height:1.6">
+                  <li>No tiene logo.</li>
+                  <li>Usa colores que no son de la marca.</li>
+                  <li>La tipografía no es consistente.</li>
+                  <li>Se ve como una diapositiva suelta.</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Cómo SÍ -->
+            <div style="border-radius:16px;overflow:hidden;border:1px solid var(--linea);box-shadow:var(--sombra)">
+              <div style="display:flex;align-items:center;gap:10px;background:var(--turquesa-suave);padding:11px 16px">
+                <span
+                  style="width:28px;height:28px;border-radius:50%;background:var(--turquesa);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1rem;flex:none">✓</span>
+                <span style="font-weight:800;color:var(--turquesa);letter-spacing:.03em;font-size:.9rem">CÓMO SÍ</span>
+              </div>
+              <div style="background:var(--superficie)">
+                <img src="/ejemplos/defensaOral/p2_02.png"
+                  alt="Ejemplo de diapositiva con identidad de marca: logo visible, colores y tipografía coherentes"
+                  loading="lazy" style="display:block;width:100%;height:auto">
+              </div>
+              <div style="background:var(--turquesa-suave);padding:12px 16px">
+                <ul style="margin:0;padding-left:16px;font-size:.85rem;color:var(--turquesa);line-height:1.6">
+                  <li>Tiene el logo en la esquina.</li>
+                  <li>Usa los colores de la marca.</li>
+                  <li>Mantiene la misma tipografía.</li>
+                  <li>Se ve como una presentación completa y profesional.</li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="nota dato"><strong>Portada y cierre.</strong> La primera y la última diapositiva son las que más
+            se miran: asegurate de que muestren bien tu logo, el nombre del producto y los colores de la marca.</div>
+        </div>
+      </section>
+
+      <section class="pantalla f1" id="color" data-paso="color" data-fase="1" hidden>
+        <div class="enc" style="flex-wrap:wrap">
+          <div class="chip"></div>
+          <div>
+            <h2>Color y contraste</h2>
+            <div class="bajada"><span>Fase 1 · La plantilla</span></div>
+          </div>
+          <div
+            style="margin-left:auto;display:flex;align-items:center;gap:10px;background:var(--azul-suave);color:var(--azul);border-radius:14px;padding:10px 15px;font-size:.85rem;font-weight:600;max-width:260px;line-height:1.3">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="flex:none">
+              <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6" />
+              <circle cx="8.5" cy="10" r="1.5" fill="currentColor" />
+              <circle cx="15.5" cy="10" r="1.5" fill="currentColor" />
+              <circle cx="12" cy="15" r="1.5" fill="currentColor" />
+              <circle cx="7" cy="13.5" r="1.1" fill="currentColor" />
+              <circle cx="17" cy="13.5" r="1.1" fill="currentColor" />
+            </svg>
+            <span>Colores bien usados hacen que tu mensaje se entienda mejor y se vea más profesional.</span>
+          </div>
+        </div>
+        <div class="cuerpo">
+          <div class="nota"><strong>Qué tenés que hacer acá:</strong> usá una paleta corta y asegurate de que el texto
+            se distinga claramente del fondo en todas las diapositivas.</div>
+
+          <!-- Paleta corta: texto + imagen al costado -->
+          <div style="display:flex;flex-wrap:wrap;gap:20px;align-items:flex-start;margin:4px 0 16px">
+            <div style="flex:1 1 220px">
+              <h3 style="margin-top:0">Usá una paleta corta</h3>
+              <p style="margin-top:0">Elegí 2 o 3 colores de tu marca más neutros (blanco, negro, grises). Usá esos
+                mismos colores en todas las diapositivas para que se vea como un conjunto.</p>
+            </div>
+            <div
+              style="flex:0 0 auto;max-width:340px;width:100%;border:1px solid var(--linea);border-radius:14px;overflow:hidden;box-shadow:var(--sombra)">
+              <img src="/ejemplos/defensaOral/p3_1.png"
+                alt="Ejemplo de paleta: color principal azul oscuro, secundario turquesa, neutro gris claro, fondo blanco"
+                loading="lazy" style="display:block;width:100%;height:auto">
+            </div>
+          </div>
+
+          <div class="tabla-caja">
+            <table>
+              <thead>
+                <tr>
+                  <th>Aspecto</th>
+                  <th style="text-align:right">Cómo tiene que quedar</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Cantidad de colores</td>
+                  <td class="val">2–3 de marca + neutros</td>
+                </tr>
+                <tr>
+                  <td>Contraste texto–fondo</td>
+                  <td class="val">Alto: texto oscuro sobre fondo claro (o al revés)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>Ejemplos de contraste</h3>
+          <p>El contraste suele ser lo que más cuesta. El texto tiene que leerse sin esfuerzo desde lejos. Mirá la
+            diferencia entre combinaciones que funcionan y otras que no.</p>
+
+          <div style="display:flex;flex-wrap:wrap;gap:16px;margin:8px 0 4px">
+
+            <!-- Correctas -->
+            <div
+              style="flex:1 1 260px;border:2px solid var(--turquesa);border-radius:14px;overflow:hidden;background:var(--superficie)">
+              <div style="display:flex;align-items:center;gap:10px;background:var(--turquesa-suave);padding:11px 16px">
+                <span
+                  style="width:28px;height:28px;border-radius:50%;background:var(--turquesa);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1rem;flex:none">✓</span>
+                <div>
+                  <div style="font-weight:800;color:var(--turquesa);font-size:.9rem">Correctas · Buen contraste</div>
+                  <div style="font-size:.8rem;color:var(--turquesa);opacity:.85">El texto se lee fácil y se ve
+                    profesional.</div>
+                </div>
+              </div>
+              <img src="/ejemplos/defensaOral/p3_2.png"
+                alt="Ejemplos de buen contraste: texto oscuro sobre blanco, blanco sobre azul oscuro, blanco sobre negro, negro sobre amarillo, blanco sobre verde"
+                loading="lazy" style="display:block;width:100%;height:auto">
+            </div>
+
+            <!-- Evitar -->
+            <div
+              style="flex:1 1 260px;border:2px solid var(--rojo);border-radius:14px;overflow:hidden;background:var(--superficie)">
+              <div style="display:flex;align-items:center;gap:10px;background:var(--rojo-suave);padding:11px 16px">
+                <span
+                  style="width:28px;height:28px;border-radius:50%;background:var(--rojo);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1rem;flex:none">✕</span>
+                <div>
+                  <div style="font-weight:800;color:var(--rojo);font-size:.9rem">Evitá · Poco contraste</div>
+                  <div style="font-size:.8rem;color:var(--rojo);opacity:.85">El texto cuesta leer y se ve poco
+                    profesional.</div>
+                </div>
+              </div>
+              <img src="/ejemplos/defensaOral/p3_3.png"
+                alt="Ejemplos de poco contraste: gris claro sobre blanco, amarillo sobre blanco, celeste sobre celeste, azul oscuro sobre negro, verde claro sobre verde"
+                loading="lazy" style="display:block;width:100%;height:auto">
+            </div>
+
+          </div>
+
+          <div class="nota alerta"><strong>Cuidado con los fondos.</strong> Un fondo con muchos dibujos o una foto muy
+            cargada hace que el texto no se lea.
+            Si usás una imagen de fondo, poné un velo oscuro o claro detrás del texto para que se destaque.</div>
+        </div>
+      </section>
+
+      <section class="pantalla f1" id="tipografia" data-paso="tipografia" data-fase="1" hidden>
+        <div class="enc" style="flex-wrap:wrap">
+          <div class="chip"></div>
+          <div>
+            <h2>Tipografía</h2>
+            <div class="bajada"><span>Fase 1 · La plantilla</span></div>
+          </div>
+          <div
+            style="margin-left:auto;display:flex;align-items:center;gap:10px;background:var(--azul-suave);color:var(--azul);border-radius:14px;padding:10px 15px;font-size:.85rem;font-weight:600;max-width:260px;line-height:1.3">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="flex:none">
+              <path d="M4 20V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v14" stroke="currentColor" stroke-width="1.6"
+                stroke-linecap="round" />
+              <path d="M2 20h20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+              <path d="M9 20v-6h6v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+                stroke-linejoin="round" />
+              <text x="7.5" y="13" font-family="Arial,sans-serif" font-size="7" font-weight="700"
+                fill="currentColor">Aa</text>
+            </svg>
+            <span>Una buena tipografía hace que tu presentación se lea fácil y se vea profesional.</span>
+          </div>
+        </div>
+        <div class="cuerpo">
+          <div class="nota"><strong>Qué tenés que hacer acá:</strong> usá como máximo <strong>2 familias
+              tipográficas</strong> en toda la presentación, claras y fáciles de leer.</div>
+
+          <h3 style="margin-top:4px">¿Por qué importa?</h3>
+          <p style="margin-top:0">La tipografía influye en la claridad, la jerarquía y la profesionalidad. Las fuentes
+            sin serifas (de palo seco) se leen mejor en pantallas y proyectores. Usá siempre las mismas fuentes en todas
+            las diapositivas.</p>
+
+          <!-- Paneles sin serifa / con serifa con imágenes reales -->
+          <div style="display:flex;flex-wrap:wrap;gap:16px;margin:8px 0 20px">
+            <div
+              style="flex:1 1 240px;border:2px solid var(--turquesa);border-radius:14px;overflow:hidden;background:var(--superficie)">
+              <img src="/ejemplos/defensaOral/p4_1.png"
+                alt="Sin serifa recomendada: ejemplo de tipografía sans-serif con título, subtítulo y cuerpo de texto"
+                loading="lazy" style="display:block;width:100%;height:auto">
+            </div>
+            <div
+              style="flex:1 1 240px;border:2px solid var(--rojo);border-radius:14px;overflow:hidden;background:var(--superficie)">
+              <img src="/ejemplos/defensaOral/p4_2.png"
+                alt="Con serifa, evitá para el contenido: ejemplo de tipografía serif con remates en pantalla"
+                loading="lazy" style="display:block;width:100%;height:auto">
+            </div>
+          </div>
+
+          <!-- Recomendaciones clave -->
+          <h3 style="margin-top:0">Recomendaciones clave</h3>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin:6px 0 16px">
+
+            <div style="display:flex;align-items:flex-start;gap:12px">
+              <div
+                style="width:44px;height:44px;border-radius:50%;background:#F0E6FB;color:#7C3AED;display:flex;align-items:center;justify-content:center;flex:none;font-family:Georgia,serif;font-weight:900;font-size:1.1rem">
+                Aa</div>
+              <div>
+                <div style="font-weight:800;font-size:.88rem;margin-bottom:2px">Usá máximo 2 familias</div>
+                <div style="font-size:.82rem;color:var(--tinta2);line-height:1.4">Una para títulos y otra para el
+                  contenido.</div>
+              </div>
+            </div>
+
+            <div style="display:flex;align-items:flex-start;gap:12px">
+              <div
+                style="width:44px;height:44px;border-radius:50%;background:var(--turquesa-suave);color:var(--turquesa);display:flex;align-items:center;justify-content:center;flex:none;font-family:Georgia,serif;font-weight:900;font-size:1.2rem">
+                T</div>
+              <div>
+                <div style="font-weight:800;font-size:.88rem;margin-bottom:2px">Mantené la consistencia</div>
+                <div style="font-size:.82rem;color:var(--tinta2);line-height:1.4">Usá las mismas fuentes en toda la
+                  presentación.</div>
+              </div>
+            </div>
+
+            <div style="display:flex;align-items:flex-start;gap:12px">
+              <div
+                style="width:44px;height:44px;border-radius:50%;background:#FFF1D6;color:#C77800;display:flex;align-items:center;justify-content:center;flex:none">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.7" />
+                  <path d="M7 9h10M7 12h7M7 15h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                </svg>
+              </div>
+              <div>
+                <div style="font-weight:800;font-size:.88rem;margin-bottom:2px">Cuidá los tamaños</div>
+                <div style="font-size:.82rem;color:var(--tinta2);line-height:1.4">Títulos grandes, texto legible.</div>
+              </div>
+            </div>
+
+            <div style="display:flex;align-items:flex-start;gap:12px">
+              <div
+                style="width:44px;height:44px;border-radius:50%;background:var(--azul-suave);color:var(--azul);display:flex;align-items:center;justify-content:center;flex:none">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7" />
+                  <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.7" />
+                  <path d="M12 3v2M12 19v2M3 12h2M19 12h2" stroke="currentColor" stroke-width="1.5"
+                    stroke-linecap="round" />
+                </svg>
+              </div>
+              <div>
+                <div style="font-weight:800;font-size:.88rem;margin-bottom:2px">Priorizá la legibilidad</div>
+                <div style="font-size:.82rem;color:var(--tinta2);line-height:1.4">Evitá fuentes decorativas o muy finas.
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="nota alerta">
+            <strong>Consejo:</strong> usá fuentes sin serifas para los títulos y el texto principal. Por ejemplo:
+            <strong style="color:var(--turquesa)">Montserrat Bold</strong> para los títulos y <strong
+              style="color:var(--turquesa)">Open Sans Regular</strong> para el contenido. Así lográs una jerarquía
+            visual profesional sin complicarte.
+          </div>
+        </div>
+      </section>
+
+      <section class="pantalla f1" id="composicion" data-paso="composicion" data-fase="1" hidden>
+        <div class="enc" style="flex-wrap:wrap">
+          <div class="chip"></div>
+          <div>
+            <h2>Composición y alineación</h2>
+            <div class="bajada"><span>Fase 1 · La plantilla</span></div>
+          </div>
+          <div
+            style="margin-left:auto;display:flex;align-items:center;gap:10px;background:var(--azul-suave);color:var(--azul);border-radius:14px;padding:10px 15px;font-size:.85rem;font-weight:600;max-width:280px;line-height:1.3">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="flex:none">
+              <path d="M4 6h16M4 12h10M4 18h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+              <circle cx="16" cy="12" r="2" fill="currentColor" />
+              <circle cx="8" cy="6" r="2" fill="currentColor" />
+              <circle cx="12" cy="18" r="2" fill="currentColor" />
+            </svg>
+            <span>Una buena composición guía la mirada y hace tu presentación más clara y profesional.</span>
+          </div>
+        </div>
+        <div class="cuerpo">
+          <div class="nota"><strong>Qué tenés que hacer acá:</strong> alineá los elementos, que no se superpongan ni
+            queden amontonados, y mantené el mismo estilo en todas las diapositivas.</div>
+
+          <p style="margin-top:12px;margin-bottom:16px">Usá el formato <strong>16:9</strong> (pantalla ancha) y dejá
+            siempre un margen de aire alrededor del contenido. Una buena composición hace que tu mensaje se entienda
+            rápido y se vea ordenado.</p>
+
+          <!-- Grilla de 4 pilares -->
+          <div
+            style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin:16px 0 24px">
+
+            <div style="display:flex;align-items:flex-start;gap:12px">
+              <div
+                style="width:44px;height:44px;border-radius:50%;background:var(--azul-suave);color:var(--azul);display:flex;align-items:center;justify-content:center;flex:none">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <rect x="4" y="4" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.8" />
+                  <rect x="14" y="4" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.8" />
+                  <rect x="4" y="14" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.8" />
+                  <rect x="14" y="14" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.8" />
+                </svg>
+              </div>
+              <div>
+                <div style="font-weight:800;font-size:.88rem;margin-bottom:2px">Alineación</div>
+                <div style="font-size:.82rem;color:var(--tinta2);line-height:1.4">Los elementos deben estar alineados
+                  entre sí.</div>
+              </div>
+            </div>
+
+            <div style="display:flex;align-items:flex-start;gap:12px">
+              <div
+                style="width:44px;height:44px;border-radius:50%;background:var(--turquesa-suave);color:var(--turquesa);display:flex;align-items:center;justify-content:center;flex:none">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M6 7v10M18 7v10M9 12h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                  <path d="M11 10l-2 2 2 2M13 10l2 2-2 2" stroke="currentColor" stroke-width="1.6"
+                    stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </div>
+              <div>
+                <div style="font-weight:800;font-size:.88rem;margin-bottom:2px">Espacios</div>
+                <div style="font-size:.82rem;color:var(--tinta2);line-height:1.4">Dejá márgenes y espacios para que se
+                  vea limpio.</div>
+              </div>
+            </div>
+
+            <div style="display:flex;align-items:flex-start;gap:12px">
+              <div
+                style="width:44px;height:44px;border-radius:50%;background:#F0E6FB;color:#7C3AED;display:flex;align-items:center;justify-content:center;flex:none">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M12 4l8 4-8 4-8-4 8-4z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+                  <path d="M4 12l8 4 8-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                  <path d="M4 16l8 4 8-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                </svg>
+              </div>
+              <div>
+                <div style="font-weight:800;font-size:.88rem;margin-bottom:2px">Sin superposiciones</div>
+                <div style="font-size:.82rem;color:var(--tinta2);line-height:1.4">Que el texto y las imágenes no se
+                  pisen.</div>
+              </div>
+            </div>
+
+            <div style="display:flex;align-items:flex-start;gap:12px">
+              <div
+                style="width:44px;height:44px;border-radius:50%;background:#FFF1D6;color:#C77800;display:flex;align-items:center;justify-content:center;flex:none">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M9 6h11M9 12h11M9 18h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                  <path d="M4 6h1.5v3H4" stroke="currentColor" stroke-width="1.5" />
+                  <path d="M4 12h2" stroke="currentColor" stroke-width="1.5" />
+                  <path d="M4 18h2" stroke="currentColor" stroke-width="1.5" />
+                </svg>
+              </div>
+              <div>
+                <div style="font-weight:800;font-size:.88rem;margin-bottom:2px">Orden visual</div>
+                <div style="font-size:.82rem;color:var(--tinta2);line-height:1.4">Usá una secuencia lógica que guíe la
+                  mirada.</div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Bloques CÓMO NO / CÓMO SÍ -->
+          <div style="display:flex;flex-wrap:wrap;gap:16px;margin:8px 0 6px">
+
+            <!-- Panel CÓMO NO -->
+            <div
+              style="flex:1 1 280px;border:1px solid #FCA5A5;border-radius:14px;background:#FFF5F5;padding:12px 12px 14px;display:flex;flex-direction:column;gap:10px">
+              <div style="display:flex;align-items:center;justify-content:space-between">
+                <div style="display:flex;align-items:center;gap:6px;font-size:.85rem;font-weight:800;color:#DC2626">
+                  <span
+                    style="width:22px;height:22px;border-radius:50%;background:#DC2626;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:.75rem">✕</span>
+                  <span>CÓMO NO</span>
+                </div>
+                <span
+                  style="font-size:.75rem;font-weight:700;background:#FEE2E2;color:#DC2626;padding:3px 10px;border-radius:12px">Desordenado
+                  y confuso</span>
+              </div>
+              <div style="border-radius:10px;overflow:hidden;border:1px solid #FECACA;background:#fff">
+                <img src="/ejemplos/defensaOral/p5_01.png"
+                  alt="Ejemplo de cómo NO componer: elementos desalineados, superpuestos y amontonados" loading="lazy"
+                  style="display:block;width:100%;height:auto">
+              </div>
+              <div style="font-size:.78rem;color:#78350F;line-height:1.35;margin-top:2px">Elementos desalineados,
+                superpuestos y sin jerarquía.</div>
+            </div>
+
+            <!-- Panel CÓMO SÍ -->
+            <div
+              style="flex:1 1 280px;border:1px solid #A7F3D0;border-radius:14px;background:#F0FDF4;padding:12px 12px 14px;display:flex;flex-direction:column;gap:10px">
+              <div style="display:flex;align-items:center;justify-content:space-between">
+                <div style="display:flex;align-items:center;gap:6px;font-size:.85rem;font-weight:800;color:#059669">
+                  <span
+                    style="width:22px;height:22px;border-radius:50%;background:#059669;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:.75rem">✓</span>
+                  <span>CÓMO SÍ</span>
+                </div>
+                <span
+                  style="font-size:.75rem;font-weight:700;background:#D1FAE5;color:#059669;padding:3px 10px;border-radius:12px">Ordenado
+                  y profesional</span>
+              </div>
+              <div style="border-radius:10px;overflow:hidden;border:1px solid #A7F3D0;background:#fff">
+                <img src="/ejemplos/defensaOral/p05_2.png"
+                  alt="Ejemplo de cómo SÍ componer: todo alineado, con espacio y sin superposiciones" loading="lazy"
+                  style="display:block;width:100%;height:auto">
+              </div>
+              <div style="font-size:.78rem;color:#065F46;line-height:1.35;margin-top:2px">Todo alineado, con espacio y
+                sin superposiciones.</div>
+            </div>
+
+          </div>
+
+          <!-- Caja Truco -->
+          <div class="nota dato" style="margin-top:16px">
+            <strong>Truco.</strong> Usá una <strong>plantilla o diapositiva patrón</strong>: definí una vez los títulos,
+            colores y posiciones, y todas las diapositivas quedan alineadas e iguales sin reacomodar a mano.
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ FASE 2 · LAS DIAPOSITIVAS ═══ -->
+
+      <section class="pantalla f2" id="jerarquia" data-paso="jerarquia" data-fase="2" hidden>
+        <div class="enc" style="flex-wrap:wrap">
+          <div class="chip"></div>
+          <div>
+            <h2>Jerarquía y legibilidad</h2>
+            <div class="bajada"><span>Fase 2 · Las diapositivas</span></div>
+          </div>
+          <div
+            style="margin-left:auto;display:flex;align-items:center;gap:10px;background:var(--azul-suave);color:var(--azul);border-radius:14px;padding:10px 15px;font-size:.85rem;font-weight:600;max-width:280px;line-height:1.3">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="flex:none">
+              <rect x="4" y="4" width="16" height="16" rx="3" fill="#8B5CF6" opacity="0.15" />
+              <text x="6" y="17" font-family="Arial,sans-serif" font-size="14" font-weight="900"
+                fill="#7C3AED">Aa</text>
+            </svg>
+            <span>Una buena jerarquía tipográfica ayuda a que tu mensaje se entienda rápido y se recuerde mejor.</span>
+          </div>
+        </div>
+        <div class="cuerpo">
+          <div class="nota"><strong>Qué tenés que hacer acá:</strong> lográ que se distingan de un vistazo el título, el
+            subtítulo y el contenido, y que ningún texto baje de 24 pt.</div>
+
+          <h3 style="margin-top:16px;margin-bottom:4px">Tamaños recomendados</h3>
+          <p style="margin-top:0;margin-bottom:14px;color:var(--tinta2);font-size:.9rem">Usá esta guía para mantener una
+            jerarquía clara y consistente en todas tus diapositivas.</p>
+
+          <!-- Tabla de tamaños recomendados -->
+          <div class="tabla-caja" style="margin-bottom:16px">
+            <table style="width:100%;border-collapse:collapse">
+              <thead>
+                <tr
+                  style="border-bottom:1px solid var(--linea);text-align:left;font-size:.75rem;letter-spacing:.05em;color:var(--tinta2);text-transform:uppercase">
+                  <th style="padding:10px 14px">Tipo de texto</th>
+                  <th style="padding:10px 14px">Función</th>
+                  <th style="padding:10px 14px;text-align:right">Tamaño recomendado</th>
+                </tr>
+              </thead>
+              <tbody style="font-size:.88rem">
+                <tr style="border-bottom:1px solid var(--linea)">
+                  <td style="padding:12px 14px;font-weight:700">Título principal</td>
+                  <td style="padding:12px 14px;color:var(--tinta2)">Identifica el tema de la diapositiva</td>
+                  <td style="padding:12px 14px;text-align:right;font-weight:800;color:var(--tinta)">32 – 44 pt</td>
+                </tr>
+                <tr style="border-bottom:1px solid var(--linea)">
+                  <td style="padding:12px 14px;font-weight:700">Subtítulo</td>
+                  <td style="padding:12px 14px;color:var(--tinta2)">Complementa o contextualiza el título</td>
+                  <td style="padding:12px 14px;text-align:right;font-weight:800;color:var(--tinta)">26 – 32 pt</td>
+                </tr>
+                <tr style="border-bottom:1px solid var(--linea)">
+                  <td style="padding:12px 14px;font-weight:700">Texto principal</td>
+                  <td style="padding:12px 14px;color:var(--tinta2)">El contenido que vas a usar normalmente</td>
+                  <td style="padding:12px 14px;text-align:right;font-weight:800;color:var(--tinta)">24 – 28 pt</td>
+                </tr>
+                <tr>
+                  <td style="padding:12px 14px;font-weight:700">Texto secundario</td>
+                  <td style="padding:12px 14px;color:var(--tinta2)">Aclaraciones, citas o etiquetas de menor jerarquía
+                  </td>
+                  <td style="padding:12px 14px;text-align:right;font-weight:800;color:var(--tinta)">24 pt (mínimo)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Bloques de Reglas (2 tarjetas en horizontal) -->
+          <div style="display:flex;flex-wrap:wrap;gap:14px;margin:16px 0 20px">
+            <div
+              style="flex:1 1 260px;background:#F5F3FF;border:1px solid #DDD6FE;border-radius:14px;padding:12px 16px;display:flex;align-items:center;gap:12px">
+              <div
+                style="width:32px;height:32px;border-radius:50%;background:#7C3AED;color:#fff;display:flex;align-items:center;justify-content:center;flex:none;font-weight:800;font-size:.85rem">
+                ✓</div>
+              <div style="font-size:.84rem;color:#5B21B6;line-height:1.35">
+                <strong>Regla sencilla: 24 pt</strong> es el mínimo para cualquier texto de la diapositiva. No uses nada
+                más chico.
+              </div>
+            </div>
+
+            <div
+              style="flex:1 1 260px;background:#F0FDF4;border:1px solid #A7F3D0;border-radius:14px;padding:12px 16px;display:flex;align-items:center;gap:12px">
+              <div
+                style="width:32px;height:32px;border-radius:50%;background:#059669;color:#fff;display:flex;align-items:center;justify-content:center;flex:none;font-weight:800;font-size:.85rem">
+                ✓</div>
+              <div style="font-size:.84rem;color:#065F46;line-height:1.35">
+                <strong>Regla visual:</strong> si no se puede leer desde el fondo del aula, el texto es demasiado
+                pequeño.
+              </div>
+            </div>
+          </div>
+
+          <!-- Paneles CÓMO NO / CÓMO SÍ -->
+          <div style="display:flex;flex-wrap:wrap;gap:16px;margin:8px 0 16px">
+
+            <!-- Panel CÓMO NO -->
+            <div
+              style="flex:1 1 280px;border:1px solid #FCA5A5;border-radius:14px;background:#FFF5F5;padding:12px 12px 14px;display:flex;flex-direction:column;gap:10px">
+              <div style="display:flex;align-items:center;justify-content:space-between">
+                <div style="display:flex;align-items:center;gap:6px;font-size:.85rem;font-weight:800;color:#DC2626">
+                  <span
+                    style="width:22px;height:22px;border-radius:50%;background:#DC2626;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:.75rem">✕</span>
+                  <span>CÓMO NO</span>
+                </div>
+                <span
+                  style="font-size:.75rem;font-weight:700;background:#FEE2E2;color:#DC2626;padding:3px 10px;border-radius:12px">Difícil
+                  de leer</span>
+              </div>
+              <div style="border-radius:10px;overflow:hidden;border:1px solid #FECACA;background:#fff">
+                <img src="/ejemplos/defensaOral/p6_1.png"
+                  alt="Ejemplo de cómo NO aplicar jerarquía: texto pequeño, poca jerarquía visual, elementos desalineados"
+                  loading="lazy" style="display:block;width:100%;height:auto">
+              </div>
+              <div
+                style="display:flex;align-items:flex-start;gap:10px;background:#fff;border-radius:10px;padding:10px 12px;border:1px solid #FECACA">
+                <div
+                  style="width:24px;height:24px;border-radius:50%;background:#FEE2E2;color:#DC2626;display:flex;align-items:center;justify-content:center;flex:none;font-size:.75rem;font-weight:800">
+                  ✕</div>
+                <ul style="margin:0;padding:0 0 0 14px;font-size:.8rem;color:#78350F;line-height:1.4">
+                  <li>Texto pequeño.</li>
+                  <li>Poca jerarquía visual.</li>
+                  <li>Elementos desalineados.</li>
+                  <li>No destaca lo más importante.</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Panel CÓMO SÍ -->
+            <div
+              style="flex:1 1 280px;border:1px solid #A7F3D0;border-radius:14px;background:#F0FDF4;padding:12px 12px 14px;display:flex;flex-direction:column;gap:10px">
+              <div style="display:flex;align-items:center;justify-content:space-between">
+                <div style="display:flex;align-items:center;gap:6px;font-size:.85rem;font-weight:800;color:#059669">
+                  <span
+                    style="width:22px;height:22px;border-radius:50%;background:#059669;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:.75rem">✓</span>
+                  <span>CÓMO SÍ</span>
+                </div>
+                <span
+                  style="font-size:.75rem;font-weight:700;background:#D1FAE5;color:#059669;padding:3px 10px;border-radius:12px">Claro
+                  y profesional</span>
+              </div>
+              <div style="border-radius:10px;overflow:hidden;border:1px solid #A7F3D0;background:#fff">
+                <img src="/ejemplos/defensaOral/p6_2.png"
+                  alt="Ejemplo de cómo SÍ aplicar jerarquía: título grande y claro, subtítulo que complementa, texto legible"
+                  loading="lazy" style="display:block;width:100%;height:auto">
+              </div>
+              <div
+                style="display:flex;align-items:flex-start;gap:10px;background:#fff;border-radius:10px;padding:10px 12px;border:1px solid #A7F3D0">
+                <div
+                  style="width:24px;height:24px;border-radius:50%;background:#D1FAE5;color:#059669;display:flex;align-items:center;justify-content:center;flex:none;font-size:.75rem;font-weight:800">
+                  ✓</div>
+                <ul style="margin:0;padding:0 0 0 14px;font-size:.8rem;color:#065F46;line-height:1.4">
+                  <li>Título grande y claro.</li>
+                  <li>Subtítulo que complementa.</li>
+                  <li>Texto legible (24 pt o más).</li>
+                  <li>Elementos alineados y con espacio.</li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Caja Jerarquía / Alerta final -->
+          <div
+            style="background:#FFFBEB;border:1px solid #FDE68A;border-radius:14px;padding:14px 18px;display:flex;align-items:center;gap:12px;margin-top:16px">
+            <div
+              style="width:36px;height:36px;border-radius:50%;background:#FEF3C7;color:#D97706;display:flex;align-items:center;justify-content:center;flex:none">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  d="M12 2a6 6 0 0 1 6 6c0 2.22-1.21 4.15-3 5.19V17a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-3.81C7.21 12.15 6 10.22 6 8a6 6 0 0 1 6-6z"
+                  stroke="currentColor" stroke-width="1.8" />
+                <path d="M9 21h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+              </svg>
+            </div>
+            <div style="font-size:.85rem;color:#92400E;line-height:1.4">
+              <strong style="color:#B45309">Jerarquía.</strong> El título tiene que verse más grande y fuerte que el
+              texto. Si todo tiene el mismo tamaño, el público no sabe qué es lo importante.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="pantalla f2" id="sintesis" data-paso="sintesis" data-fase="2" hidden>
+        <div class="enc" style="flex-wrap:wrap">
+          <div class="chip"></div>
+          <div>
+            <h2>Síntesis: menos texto</h2>
+            <div class="bajada"><span>Fase 2 · Las diapositivas</span></div>
+          </div>
+          <div
+            style="margin-left:auto;display:flex;align-items:center;gap:10px;background:var(--azul-suave);color:var(--azul);border-radius:14px;padding:10px 15px;font-size:.85rem;font-weight:600;max-width:280px;line-height:1.3">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="flex:none">
+              <path
+                d="M12 2a6 6 0 0 1 6 6c0 2.22-1.21 4.15-3 5.19V17a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-3.81C7.21 12.15 6 10.22 6 8a6 6 0 0 1 6-6z"
+                stroke="currentColor" stroke-width="1.8" />
+              <path d="M9 21h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+            </svg>
+            <span>Una idea por diapositiva. Cuanto menos texto, más impacto.</span>
+          </div>
+        </div>
+        <div class="cuerpo">
+          <div class="nota"><strong>Qué tenés que hacer acá:</strong> sacá los párrafos largos y dejá solo palabras
+            clave. Como máximo <strong>36 palabras y 6 líneas</strong> de texto por diapositiva.</div>
+
+          <h3 style="margin-top:16px;margin-bottom:4px">Reglas principales</h3>
+          <p style="margin-top:0;margin-bottom:14px;color:var(--tinta2);font-size:.9rem">Una buena diapositiva comunica
+            de forma clara, directa y visual.</p>
+
+          <!-- Grilla 3 tarjetas de reglas -->
+          <div
+            style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin:16px 0 24px">
+
+            <div
+              style="background:#F5F3FF;border:1px solid #DDD6FE;border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:12px">
+              <div
+                style="width:42px;height:42px;border-radius:50%;background:#EDE9FE;color:#7C3AED;display:flex;align-items:center;justify-content:center;flex:none">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="currentColor"
+                    stroke-width="1.8" />
+                  <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" stroke="currentColor" stroke-width="1.8"
+                    stroke-linecap="round" />
+                </svg>
+              </div>
+              <div>
+                <div style="font-weight:800;font-size:.88rem;color:#5B21B6;margin-bottom:2px">Hasta 36 palabras</div>
+                <div style="font-size:.8rem;color:var(--tinta2)">Menos texto, más claridad.</div>
+              </div>
+            </div>
+
+            <div
+              style="background:var(--azul-suave);border:1px solid #BFDBFE;border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:12px">
+              <div
+                style="width:42px;height:42px;border-radius:50%;background:#DBEAFE;color:var(--azul);display:flex;align-items:center;justify-content:center;flex:none">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" />
+                </svg>
+              </div>
+              <div>
+                <div style="font-weight:800;font-size:.88rem;color:var(--azul);margin-bottom:2px">Hasta 6 líneas</div>
+                <div style="font-size:.8rem;color:var(--tinta2)">Evitá saturar la diapositiva.</div>
+              </div>
+            </div>
+
+            <div
+              style="background:var(--turquesa-suave);border:1px solid #A7F3D0;border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:12px">
+              <div
+                style="width:42px;height:42px;border-radius:50%;background:#D1FAE5;color:var(--turquesa);display:flex;align-items:center;justify-content:center;flex:none">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8" />
+                  <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.8" />
+                  <circle cx="12" cy="12" r="1" fill="currentColor" />
+                </svg>
+              </div>
+              <div>
+                <div style="font-weight:800;font-size:.88rem;color:#065F46;margin-bottom:2px">Una idea principal</div>
+                <div style="font-size:.8rem;color:var(--tinta2)">Cada diapositiva debe comunicar un solo mensaje.</div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Sección Ejemplo: cuánto texto poner -->
+          <h3 style="margin-top:20px;margin-bottom:4px">Ejemplo: cuánto texto poner</h3>
+          <p style="margin-top:0;margin-bottom:14px;color:var(--tinta2);font-size:.9rem">Mirá la diferencia entre una
+            diapositiva con el texto <strong>ideal</strong> y otra que tiene demasiado contenido.</p>
+
+          <div style="display:flex;flex-wrap:wrap;gap:16px;margin:8px 0 6px">
+
+            <!-- Panel Ideal -->
+            <div
+              style="flex:1 1 280px;border:1px solid #A7F3D0;border-radius:14px;background:#F0FDF4;padding:12px 12px 14px;display:flex;flex-direction:column;gap:10px">
+              <div style="display:flex;align-items:center;justify-content:space-between">
+                <div style="display:flex;align-items:center;gap:6px;font-size:.82rem;font-weight:800;color:#059669">
+                  <span
+                    style="width:22px;height:22px;border-radius:50%;background:#059669;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:.75rem">✓</span>
+                  <span>IDEAL · POCAS PALABRAS CLAVE</span>
+                </div>
+                <span
+                  style="font-size:.75rem;font-weight:700;background:#D1FAE5;color:#059669;padding:3px 10px;border-radius:12px">Claro
+                  y efectivo</span>
+              </div>
+              <div style="border-radius:10px;overflow:hidden;border:1px solid #A7F3D0;background:#fff">
+                <img src="/ejemplos/defensaOral/p7_1.png" alt="Ejemplo de diapositiva ideal con pocas palabras clave"
+                  loading="lazy" style="display:block;width:100%;height:auto">
+              </div>
+            </div>
+
+            <!-- Panel Exceso de texto -->
+            <div
+              style="flex:1 1 280px;border:1px solid #FCA5A5;border-radius:14px;background:#FFF5F5;padding:12px 12px 14px;display:flex;flex-direction:column;gap:10px">
+              <div style="display:flex;align-items:center;justify-content:space-between">
+                <div style="display:flex;align-items:center;gap:6px;font-size:.82rem;font-weight:800;color:#DC2626">
+                  <span
+                    style="width:22px;height:22px;border-radius:50%;background:#DC2626;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:.75rem">✕</span>
+                  <span>EXCESO DE TEXTO · EVITALO</span>
+                </div>
+                <span
+                  style="font-size:.75rem;font-weight:700;background:#FEE2E2;color:#DC2626;padding:3px 10px;border-radius:12px">Difícil
+                  de leer</span>
+              </div>
+              <div style="border-radius:10px;overflow:hidden;border:1px solid #FECACA;background:#fff">
+                <img src="/ejemplos/defensaOral/p7_2.png" alt="Ejemplo de diapositiva con exceso de texto a evitar"
+                  loading="lazy" style="display:block;width:100%;height:auto">
+              </div>
+            </div>
+
+          </div>
+
+          <p style="font-size:.82rem;color:var(--tinta2);margin:6px 0 16px">Las dos sirven para el mismo tema. La de la
+            izquierda se entiende en un vistazo; la de la derecha excede el límite de 6 líneas y 36 palabras.</p>
+
+          <!-- Caja 1: Menos texto, más comunicación -->
+          <div
+            style="background:#F0FDF4;border:1px solid #A7F3D0;border-radius:14px;padding:14px 18px;display:flex;align-items:center;gap:12px;margin-top:12px">
+            <div
+              style="width:34px;height:34px;border-radius:50%;background:#D1FAE5;color:#059669;display:flex;align-items:center;justify-content:center;flex:none;font-weight:800">
+              ✓
+            </div>
+            <div style="font-size:.84rem;color:#065F46;line-height:1.4">
+              <strong>Menos texto, más comunicación.</strong> La regla 6×6 es una guía, no una ley. No intentes llenar
+              seis líneas porque "hay que hacerlo": si podés comunicar la idea con 3 líneas, 3 líneas es mejor que 6.
+            </div>
+          </div>
+
+          <!-- Caja 2: La diapositiva es apoyo -->
+          <div
+            style="background:#FFFBEB;border:1px solid #FDE68A;border-radius:14px;padding:14px 18px;display:flex;align-items:center;gap:12px;margin-top:12px">
+            <div
+              style="width:34px;height:34px;border-radius:50%;background:#FEF3C7;color:#D97706;display:flex;align-items:center;justify-content:center;flex:none">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  d="M12 2a6 6 0 0 1 6 6c0 2.22-1.21 4.15-3 5.19V17a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-3.81C7.21 12.15 6 10.22 6 8a6 6 0 0 1 6-6z"
+                  stroke="currentColor" stroke-width="1.8" />
+                <path d="M9 21h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+              </svg>
+            </div>
+            <div style="font-size:.84rem;color:#92400E;line-height:1.4">
+              <strong style="color:#B45309">La diapositiva es apoyo.</strong> Lo que desarrollás con tus palabras va en
+              tu exposición, no escrito en la pantalla. Si leés la diapositiva palabra por palabra, tiene demasiado
+              texto.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="pantalla f2" id="imagenes" data-paso="imagenes" data-fase="2" hidden>
+        <div class="enc" style="flex-wrap:wrap">
+          <div class="chip"></div>
+          <div>
+            <h2>Imágenes y recursos visuales</h2>
+            <div class="bajada"><span>Fase 2 · Las diapositivas</span></div>
+          </div>
+          <div
+            style="margin-left:auto;display:flex;align-items:center;gap:10px;background:var(--azul-suave);color:var(--azul);border-radius:14px;padding:10px 15px;font-size:.85rem;font-weight:600;max-width:280px;line-height:1.3">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="flex:none">
+              <rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="1.8" />
+              <circle cx="8.5" cy="8.5" r="1.5" fill="currentColor" />
+              <path d="M21 15l-5-5L5 21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+            <span>Una imagen bien elegida puede explicar en segundos lo que un párrafo entero no.</span>
+          </div>
+        </div>
+        <div class="cuerpo">
+          <div class="nota"><strong>Qué tenés que hacer acá:</strong> usá imágenes nítidas y que aporten, y gráficos o
+            íconos solo cuando ayuden a entender algo.</div>
+
+          <h3 style="margin-top:16px;margin-bottom:12px">Consejos clave</h3>
+
+          <!-- Grilla de 5 pilares -->
+          <div
+            style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin:12px 0 24px">
+
+            <div style="display:flex;align-items:flex-start;gap:12px">
+              <div
+                style="width:44px;height:44px;border-radius:50%;background:#F5F3FF;color:#7C3AED;display:flex;align-items:center;justify-content:center;flex:none">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="1.8" />
+                  <circle cx="8.5" cy="8.5" r="1.5" fill="currentColor" />
+                  <path d="M21 15l-5-5L5 21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                </svg>
+              </div>
+              <div>
+                <div style="font-weight:800;font-size:.88rem;margin-bottom:2px">Calidad</div>
+                <div style="font-size:.8rem;color:var(--tinta2);line-height:1.35">Usá imágenes nítidas, no pixeladas ni
+                  deformadas.</div>
+              </div>
+            </div>
+
+            <div style="display:flex;align-items:flex-start;gap:12px">
+              <div
+                style="width:44px;height:44px;border-radius:50%;background:var(--turquesa-suave);color:var(--turquesa);display:flex;align-items:center;justify-content:center;flex:none">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8" />
+                  <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.8" />
+                  <circle cx="12" cy="12" r="1" fill="currentColor" />
+                </svg>
+              </div>
+              <div>
+                <div style="font-weight:800;font-size:.88rem;margin-bottom:2px">Pertinencia</div>
+                <div style="font-size:.8rem;color:var(--tinta2);line-height:1.35">Cada imagen debe comunicar el mensaje.
+                </div>
+              </div>
+            </div>
+
+            <div style="display:flex;align-items:flex-start;gap:12px">
+              <div
+                style="width:44px;height:44px;border-radius:50%;background:var(--azul-suave);color:var(--azul);display:flex;align-items:center;justify-content:center;flex:none">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M18 20V10M12 20V4M6 20v-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+              </div>
+              <div>
+                <div style="font-weight:800;font-size:.88rem;margin-bottom:2px">Gráficos y tablas</div>
+                <div style="font-size:.8rem;color:var(--tinta2);line-height:1.35">Usalos cuando aporten datos y que sean
+                  legibles.</div>
+              </div>
+            </div>
+
+            <div style="display:flex;align-items:flex-start;gap:12px">
+              <div
+                style="width:44px;height:44px;border-radius:50%;background:#FFF1D6;color:#C77800;display:flex;align-items:center;justify-content:center;flex:none">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <polygon
+                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                    stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+                </svg>
+              </div>
+              <div>
+                <div style="font-weight:800;font-size:.88rem;margin-bottom:2px">Íconos y formas</div>
+                <div style="font-size:.8rem;color:var(--tinta2);line-height:1.35">Deben cumplir una función. Evitá lo
+                  decorativo.</div>
+              </div>
+            </div>
+
+            <div style="display:flex;align-items:flex-start;gap:12px">
+              <div
+                style="width:44px;height:44px;border-radius:50%;background:#FCE7F3;color:#DB2777;display:flex;align-items:center;justify-content:center;flex:none;font-weight:900;font-size:1.1rem;font-family:Georgia,serif">
+                T</div>
+              <div>
+                <div style="font-weight:800;font-size:.88rem;margin-bottom:2px">Texto e imagen</div>
+                <div style="font-size:.8rem;color:var(--tinta2);line-height:1.35">Se complementan. La imagen no repite
+                  lo que ya dice el texto.</div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Paneles CÓMO NO / CÓMO SÍ -->
+          <div style="display:flex;flex-wrap:wrap;gap:16px;margin:8px 0 6px">
+
+            <!-- Panel CÓMO NO -->
+            <div
+              style="flex:1 1 280px;border:1px solid #FCA5A5;border-radius:14px;background:#FFF5F5;padding:12px 12px 14px;display:flex;flex-direction:column;gap:10px">
+              <div style="display:flex;align-items:center;justify-content:space-between">
+                <div style="display:flex;align-items:center;gap:6px;font-size:.85rem;font-weight:800;color:#DC2626">
+                  <span
+                    style="width:22px;height:22px;border-radius:50%;background:#DC2626;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:.75rem">✕</span>
+                  <span>CÓMO NO</span>
+                </div>
+                <span
+                  style="font-size:.75rem;font-weight:700;background:#FEE2E2;color:#DC2626;padding:3px 10px;border-radius:12px">Baja
+                  calidad y sin relación</span>
+              </div>
+              <div style="border-radius:10px;overflow:hidden;border:1px solid #FECACA;background:#fff">
+                <img src="/ejemplos/defensaOral/p8_1.png"
+                  alt="Ejemplo de cómo NO usar imágenes: imagen pixelada, borrosa, no aporta información" loading="lazy"
+                  style="display:block;width:100%;height:auto">
+              </div>
+              <div
+                style="display:flex;align-items:center;gap:8px;background:#FFF5F5;border-radius:10px;padding:8px 12px;border:1px solid #FECACA;font-size:.8rem;color:#78350F">
+                <span
+                  style="width:20px;height:20px;border-radius:50%;background:#DC2626;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:800;flex:none">✕</span>
+                <span>Imagen pixelada o deformada (estirada).</span>
+              </div>
+            </div>
+
+            <!-- Panel CÓMO SÍ -->
+            <div
+              style="flex:1 1 280px;border:1px solid #A7F3D0;border-radius:14px;background:#F0FDF4;padding:12px 12px 14px;display:flex;flex-direction:column;gap:10px">
+              <div style="display:flex;align-items:center;justify-content:space-between">
+                <div style="display:flex;align-items:center;gap:6px;font-size:.85rem;font-weight:800;color:#059669">
+                  <span
+                    style="width:22px;height:22px;border-radius:50%;background:#059669;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:.75rem">✓</span>
+                  <span>CÓMO SÍ</span>
+                </div>
+                <span
+                  style="font-size:.75rem;font-weight:700;background:#D1FAE5;color:#059669;padding:3px 10px;border-radius:12px">Nítida,
+                  relevante y bien integrada</span>
+              </div>
+              <div style="border-radius:10px;overflow:hidden;border:1px solid #A7F3D0;background:#fff">
+                <img src="/ejemplos/defensaOral/p8_2.png"
+                  alt="Ejemplo de cómo SÍ usar imágenes: imagen nítida, de buena calidad, aporta información y combina"
+                  loading="lazy" style="display:block;width:100%;height:auto">
+              </div>
+              <div
+                style="display:flex;align-items:center;gap:8px;background:#F0FDF4;border-radius:10px;padding:8px 12px;border:1px solid #A7F3D0;font-size:.8rem;color:#065F46">
+                <span
+                  style="width:20px;height:20px;border-radius:50%;background:#059669;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:800;flex:none">✓</span>
+                <span>Imagen nítida y con la proporción correcta.</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Caja Tip extra -->
+          <div
+            style="background:#F5F3FF;border:1px solid #DDD6FE;border-radius:14px;padding:14px 18px;display:flex;align-items:center;gap:12px;margin-top:16px">
+            <div
+              style="width:36px;height:36px;border-radius:50%;background:#EDE9FE;color:#7C3AED;display:flex;align-items:center;justify-content:center;flex:none">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  d="M12 2a6 6 0 0 1 6 6c0 2.22-1.21 4.15-3 5.19V17a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-3.81C7.21 12.15 6 10.22 6 8a6 6 0 0 1 6-6z"
+                  stroke="currentColor" stroke-width="1.8" />
+                <path d="M9 21h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+              </svg>
+            </div>
+            <div style="font-size:.84rem;color:#5B21B6;line-height:1.4">
+              <strong style="color:#6D28D9">Tip extra:</strong> Buscá imágenes de alta resolución, usá fotos propias de
+              tu producto o proyecto. Si mostrás una app, web o redes sociales, un código QR grande y nítido queda muy
+              prolijo.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="pantalla f2" id="animaciones" data-paso="animaciones" data-fase="2" hidden>
+        <div class="enc" style="flex-wrap:wrap">
+          <div class="chip"></div>
+          <div>
+            <h2>Animaciones y transiciones</h2>
+            <div class="bajada"><span>Fase 2 · Las diapositivas</span></div>
+          </div>
+          <div
+            style="margin-left:auto;display:flex;align-items:center;gap:10px;background:var(--azul-suave);color:var(--azul);border-radius:14px;padding:10px 15px;font-size:.85rem;font-weight:600;max-width:280px;line-height:1.3">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="flex:none">
+              <circle cx="12" cy="12" r="10" fill="#7C3AED" opacity="0.15" />
+              <polygon points="10 8 16 12 10 16 10 8" fill="#7C3AED" />
+            </svg>
+            <span>Las animaciones y transiciones deben apoyar tu mensaje, no robarle la atención.</span>
+          </div>
+        </div>
+        <div class="cuerpo">
+          <div class="nota"><strong>Qué tenés que hacer acá:</strong> usá animaciones y transiciones para dar dinamismo,
+            pero con moderación: sin exceso y sin que distraigan.</div>
+
+          <!-- Grilla de 4 pilares -->
+          <div
+            style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin:16px 0 24px">
+
+            <div style="display:flex;align-items:flex-start;gap:12px">
+              <div
+                style="width:44px;height:44px;border-radius:50%;background:#F5F3FF;color:#7C3AED;display:flex;align-items:center;justify-content:center;flex:none">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path
+                    d="M12 3l1.91 5.8 6.09.89-4.41 4.3 1.04 6.07-5.63-2.96-5.63 2.96 1.04-6.07-4.41-4.3 6.09-.89L12 3z"
+                    stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+                </svg>
+              </div>
+              <div>
+                <div style="font-weight:800;font-size:.88rem;margin-bottom:2px">Pocas y coherentes</div>
+                <div style="font-size:.8rem;color:var(--tinta2);line-height:1.35">Elegí una transición suave y usala en
+                  toda la presentación.</div>
+              </div>
+            </div>
+
+            <div style="display:flex;align-items:flex-start;gap:12px">
+              <div
+                style="width:44px;height:44px;border-radius:50%;background:var(--turquesa-suave);color:var(--turquesa);display:flex;align-items:center;justify-content:center;flex:none">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke="currentColor" stroke-width="1.8" />
+                  <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.8" />
+                </svg>
+              </div>
+              <div>
+                <div style="font-weight:800;font-size:.88rem;margin-bottom:2px">Para guiar la atención</div>
+                <div style="font-size:.8rem;color:var(--tinta2);line-height:1.35">Podés hacer aparecer una lista por
+                  partes mientras la explicás.</div>
+              </div>
+            </div>
+
+            <div style="display:flex;align-items:flex-start;gap:12px">
+              <div
+                style="width:44px;height:44px;border-radius:50%;background:var(--azul-suave);color:var(--azul);display:flex;align-items:center;justify-content:center;flex:none">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8" />
+                  <path d="M4.93 4.93l14.14 14.14" stroke="currentColor" stroke-width="1.8" />
+                </svg>
+              </div>
+              <div>
+                <div style="font-weight:800;font-size:.88rem;margin-bottom:2px">Sin exceso</div>
+                <div style="font-size:.8rem;color:var(--tinta2);line-height:1.35">Evitá efectos llamativos (giros,
+                  rebotes, zoom extremos).</div>
+              </div>
+            </div>
+
+            <div style="display:flex;align-items:flex-start;gap:12px">
+              <div
+                style="width:44px;height:44px;border-radius:50%;background:#FFF1D6;color:#C77800;display:flex;align-items:center;justify-content:center;flex:none">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path
+                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l8.78-8.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                    fill="currentColor" />
+                </svg>
+              </div>
+              <div>
+                <div style="font-weight:800;font-size:.88rem;margin-bottom:2px">Que no molesten</div>
+                <div style="font-size:.8rem;color:var(--tinta2);line-height:1.35">Si una animación no ayuda a entender,
+                  es mejor sacarla.</div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Paneles CÓMO NO / CÓMO SÍ -->
+          <div style="display:flex;flex-wrap:wrap;gap:16px;margin:8px 0 6px">
+
+            <!-- Panel CÓMO NO -->
+            <div
+              style="flex:1 1 280px;border:1px solid #FCA5A5;border-radius:14px;background:#FFF5F5;padding:12px 12px 14px;display:flex;flex-direction:column;gap:10px">
+              <div style="display:flex;align-items:center;justify-content:space-between">
+                <div style="display:flex;align-items:center;gap:6px;font-size:.85rem;font-weight:800;color:#DC2626">
+                  <span
+                    style="width:22px;height:22px;border-radius:50%;background:#DC2626;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:.75rem">✕</span>
+                  <span>CÓMO NO</span>
+                </div>
+                <span
+                  style="font-size:.75rem;font-weight:700;background:#FEE2E2;color:#DC2626;padding:3px 10px;border-radius:12px">Demasiados
+                  efectos</span>
+              </div>
+              <div style="border-radius:10px;overflow:hidden;border:1px solid #FECACA;background:#fff">
+                <img src="/ejemplos/defensaOral/p9_1.png"
+                  alt="Ejemplo de cómo NO animar: demasiadas animaciones, efectos llamativos sin orden claro"
+                  loading="lazy" style="display:block;width:100%;height:auto">
+              </div>
+              <div
+                style="display:flex;align-items:flex-start;gap:8px;background:#FFF5F5;border-radius:10px;padding:8px 12px;border:1px solid #FECACA;font-size:.8rem;color:#78350F;line-height:1.35">
+                <span
+                  style="width:20px;height:20px;border-radius:50%;background:#DC2626;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:800;flex:none">✕</span>
+                <span>Demasiadas animaciones, efectos llamativos y sin un orden claro. Distrae del mensaje
+                  principal.</span>
+              </div>
+            </div>
+
+            <!-- Panel CÓMO SÍ -->
+            <div
+              style="flex:1 1 280px;border:1px solid #A7F3D0;border-radius:14px;background:#F0FDF4;padding:12px 12px 14px;display:flex;flex-direction:column;gap:10px">
+              <div style="display:flex;align-items:center;justify-content:space-between">
+                <div style="display:flex;align-items:center;gap:6px;font-size:.85rem;font-weight:800;color:#059669">
+                  <span
+                    style="width:22px;height:22px;border-radius:50%;background:#059669;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:.75rem">✓</span>
+                  <span>CÓMO SÍ</span>
+                </div>
+                <span
+                  style="font-size:.75rem;font-weight:700;background:#D1FAE5;color:#059669;padding:3px 10px;border-radius:12px">Simple
+                  y efectivo</span>
+              </div>
+              <div style="border-radius:10px;overflow:hidden;border:1px solid #A7F3D0;background:#fff">
+                <img src="/ejemplos/defensaOral/p9_2.png"
+                  alt="Ejemplo de cómo SÍ animar: animaciones simples y en secuencia, ayudan a comprender la información sin distraer"
+                  loading="lazy" style="display:block;width:100%;height:auto">
+              </div>
+              <div
+                style="display:flex;align-items:flex-start;gap:8px;background:#F0FDF4;border-radius:10px;padding:8px 12px;border:1px solid #A7F3D0;font-size:.8rem;color:#065F46;line-height:1.35">
+                <span
+                  style="width:20px;height:20px;border-radius:50%;background:#059669;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:800;flex:none">✓</span>
+                <span>Animaciones simples y en secuencia. Ayudan a comprender la información sin distraer.</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Caja Regla simple -->
+          <div
+            style="background:#F5F3FF;border:1px solid #DDD6FE;border-radius:14px;padding:14px 18px;display:flex;align-items:center;gap:12px;margin-top:16px">
+            <div
+              style="width:36px;height:36px;border-radius:50%;background:#EDE9FE;color:#7C3AED;display:flex;align-items:center;justify-content:center;flex:none">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  d="M12 2a6 6 0 0 1 6 6c0 2.22-1.21 4.15-3 5.19V17a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-3.81C7.21 12.15 6 10.22 6 8a6 6 0 0 1 6-6z"
+                  stroke="currentColor" stroke-width="1.8" />
+                <path d="M9 21h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+              </svg>
+            </div>
+            <div style="font-size:.84rem;color:#5B21B6;line-height:1.4">
+              <strong style="color:#6D28D9">Regla simple.</strong> La animación está para acompañar lo que decís, no
+              para lucirse. Si el público mira el efecto en vez de escucharte, sobra.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ FASE 3 · EL CONTENIDO ═══ -->
+
+      <section class="pantalla f3" id="contenido-ejemplos" data-paso="contenido-ejemplos" data-fase="3" hidden>
+        <div class="enc">
+          <div class="chip"></div>
+          <div>
+            <h2>Ejemplos de contenido</h2>
+            <div class="bajada"><span>Fase 3 · El contenido</span></div>
+          </div>
+        </div>
+        <div class="cuerpo">
+          <div class="nota"><strong>Qué tenés que hacer acá:</strong> descargá el ejemplo de contenido de tu nivel y
+            usalo como referencia de qué mostrar en cada parte de tu presentación.</div>
+
+          <p>El contenido de la defensa cambia según el proyecto y el nivel. Por eso, en vez de una lista fija, acá vas
+            a encontrar <strong>ejemplos de contenido y materiales de apoyo</strong> preparados para guiar tu
+            exposición.</p>
+
+          <h3 style="margin-top:20px;margin-bottom:6px">Materiales de apoyo</h3>
+
+          <div id="ejemplos-lista">
+            <!-- Tarjeta de descarga de PowerPoint -->
+            <div
+              style="display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;background:var(--superficie);border:1px solid var(--linea);border-radius:14px;box-shadow:var(--sombra);padding:16px 18px;margin-bottom:16px">
+              <div style="display:flex;align-items:center;gap:14px;min-width:0;flex:1 1 240px">
+                <div
+                  style="width:46px;height:46px;border-radius:12px;background:#FFF1D6;color:#D97706;display:flex;align-items:center;justify-content:center;flex:none;font-weight:800">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="currentColor"
+                      stroke-width="1.8" />
+                    <path d="M14 2v6h6" stroke="currentColor" stroke-width="1.8" />
+                    <path d="M10 13h4M10 17h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                  </svg>
+                </div>
+                <div>
+                  <strong style="font-size:1.02rem;display:block;margin-bottom:2px">Guía de contenido de la
+                    defensa</strong>
+                  <div style="color:var(--tinta2);font-size:.88rem">Qué contenido va en cada parte de la presentación
+                    (en inglés, con partes en español). PowerPoint (.pptx).</div>
+                </div>
+              </div>
+              <a class="btn-p" href="/ejemplos/defensaOral/STEAM%20PROJECT%20ORAL%20DEFENSE%20OUTLINE.pptx"
+                download="STEAM PROJECT ORAL DEFENSE OUTLINE.pptx"
+                style="white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center;padding:9px 15px;border-radius:var(--r-s);font-weight:600;font-size:.85rem">Descargar
+                (61 KB)</a>
+            </div>
+
+            <!-- Tarjeta de ejemplo de contenido: STEAM PROJECT.9thG -->
+            <div
+              style="display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;background:var(--superficie);border:1px solid var(--linea);border-radius:14px;box-shadow:var(--sombra);padding:16px 18px;margin-bottom:16px">
+              <div style="display:flex;align-items:center;gap:14px;min-width:0;flex:1 1 240px">
+                <div
+                  style="width:46px;height:46px;border-radius:12px;background:#FFF1D6;color:#D97706;display:flex;align-items:center;justify-content:center;flex:none;font-weight:800">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="currentColor"
+                      stroke-width="1.8" />
+                    <path d="M14 2v6h6" stroke="currentColor" stroke-width="1.8" />
+                    <path d="M10 13h4M10 17h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                  </svg>
+                </div>
+                <div>
+                  <strong style="font-size:1.02rem;display:block;margin-bottom:2px">Estructura de la presentación de 9.º
+                    grado</strong>
+                  <div style="color:var(--tinta2);font-size:.88rem">Carátula, introducción, justificación, objetivos,
+                    problema, hipótesis y variables. PowerPoint (.pptx).</div>
+                </div>
+              </div>
+              <a class="btn-p" href="/ejemplos/defensaOral/STEAM%20PROJECT.9thG.pptx" download="STEAM PROJECT.9thG.pptx"
+                style="white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center;padding:9px 15px;border-radius:var(--r-s);font-weight:600;font-size:.85rem">Descargar
+                (1,0 MB)</a>
+            </div>
+
+
+          </div>
+          <div class="nota alerta" style="margin-top:18px"><strong>Es una referencia, no un molde.</strong> Cada
+            proyecto STEAM es distinto: tomá el ejemplo como guía de la estructura y adaptalo a tu producto y a tu
+            investigación.</div>
+        </div>
+      </section>
+
+      <!-- ═══ FASE 4 · LA REVISIÓN ═══ -->
+
+      <section class="pantalla f4" id="rubrica" data-paso="rubrica" data-fase="4" hidden>
+        <div class="enc">
+          <div class="chip"></div>
+          <div>
+            <h2>Criterios de evaluación</h2>
+            <div class="bajada"><span>Fase 4 · La revisión</span></div>
+          </div>
+        </div>
+        <div class="cuerpo">
+          <div class="nota"><strong>Qué tenés que hacer acá:</strong> repasá tu trabajo con esta lista y marcá cada
+            punto que cumplas para estimar tu puntaje.</div>
+
+          <p style="margin-top:12px;margin-bottom:14px">Estos son los mismos puntos que se usan para corregir el
+            trabajo. Marcá cada uno para ver cuántos puntos obtendrías.</p>
+
+          <!-- Banner de Puntaje Estimado -->
+          <div class="nota alerta"
+            style="display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap">
+            <div style="display:flex;align-items:center;gap:8px">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"
+                style="color:#D97706;flex:none">
+                <path
+                  d="M12 2a6 6 0 0 1 6 6c0 2.22-1.21 4.15-3 5.19V17a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-3.81C7.21 12.15 6 10.22 6 8a6 6 0 0 1 6-6z"
+                  stroke="currentColor" stroke-width="1.8" />
+                <path d="M9 21h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+              </svg>
+              <strong style="color:#B45309">Puntaje estimado</strong>
+            </div>
+            <span id="comprobacion-puntaje"
+              style="font-family:var(--mono);font-weight:700;font-size:1.05rem;color:#B45309">0 / 10 puntos</span>
+          </div>
+
+          <!-- Lista interactiva de Criterios -->
+          <ul id="comprobacion-lista"
+            style="list-style:none;margin:16px 0 20px;padding:0;display:flex;flex-direction:column;gap:11px">
+            <li
+              style="display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff;padding:12px 14px;border:1px solid var(--linea);border-radius:12px;box-shadow:var(--sombra)">
+              <label style="display:flex;align-items:flex-start;gap:10px;flex:1;cursor:pointer">
+                <input type="checkbox" data-pts="1"
+                  style="margin-top:3px;flex-shrink:0;width:18px;height:18px;accent-color:var(--azul)">
+                <span><strong>Selección de plantilla:</strong> La plantilla es adecuada para una defensa de proyecto y
+                  permite organizar correctamente la información.</span>
+              </label>
+              <span class="val" style="flex-shrink:0;font-weight:700;font-size:.85rem;color:var(--tinta2)">1 pt</span>
+            </li>
+            <li
+              style="display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff;padding:12px 14px;border:1px solid var(--linea);border-radius:12px;box-shadow:var(--sombra)">
+              <label style="display:flex;align-items:flex-start;gap:10px;flex:1;cursor:pointer">
+                <input type="checkbox" data-pts="1"
+                  style="margin-top:3px;flex-shrink:0;width:18px;height:18px;accent-color:var(--azul)">
+                <span><strong>Identidad de marca:</strong> Se utilizan los colores de la empresa y el logo aparece en
+                  todas las diapositivas.</span>
+              </label>
+              <span class="val" style="flex-shrink:0;font-weight:700;font-size:.85rem;color:var(--tinta2)">1 pt</span>
+            </li>
+            <li
+              style="display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff;padding:12px 14px;border:1px solid var(--linea);border-radius:12px;box-shadow:var(--sombra)">
+              <label style="display:flex;align-items:flex-start;gap:10px;flex:1;cursor:pointer">
+                <input type="checkbox" data-pts="1"
+                  style="margin-top:3px;flex-shrink:0;width:18px;height:18px;accent-color:var(--azul)">
+                <span><strong>Color y contraste:</strong> El texto se distingue claramente del fondo en todas las
+                  diapositivas.</span>
+              </label>
+              <span class="val" style="flex-shrink:0;font-weight:700;font-size:.85rem;color:var(--tinta2)">1 pt</span>
+            </li>
+            <li
+              style="display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff;padding:12px 14px;border:1px solid var(--linea);border-radius:12px;box-shadow:var(--sombra)">
+              <label style="display:flex;align-items:flex-start;gap:10px;flex:1;cursor:pointer">
+                <input type="checkbox" data-pts="1"
+                  style="margin-top:3px;flex-shrink:0;width:18px;height:18px;accent-color:var(--azul)">
+                <span><strong>Tipografía:</strong> Utiliza un máximo de 2 familias tipográficas.</span>
+              </label>
+              <span class="val" style="flex-shrink:0;font-weight:700;font-size:.85rem;color:var(--tinta2)">1 pt</span>
+            </li>
+            <li
+              style="display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff;padding:12px 14px;border:1px solid var(--linea);border-radius:12px;box-shadow:var(--sombra)">
+              <label style="display:flex;align-items:flex-start;gap:10px;flex:1;cursor:pointer">
+                <input type="checkbox" data-pts="1"
+                  style="margin-top:3px;flex-shrink:0;width:18px;height:18px;accent-color:var(--azul)">
+                <span><strong>Composición y alineación:</strong> Los elementos están alineados, no se superponen y no
+                  quedan amontonados.</span>
+              </label>
+              <span class="val" style="flex-shrink:0;font-weight:700;font-size:.85rem;color:var(--tinta2)">1 pt</span>
+            </li>
+            <li
+              style="display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff;padding:12px 14px;border:1px solid var(--linea);border-radius:12px;box-shadow:var(--sombra)">
+              <label style="display:flex;align-items:flex-start;gap:10px;flex:1;cursor:pointer">
+                <input type="checkbox" data-pts="1"
+                  style="margin-top:3px;flex-shrink:0;width:18px;height:18px;accent-color:var(--azul)">
+                <span><strong>Jerarquía y legibilidad:</strong> Título, subtítulos y contenido se diferencian claramente
+                  por tamaño o formato, el tamaño mínimo es de 24 ptos.</span>
+              </label>
+              <span class="val" style="flex-shrink:0;font-weight:700;font-size:.85rem;color:var(--tinta2)">1 pt</span>
+            </li>
+            <li
+              style="display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff;padding:12px 14px;border:1px solid var(--linea);border-radius:12px;box-shadow:var(--sombra)">
+              <label style="display:flex;align-items:flex-start;gap:10px;flex:1;cursor:pointer">
+                <input type="checkbox" data-pts="1"
+                  style="margin-top:3px;flex-shrink:0;width:18px;height:18px;accent-color:var(--azul)">
+                <span><strong>Síntesis: menos texto:</strong> Máximo 36 palabras de contenido por diapositiva y hasta 6
+                  líneas de texto continuo.</span>
+              </label>
+              <span class="val" style="flex-shrink:0;font-weight:700;font-size:.85rem;color:var(--tinta2)">1 pt</span>
+            </li>
+            <li
+              style="display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff;padding:12px 14px;border:1px solid var(--linea);border-radius:12px;box-shadow:var(--sombra)">
+              <label style="display:flex;align-items:flex-start;gap:10px;flex:1;cursor:pointer">
+                <input type="checkbox" data-pts="1"
+                  style="margin-top:3px;flex-shrink:0;width:18px;height:18px;accent-color:var(--azul)">
+                <span><strong>Imágenes y recursos visuales:</strong> Las imágenes no están pixeladas ni deformadas y los
+                  recursos aportan información.</span>
+              </label>
+              <span class="val" style="flex-shrink:0;font-weight:700;font-size:.85rem;color:var(--tinta2)">1 pt</span>
+            </li>
+            <li
+              style="display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff;padding:12px 14px;border:1px solid var(--linea);border-radius:12px;box-shadow:var(--sombra)">
+              <label style="display:flex;align-items:flex-start;gap:10px;flex:1;cursor:pointer">
+                <input type="checkbox" data-pts="1"
+                  style="margin-top:3px;flex-shrink:0;width:18px;height:18px;accent-color:var(--azul)">
+                <span><strong>Animaciones y transiciones:</strong> Utiliza animaciones y/o transiciones para dar
+                  dinamismo, sin exceso ni distracciones.</span>
+              </label>
+              <span class="val" style="flex-shrink:0;font-weight:700;font-size:.85rem;color:var(--tinta2)">1 pt</span>
+            </li>
+            <li
+              style="display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff;padding:12px 14px;border:1px solid var(--linea);border-radius:12px;box-shadow:var(--sombra)">
+              <label style="display:flex;align-items:flex-start;gap:10px;flex:1;cursor:pointer">
+                <input type="checkbox" data-pts="1"
+                  style="margin-top:3px;flex-shrink:0;width:18px;height:18px;accent-color:var(--azul)">
+                <span><strong>Ortografía y redacción:</strong> No presenta errores de ortografía, gramática ni
+                  puntuación.</span>
+              </label>
+              <span class="val" style="flex-shrink:0;font-weight:700;font-size:.85rem;color:var(--tinta2)">1 pt</span>
+            </li>
+          </ul>
+
+          <div class="nota dato"><strong>Lo importante no es cuánto ponés, sino cómo lo mostrás.</strong> Podés tener
+            mucha información correcta y aun así hacer una mala diapositiva por querer meterla toda. La presentación
+            tiene que demostrar que sabés <strong>seleccionar y comunicar</strong>.</div>
+          <div class="nota alerta"><strong>Consistencia del idioma.</strong> Si una diapositiva está en español, todo su
+            contenido en español; si está en inglés, todo en inglés. No mezcles idiomas sin una razón (una cita, una
+            marca).</div>
+        </div>
+        <script>
+          (function () {
+            "use strict";
+            var lista = document.getElementById("comprobacion-lista");
+            var marcador = document.getElementById("comprobacion-puntaje");
+            if (!lista || !marcador) return;
+            var boxes = [].slice.call(lista.querySelectorAll('input[type="checkbox"]'));
+            var total = boxes.reduce(function (acc, b) { return acc + (parseInt(b.getAttribute("data-pts"), 10) || 0); }, 0);
+            function recalcular() {
+              var puntos = boxes.reduce(function (acc, b) { return acc + (b.checked ? (parseInt(b.getAttribute("data-pts"), 10) || 0) : 0); }, 0);
+              marcador.textContent = puntos + " / " + total + " puntos";
+            }
+            lista.addEventListener("change", recalcular);
+            recalcular();
+          })();
+        </script>
+      </section>
+
+      <section class="pantalla f4" id="prompt" data-paso="prompt" data-fase="4" hidden>
+        <div class="enc">
+          <div class="chip"></div>
+          <div>
+            <h2>El prompt para mejorar tu presentación</h2>
+            <div class="bajada"><span>Fase 4 · La revisión</span></div>
+          </div>
+        </div>
+        <div class="cuerpo">
+          <div class="nota"><strong>Qué tenés que hacer acá:</strong> exportá tus diapositivas a PDF (o a
+            imágenes) y subilas junto con este prompt a una IA (ChatGPT o Claude). Te va a dar una devolución
+            diapositiva por diapositiva.</div>
+
+          <div id="prompts-lista">
+            <div class="prompt-item">
+              <button class="prompt-cabecera" type="button" aria-expanded="false">
+                <span data-prompt-titulo="defensa">Analizar y mejorar mi presentación de la defensa</span>
+                <svg class="flecha" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                </svg>
+              </button>
+              <div class="prompt-cuerpo">
+                <p data-prompt-desc="defensa" class="prompt-desc">Subís el PDF (o las imágenes) de tus diapositivas
+                  junto con este prompt.
+                  La IA revisa el diseño y el lenguaje, y te dice diapositiva por diapositiva qué mejorar y cómo.</p>
+                <pre data-prompt="defensa"
+                  class="prompt-texto">Actuás como un especialista en diseño de presentaciones que ayuda a estudiantes de secundaria a mejorar las diapositivas de una defensa oral escolar. Te voy a adjuntar mi presentación (en PDF o como imágenes de las diapositivas). Revisá SOLO el diseño visual, la comunicación y la corrección del lenguaje. NO evalúes si la investigación científica o el modelo de negocio son correctos.
+
+Evaluá mi presentación con estos 10 indicadores:
+
+1. Selección de plantilla: la plantilla es adecuada para una defensa de proyecto, permite organizar bien la información y tiene un diseño trabajado (no es solo un fondo con texto encima).
+2. Identidad de marca: se usan los colores de la empresa y el logo aparece en todas las diapositivas.
+3. Color y contraste: el texto se distingue claramente del fondo en todas las diapositivas.
+4. Tipografía: usa como máximo 2 familias tipográficas y el texto principal tiene un tamaño adecuado (24 pt o más).
+5. Composición y alineación: los elementos están alineados, no se superponen y no quedan amontonados.
+6. Jerarquía y legibilidad: el título, los subtítulos y el contenido se diferencian claramente por tamaño o formato.
+7. Síntesis: menos texto: máximo 36 palabras de contenido por diapositiva y hasta 6 líneas de texto.
+8. Imágenes y recursos visuales: las imágenes no están pixeladas ni deformadas y los recursos aportan información.
+9. Animaciones y transiciones: usa animaciones y/o transiciones para dar dinamismo, sin exceso ni distracciones. (Si te paso imágenes o PDF y no podés ver las animaciones, aclaralo y no lo evalúes.)
+10. Ortografía y redacción: no hay errores de ortografía, gramática ni puntuación. Revisá también la consistencia del idioma (si una diapositiva está en español, todo en español; si está en inglés, todo en inglés).
+
+Para CADA diapositiva con algo para mejorar, indicame:
+1. El número de diapositiva.
+2. Qué indicadores no cumple (nombralos).
+3. Qué está fallando, explicado en pocas palabras.
+4. Cómo mejorarlo, con una recomendación concreta y aplicable.
+5. Si hay un error de lenguaje, copiá el texto tal como está y escribí la corrección.
+
+Reglas:
+- Señalá solo lo que se puede mejorar. Si una diapositiva está bien, decilo en una línea y seguí.
+- No reescribas todo mi contenido ni cambies mis ideas: enfocate en cómo se ve y cómo se comunica.
+- Sé claro y respetuoso, como quien ayuda a un estudiante a mejorar.
+
+Al final, dame:
+- Un resumen de los 3 cambios más importantes para que la presentación mejore rápido.
+- Una valoración general del diseño (por ejemplo: bien encaminada / necesita ajustes / hay que rehacer varias diapositivas).</pre>
+                <button class="btn-p prompt-copiar" type="button">Copiar prompt</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="nota dato"><strong>Es una ayuda, no la nota final.</strong> La devolución de la IA es un
+            aporte para mejorar tu presentación. La evaluación final siempre la tiene tu docente.</div>
+        </div>
+      </section>
+
+      <section class="pantalla f4" id="ensayo" data-paso="ensayo" data-fase="4" hidden>
+        <div class="enc">
+          <div class="chip"></div>
+          <div>
+            <h2>Ensayá tu defensa</h2>
+            <div class="bajada"><span>Fase 4 · La revisión</span></div>
+          </div>
+        </div>
+        <div class="cuerpo">
+          <div class="nota"><strong>Qué tenés que hacer acá:</strong> ensayá la exposición completa, con el tiempo
+            medido, al menos dos veces antes del día de la defensa.</div>
+
+          <p>Las diapositivas ya están listas. Ahora falta la otra mitad: cómo lo contás. Un buen ensayo te da
+            seguridad y hace que la defensa salga ordenada.</p>
+
+          <div
+            style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin:10px 0 18px">
+            <div
+              style="background:var(--superficie);border:1px solid var(--linea);border-radius:16px;box-shadow:var(--sombra);padding:20px 16px;display:flex;flex-direction:column;align-items:flex-start;gap:8px">
+              <div
+                style="width:46px;height:46px;border-radius:50%;background:var(--azul-suave);color:var(--azul);display:flex;align-items:center;justify-content:center;flex:none;font-size:1.3rem">
+                👥</div>
+              <div style="font-weight:800;font-size:.95rem;line-height:1.3">Repartan la exposición</div>
+              <div style="font-size:.85rem;color:var(--tinta2);line-height:1.45">Decidan quién presenta cada parte. Que
+                todos hablen y que cada uno le pase la palabra al siguiente.</div>
+            </div>
+            <div
+              style="background:var(--superficie);border:1px solid var(--linea);border-radius:16px;box-shadow:var(--sombra);padding:20px 16px;display:flex;flex-direction:column;align-items:flex-start;gap:8px">
+              <div
+                style="width:46px;height:46px;border-radius:50%;background:var(--azul-suave);color:var(--azul);display:flex;align-items:center;justify-content:center;flex:none;font-size:1.3rem">
+                ⏱️</div>
+              <div style="font-weight:800;font-size:.95rem;line-height:1.3">Medí el tiempo</div>
+              <div style="font-size:.85rem;color:var(--tinta2);line-height:1.45">Cronometrá el ensayo y respetá el
+                tiempo que indique tu docente. Si te pasás, recortá texto, no hables más rápido.</div>
+            </div>
+            <div
+              style="background:var(--superficie);border:1px solid var(--linea);border-radius:16px;box-shadow:var(--sombra);padding:20px 16px;display:flex;flex-direction:column;align-items:flex-start;gap:8px">
+              <div
+                style="width:46px;height:46px;border-radius:50%;background:var(--azul-suave);color:var(--azul);display:flex;align-items:center;justify-content:center;flex:none;font-size:1.3rem">
+                🗣️</div>
+              <div style="font-weight:800;font-size:.95rem;line-height:1.3">Hablá, no leas</div>
+              <div style="font-size:.85rem;color:var(--tinta2);line-height:1.45">La diapositiva es apoyo. Mirá al
+                público y, si hace falta, usá tarjetas con palabras clave.</div>
+            </div>
+            <div
+              style="background:var(--superficie);border:1px solid var(--linea);border-radius:16px;box-shadow:var(--sombra);padding:20px 16px;display:flex;flex-direction:column;align-items:flex-start;gap:8px">
+              <div
+                style="width:46px;height:46px;border-radius:50%;background:var(--azul-suave);color:var(--azul);display:flex;align-items:center;justify-content:center;flex:none;font-size:1.3rem">
+                ❓</div>
+              <div style="font-weight:800;font-size:.95rem;line-height:1.3">Prepará las preguntas</div>
+              <div style="font-size:.85rem;color:var(--tinta2);line-height:1.45">Piensen qué puede preguntar el jurado
+                (costos, proceso, resultados, qué mejorarían) y ensayen respuestas cortas.</div>
+            </div>
+          </div>
+
+          <div class="nota dato"><strong>Si no sabés una respuesta,</strong> decilo con honestidad y contá cómo lo
+            averiguarías. Es mejor que inventar.</div>
+
+          <div class="nota alerta"><strong>Copia de seguridad (¡importante!).</strong> Antes de la defensa,
+            <strong>descargá tu presentación</strong> a la computadora: no dependas de internet ni de una versión
+            "en la nube", por si ese día hay problemas de conexión. Guardala también en un <strong>pendrive</strong>,
+            así la podés pasar rápido a otra computadora si la que ibas a usar falla. Llevá la copia en el formato
+            final (por ejemplo, PDF además del archivo original) para que se vea igual en cualquier equipo.
+          </div>
+
+          <h3 style="margin-top:22px;margin-bottom:8px">El día de la defensa</h3>
+          <ul style="margin:0;padding-left:20px;line-height:1.7">
+            <li>Llegá con tiempo y probá la presentación en la computadora y el proyector que vas a usar.</li>
+            <li>Tené a mano la copia en el pendrive y el PDF.</li>
+            <li>Si corresponde, llevá el producto o una muestra para mostrarla.</li>
+            <li>Respirá, hablá despacio y mirá al público: conocés tu proyecto mejor que nadie.</li>
+          </ul>
+        </div>
+      </section>
+
+
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      "use strict";
+
+      var CLAVE = "defensa-oral-sil";
+      // El avance marca el punto MÁXIMO al que llegó el alumno (0..total).
+      // "Siguiente" puede aumentarlo; "Anterior" nunca lo baja.
+      var estado = { max: 0 };
+      try {
+        var g = JSON.parse(localStorage.getItem(CLAVE) || "{}");
+        if (g && typeof g === "object" && typeof g.max === "number") estado.max = g.max;
+      } catch (e) { }
+      function guardar() { try { localStorage.setItem(CLAVE, JSON.stringify(estado)); } catch (e) { } }
+
+      var titulos = {
+        "inicio": "Inicio",
+        "jerarquia": "Jerarquía y legibilidad", "sintesis": "Síntesis: menos texto", "tipografia": "Tipografía",
+        "plantilla": "Selección de plantilla", "color": "Color y contraste", "composicion": "Composición y alineación", "imagenes": "Imágenes y recursos visuales", "identidad": "Identidad de marca", "animaciones": "Animaciones y transiciones",
+        "contenido-ejemplos": "Ejemplos de contenido",
+        "rubrica": "Criterios de evaluación", "prompt": "Prompt para mejorar", "ensayo": "Ensayá tu defensa"
+      };
+      var nombreFase = { 1: "Fase 1 · La plantilla", 2: "Fase 2 · Las diapositivas", 3: "Fase 3 · El contenido", 4: "Fase 4 · La revisión" };
+
+      var main = document.getElementById("contenido");
+      var pantallas = [].slice.call(main.querySelectorAll(".pantalla"));
+      var pasos = pantallas.filter(function (s) { return s.hasAttribute("data-paso"); });
+      var indice = document.getElementById("indice");
+      var orden = [], actual = "inicio";
+      var FINAL = "ensayo";
+
+      /* pie de navegación en cada pantalla */
+      pantallas.forEach(function (sec) {
+        var pie = document.createElement("footer");
+        pie.className = "navpie";
+        pie.innerHTML =
+          '<div class="lado izq"><span class="destino ant-t"></span><button class="btn-s ir-ant">← Anterior</button></div>' +
+          '<div class="lado der"><span class="destino sig-t"></span><button class="btn-p ir-sig">Siguiente →</button></div>';
+        sec.appendChild(pie);
+      });
+
+      /* índice */
+      function construirIndice() {
+        orden = ["inicio"];
+        var n = 0, faseActual = 0, html = "";
+        html += '<li><a href="#inicio" data-p="inicio"><span class="pt">•</span><span>Inicio</span></a></li>';
+        pasos.forEach(function (sec) {
+          n++;
+          var k = sec.getAttribute("data-paso"), f = parseInt(sec.getAttribute("data-fase"), 10);
+          sec.dataset.visible = "1";
+          sec.querySelector(".chip").textContent = (n < 10 ? "0" : "") + n;
+          orden.push(k);
+          if (f > faseActual) { faseActual = f; html += '<li class="sep">' + nombreFase[f] + '</li>'; }
+          html += '<li><a href="#' + k + '" data-p="' + k + '"><span class="pt">' + (n < 10 ? "0" : "") + n + '</span><span>' + titulos[k] + '</span><span class="pin"></span></a></li>';
+        });
+        indice.innerHTML = html;
+      }
+
+      /* navegación */
+      function ir(k, silencioso) {
+        if (orden.indexOf(k) < 0) k = "inicio";
+        actual = k;
+        pantallas.forEach(function (s) { s.hidden = s.id !== k; });
+        var el = document.getElementById(k);
+
+        var i = orden.indexOf(k), ant = orden[i - 1], sig = orden[i + 1];
+        // Solo sube el máximo; volver atrás no lo modifica.
+        if (i > estado.max) { estado.max = i; guardar(); }
+        var pie = el.querySelector(".navpie");
+        if (pie) {
+          var bAnt = pie.querySelector(".ir-ant"), bSig = pie.querySelector(".ir-sig");
+          var esFinal = k === FINAL;
+          pie.querySelector(".ant-t").textContent = ant ? titulos[ant] : "";
+          pie.querySelector(".sig-t").textContent = esFinal ? "Página de inicio" : (sig ? titulos[sig] : "");
+          bAnt.disabled = !ant; bSig.disabled = !sig && !esFinal;
+          bAnt.textContent = "← Anterior";
+          bSig.textContent = esFinal ? "Inicio" : (sig ? "Siguiente →" : "Fin");
+          bAnt.onclick = function () { if (ant) ir(ant); };
+          bSig.onclick = function () { if (esFinal) { window.location.href = "/"; return; } if (sig) ir(sig); };
+        }
+
+        indice.querySelectorAll("a[data-p]").forEach(function (a) {
+          a.classList.toggle("activo", a.getAttribute("data-p") === k);
+        });
+        cerrarMenu();
+        pintarPasos();
+        if (location.hash !== "#" + k) history.replaceState(null, "", "#" + k);
+        if (!silencioso) window.scrollTo({ top: 0, behavior: "instant" });
+      }
+
+      /* progreso */
+      function pintarPasos() {
+        var total = pasos.length;
+        // Marca como "hecho" todo lo que quede hasta el máximo alcanzado (recorrido lineal).
+        pasos.forEach(function (sec) {
+          var k = sec.getAttribute("data-paso"), idx = orden.indexOf(k);
+          var a = indice.querySelector('a[data-p="' + k + '"]');
+          if (a) a.classList.toggle("hecho", idx > 0 && idx <= estado.max);
+        });
+        var hechos = Math.min(estado.max, total);
+        var destino = orden[estado.max] || "inicio";
+        var enlace = document.getElementById("pasos-actual");
+        enlace.textContent = hechos;
+        enlace.setAttribute("href", "#" + destino);
+        enlace.dataset.destino = destino;
+        document.getElementById("pasos-total").textContent = total;
+        document.getElementById("pasos-barra").style.width = (total ? hechos / total * 100 : 0) + "%";
+      }
+
+      /* menú lateral en pantallas chicas */
+      function cerrarMenu() {
+        document.body.classList.remove("menu");
+        var m = document.getElementById("tb-menu");
+        if (m) m.setAttribute("aria-expanded", "false");
+      }
+      document.getElementById("tb-menu").addEventListener("click", function () {
+        var ab = document.body.classList.toggle("menu");
+        this.setAttribute("aria-expanded", ab ? "true" : "false");
+      });
+      document.getElementById("velo").addEventListener("click", cerrarMenu);
+
+      /* clic en enlaces internos */
+      document.addEventListener("click", function (e) {
+        var a = e.target.closest('a[href^="#"]');
+        if (a) {
+          var k = a.getAttribute("href").slice(1);
+          var el = document.getElementById(k);
+          if (el && el.classList.contains("pantalla")) { e.preventDefault(); ir(k); }
+        }
+      });
+
+      /* prompts: abrir/cerrar y copiar */
+      document.addEventListener("click", function (e) {
+        var cab = e.target.closest(".prompt-cabecera");
+        if (cab) {
+          var item = cab.closest(".prompt-item");
+          var abierto = item.classList.toggle("abierto");
+          cab.setAttribute("aria-expanded", abierto ? "true" : "false");
+          return;
+        }
+        var btnCopiar = e.target.closest(".prompt-copiar");
+        if (btnCopiar) {
+          var texto = btnCopiar.closest(".prompt-cuerpo").querySelector(".prompt-texto").textContent;
+          var marcar = function () {
+            var original = btnCopiar.textContent;
+            btnCopiar.textContent = "¡Copiado!";
+            btnCopiar.classList.add("copiado");
+            setTimeout(function () { btnCopiar.textContent = original; btnCopiar.classList.remove("copiado"); }, 1800);
+          };
+          var conTextarea = function () {
+            var ta = document.createElement("textarea");
+            ta.value = texto; ta.style.position = "fixed"; ta.style.opacity = "0";
+            document.body.appendChild(ta); ta.select();
+            try { document.execCommand("copy"); } catch (err) { }
+            document.body.removeChild(ta);
+            marcar();
+          };
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(texto).then(marcar, conTextarea);
+          } else { conTextarea(); }
+        }
+      });
+
+      /* reiniciar el avance (con confirmación) */
+      function limpiarAvance() {
+        estado.max = 0; guardar(); pintarPasos();
+        // también se borran las marcas de los criterios (computadoras compartidas)
+        var casillas = [].slice.call(document.querySelectorAll("#rubrica input[type=checkbox]"));
+        casillas.forEach(function (c) { c.checked = false; });
+        if (casillas.length) casillas[0].dispatchEvent(new Event("change", { bubbles: true }));
+      }
+      var btnRe = document.getElementById("btn-reiniciar");
+      btnRe.addEventListener("click", function () {
+        if (window.confirm("¿Reiniciar el avance, borrar las marcas de los criterios y volver al inicio?")) {
+          limpiarAvance();
+          ir("inicio");
+        }
+      });
+
+      /* teclado e hash */
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") cerrarMenu();
+        var t = e.target.tagName;
+        if (t === "INPUT" || t === "SELECT" || t === "TEXTAREA") return;
+        var i = orden.indexOf(actual);
+        if (e.key === "ArrowRight" && orden[i + 1]) ir(orden[i + 1]);
+        if (e.key === "ArrowLeft" && orden[i - 1]) ir(orden[i - 1]);
+      });
+      window.addEventListener("hashchange", function () {
+        var k = location.hash.slice(1);
+        if (k && k !== actual && orden.indexOf(k) >= 0) ir(k);
+      });
+      document.getElementById("pasos-actual").addEventListener("click", function (e) {
+        e.preventDefault();
+        var d = this.dataset.destino;
+        if (d && orden.indexOf(d) >= 0) ir(d);
+      });
+
+      /* cuenta (docente): enlace al panel y salir */
+      if (window.fetch) {
+        fetch("/api/yo", { headers: { "Accept": "application/json" } })
+          .then(function (r) { return r.ok ? r.json() : null; })
+          .then(function (yo) {
+            var cont = document.getElementById("tb-cuenta");
+            if (!cont || !yo) return;
+            if (yo.autenticado) {
+              cont.innerHTML = "";
+              if (yo.docente) {
+                var aP = document.createElement("a");
+                aP.className = "btn-mini"; aP.href = "/panel"; aP.textContent = "Panel";
+                cont.appendChild(aP);
+              }
+              var f = document.createElement("form");
+              f.method = "POST"; f.action = "/salir"; f.style.margin = "0";
+              var t = document.createElement("input");
+              t.type = "hidden"; t.name = "_token"; t.value = yo.csrf || "";
+              f.appendChild(t);
+              var b = document.createElement("button");
+              b.className = "btn-mini"; b.type = "submit"; b.textContent = "Salir";
+              b.title = "Cerrar la sesión de " + yo.nombre;
+              f.appendChild(b);
+              cont.appendChild(f);
+            } else {
+              cont.innerHTML = '<a class="btn-mini" href="/ingresar">Ingresar</a>';
+            }
+          })
+          .catch(function () { });
+      }
+
+
+      /* alto de la barra para el desplazamiento */
+      function medirBarra() {
+        var tb = document.querySelector(".topbar");
+        if (tb) document.documentElement.style.setProperty("--tbh", tb.offsetHeight + "px");
+      }
+      medirBarra(); window.addEventListener("resize", medirBarra);
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(medirBarra);
+
+      /* arranque */
+      construirIndice();
+      pintarPasos();
+      var inicial = location.hash.slice(1);
+      ir(inicial && orden.indexOf(inicial) >= 0 ? inicial : "inicio", true);
+    })();
+  </script>
+  <style>
+    /* Imágenes de ejemplo que se agrandan al tocarlas */
+    .img-ampliable {
+      cursor: zoom-in
+    }
+
+    .visor-imagen {
+      border: 0;
+      padding: 0;
+      background: transparent;
+      max-width: 96vw;
+      max-height: 94vh
+    }
+
+    .visor-imagen::backdrop {
+      background: rgba(10, 20, 40, .82)
+    }
+
+    .visor-imagen img {
+      display: block;
+      max-width: 96vw;
+      max-height: 86vh;
+      border-radius: 12px;
+      background: #fff
+    }
+
+    .visor-imagen p {
+      margin: 10px 4px 0;
+      color: #fff;
+      font-size: .9rem;
+      text-align: center
+    }
+
+    .visor-imagen button {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 0;
+      background: rgba(255, 255, 255, .92);
+      font-size: 1.3rem;
+      cursor: pointer
+    }
+  </style>
+  <script>
+    (function () {
+      "use strict";
+
+      /* Imágenes de ejemplo: al tocarlas (o su tarjeta) se ven grandes */
+      var visor = document.createElement("dialog");
+      visor.className = "visor-imagen";
+      visor.innerHTML = '<button type="button" aria-label="Cerrar">×</button><img alt=""><p></p>';
+      document.body.appendChild(visor);
+      function cerrarVisor() { if (visor.open) visor.close(); }
+      visor.addEventListener("click", cerrarVisor);
+      [].slice.call(document.querySelectorAll('#contenido img[src^="/ejemplos/defensaOral/"]')).forEach(function (img) {
+        var tarjeta = img.parentElement;
+        tarjeta.classList.add("img-ampliable");
+        tarjeta.setAttribute("title", "Tocá para ver más grande");
+        tarjeta.addEventListener("click", function () {
+          visor.querySelector("img").src = img.src;
+          visor.querySelector("img").alt = img.alt;
+          visor.querySelector("p").textContent = img.alt;
+          if (typeof visor.showModal === "function") visor.showModal(); else visor.setAttribute("open", "");
+        });
+      });
+
+      /* Ejemplos de contenido: si hay archivos cargados en el panel, se muestran esos;
+         si no, quedan los que trae escritos la página. */
+      var lista = document.getElementById("ejemplos-lista");
+      if (!lista || !window.fetch) return;
+      function esc(texto) { var div = document.createElement("div"); div.textContent = texto || ""; return div.innerHTML; }
+      function tarjetaArchivo(titulo, descripcion, url, nombre, tamano) {
+        return '<div style="display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;background:var(--superficie);border:1px solid var(--linea);border-radius:14px;box-shadow:var(--sombra);padding:16px 18px;margin-bottom:16px">' +
+          '<div style="display:flex;align-items:center;gap:14px;min-width:0;flex:1 1 240px">' +
+          '<div style="width:46px;height:46px;border-radius:12px;background:#FFF1D6;color:#D97706;display:flex;align-items:center;justify-content:center;flex:none">' +
+          '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="currentColor" stroke-width="1.8" /><path d="M14 2v6h6" stroke="currentColor" stroke-width="1.8" /><path d="M10 13h4M10 17h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" /></svg></div>' +
+          '<div><strong style="font-size:1.02rem;display:block;margin-bottom:2px">' + esc(titulo) + '</strong>' +
+          (descripcion ? '<div style="color:var(--tinta2);font-size:.88rem">' + esc(descripcion) + '</div>' : '') + '</div></div>' +
+          '<a class="btn-p" href="' + esc(url) + '" download="' + esc(nombre) + '" style="white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center;padding:9px 15px;border-radius:var(--r-s);font-weight:600;font-size:.85rem">Descargar' + (tamano ? ' (' + esc(tamano) + ')' : '') + '</a></div>';
+      }
+      fetch("/api/ejemplos", { headers: { "Accept": "application/json" } })
+        .then(function (r) { return r.ok ? r.json() : []; })
+        .then(function (ejemplos) {
+          if (!Array.isArray(ejemplos) || !ejemplos.length) return;
+          lista.innerHTML = ejemplos.map(function (e) {
+            return tarjetaArchivo(e.titulo, e.descripcion, e.url, e.nombre, e.tamano);
+          }).join("");
+        })
+        .catch(function () { });
+    })();
+  </script>
+  <script>
+    /* Guardado automático: lo que se escribe o marca en la página queda guardado
+       en este navegador y se recupera al recargar. */
+    (function () {
+      "use strict";
+      var CLAVE = "autoguardado:" + location.pathname;
+      var marcable = /^(checkbox|radio)$/;
+      function campos() {
+        return [].slice.call(document.querySelectorAll("input, textarea, select")).filter(function (c) {
+          return !/^(hidden|file|password|search|submit|button|reset|image)$/.test(c.type) && !c.closest("form");
+        });
+      }
+      // Identifica cada campo por algo que no cambie entre recargas.
+      function claves(lista) {
+        var usadas = {};
+        return lista.map(function (c) {
+          if (c.id) return "#" + c.id;
+          var base = c.closest("[id]");
+          var detalle = marcable.test(c.type) ? (c.value !== "on" ? c.value : "") : (c.getAttribute("aria-label") || c.dataset.etiqueta || c.dataset.categoria || "");
+          var firma = [base ? base.id : "", c.tagName, c.type, c.name, detalle].join("|");
+          usadas[firma] = (usadas[firma] || 0) + 1;
+          return firma + "|" + usadas[firma];
+        });
+      }
+      function guardar() {
+        var lista = campos(), k = claves(lista), datos = {};
+        lista.forEach(function (c, i) {
+          datos[k[i]] = marcable.test(c.type) ? (c.dataset.estado || c.checked) : c.value;
+        });
+        try { localStorage.setItem(CLAVE, JSON.stringify(datos)); } catch (e) { }
+      }
+      var datos = {};
+      try { datos = JSON.parse(localStorage.getItem(CLAVE) || "{}") || {}; } catch (e) { }
+      var lista = campos(), k = claves(lista);
+      lista.forEach(function (c, i) {
+        if (!Object.prototype.hasOwnProperty.call(datos, k[i])) return;
+        var v = datos[k[i]];
+        if (c.dataset.estado && typeof v === "string") {
+          // Indicadores de tres estados (sin revisar / requiere mejora / correcto): cada clic avanza uno.
+          for (var n = 0; n < 3 && c.dataset.estado !== v; n++) c.click();
+          return;
+        }
+        if (marcable.test(c.type)) {
+          if (c.checked === !!v) return;
+          c.checked = !!v;
+        } else {
+          if (c.value === v) return;
+          c.value = v;
+          if (c.value !== v) return; // la opción ya no existe en la lista
+        }
+        c.dispatchEvent(new Event("input", { bubbles: true }));
+        c.dispatchEvent(new Event("change", { bubbles: true }));
+      });
+      var espera = null;
+      function programar() { clearTimeout(espera); espera = setTimeout(guardar, 300); }
+      document.addEventListener("input", programar);
+      document.addEventListener("change", programar);
+      document.addEventListener("click", programar);
+      window.addEventListener("pagehide", guardar);
+      document.addEventListener("visibilitychange", function () { if (document.visibilityState === "hidden") guardar(); });
+    })();
+  </script>
+</body>
+
+</html>
