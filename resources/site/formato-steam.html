@@ -628,23 +628,6 @@
       color: var(--tinta)
     }
 
-    .btn-mini.rojo {
-      color: var(--rojo);
-      border-color: color-mix(in srgb, var(--rojo) 42%, transparent)
-    }
-
-    .btn-mini.rojo:hover {
-      border-color: var(--rojo);
-      background: var(--rojo-suave);
-      color: var(--rojo)
-    }
-
-    .btn-mini.confirmar {
-      border-color: var(--rojo);
-      color: var(--rojo);
-      background: var(--rojo-suave)
-    }
-
     .btn-mini[aria-expanded=true] {
       border-color: var(--azul);
       color: var(--azul);
@@ -2705,13 +2688,14 @@
             <path d="M2 4h12M2 8h12M2 12h12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
           </svg>
         </button>
-        <button class="btn-mini icono rojo" id="btn-reiniciar" aria-label="Reiniciar"
-          title="Volver el avance a cero y empezar de nuevo">
+        <a class="btn-mini icono" id="btn-muestra" href="/muestra-nueva" target="_blank" rel="noopener" style="text-decoration:none"
+          aria-label="Ver la muestra formateada" title="Ver la muestra formateada">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-            <path d="M13 3v3.5H9.5M13 6.3A5.5 5.5 0 1 1 12.2 3.6" stroke="currentColor" stroke-width="1.6"
-              stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M1.5 8S3.9 3.5 8 3.5 14.5 8 14.5 8 12.1 12.5 8 12.5 1.5 8 1.5 8Z" stroke="currentColor"
+              stroke-width="1.4" stroke-linejoin="round" />
+            <circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.4" />
           </svg>
-        </button>
+        </a>
         <button class="btn-mini icono foco" id="btn-ayuda" aria-pressed="false"
           aria-label="Mostrar la ayuda para hacerlo en Word" title="Mostrar la ayuda para hacerlo en Word">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
@@ -3666,8 +3650,11 @@
               <li><strong>Título 4:</strong> Times New Roman 12, <strong>Negrita</strong>; en <span class="cmd">Formato
                   › Párrafo</span> poné sangría izquierda <strong>1,27 cm</strong>.</li>
               <li><strong>Título 5:</strong> lo mismo, pero con <strong>Negrita y Cursiva</strong>.</li>
-              <li>Como el título termina en punto y el texto sigue en el mismo renglón, escribís el título, ponés el
-                punto y continuás redactando en la misma línea (no es un párrafo aparte).</li>
+              <li>Para que el texto siga en el mismo renglón sin quedar en negrita: escribí el título con su punto,
+                apretá <span class="tecla">Ctrl</span> + <span class="tecla">Alt</span> + <span
+                  class="tecla">Enter</span> (el <strong>separador de estilos</strong>) y aplicá
+                <span class="cmd">Normal</span> al texto que sigue. Word lo muestra en el mismo renglón, pero el
+                título y el texto quedan con su propio estilo.</li>
             </ul>
           </div>
         </div>
@@ -3826,7 +3813,7 @@
             </table>
           </div>
 
-          <h3>Especificaciones para Aplicar formato a: Con encabezado</h3>
+          <h3>Especificaciones para Aplicar formato a: Fila de encabezado</h3>
           <div class="tabla-caja">
             <table>
               <thead>
@@ -3917,18 +3904,19 @@
             <ul class="marca">
               <li><strong>Nombre:</strong> escribí <code>TablaSteam</code>. <strong>Estilo basado en:</strong> <span
                   class="cmd">Tabla normal</span>.</li>
-              <li>En <span class="cmd">Aplicar formato a: Toda la tabla</span> quitá todos los bordes y dejá solo el
-                <strong>borde superior</strong> e <strong>inferior</strong> (línea simple, ½ pto).
+              <li>En <span class="cmd">Aplicar formato a: Toda la tabla</span> elegí <strong>Times New Roman 12</strong>,
+                alineación a la izquierda y, en <span class="cmd">Formato › Párrafo</span>, interlineado
+                <strong>Sencillo</strong>. Después quitá todos los bordes y dejá solo el <strong>borde superior</strong>
+                e <strong>inferior</strong> (línea simple, ½ pto, color automático).
               </li>
               <li>Elegí <span class="cmd">Aplicar formato a: Fila de encabezado</span> y agregale el <strong>borde
                   inferior</strong> (la línea que separa el encabezado del cuerpo).</li>
-              <li>En el texto del encabezado mantené <strong>Times New Roman 12 pt</strong>, interlineado
-                <strong>simple</strong>, aplicá <strong>negrita</strong> y centrálo horizontalmente. En
-                <span class="cmd">Propiedades de tabla › Celda</span>, elegí también la alineación vertical
-                <strong>Centrada</strong>.
-              </li>
               <li>Tildá <strong>Solo en este documento</strong> y aceptá. Para usarlo: seleccioná la tabla y hacé clic
                 en <span class="cmd">TablaSteam</span> en la galería de estilos de tabla.</li>
+              <li><strong>Aparte, en cada tabla</strong> (formato directo, fuera de la ventana del estilo): seleccioná
+                la fila de encabezado, aplicá <strong>negrita</strong> y centrala con <span class="cmd">Inicio ›
+                  Centrar</span>; después, en <span class="cmd">Propiedades de tabla › Celda</span>, elegí la
+                alineación vertical <strong>Centrada</strong>.</li>
             </ul>
           </div>
         </div>
@@ -3948,7 +3936,7 @@
             alineación de cada una.</div>
 
           <h3>1. Aplicar los estilos a todas las tablas</h3>
-          <p>Recorré el documento y aplicar el estilo TablaStean a <strong>cada tabla</strong>, incluso en las que
+          <p>Recorré el documento y aplicá el estilo TablaSteam a <strong>cada tabla</strong>, incluso en las que
             agregues más
             adelante. Si es necesario colocar la negrita en las filas de encabezado y/o la primera columna.</p>
           <h3>2. Ubicación y alineación de la tabla</h3>
@@ -4070,6 +4058,20 @@
             <p class="mn">Este es el texto normal del trabajo. Arranca con sangría de primera línea de 1,27 cm, alineado
               a la izquierda con margen derecho irregular, interlineado de 1,5 líneas y sin partir palabras con guiones.
             </p>
+          </div>
+          <div class="ayuda solo-paso">
+            <div class="ayuda-tt">Cómo hacerlo · Word 2019 (Windows)</div>
+            <p>Para aplicar un estilo, poné el cursor en el párrafo (no hace falta seleccionarlo entero) y hacé clic en
+              el estilo en <span class="cmd">Inicio › Estilos</span>.</p>
+            <ul class="marca">
+              <li><strong>Títulos y párrafos:</strong> recorré el trabajo y aplicá <span class="cmd">Título 1</span>,
+                <span class="cmd">Título 2</span>, <span class="cmd">Título 3</span> o <span class="cmd">Normal</span>
+                según la tabla de arriba.</li>
+              <li><strong>Texto de las tablas:</strong> hacé clic dentro de la tabla, seleccionala completa con
+                <span class="cmd">Presentación › Seleccionar › Seleccionar tabla</span> y aplicá <span
+                  class="cmd">Sin espaciado</span>.</li>
+              <li>Para revisar qué estilo tiene un texto, poné el cursor ahí: el estilo queda marcado en la galería.</li>
+            </ul>
           </div>
         </div>
       </section>
@@ -4240,6 +4242,13 @@
             <p>Armá la carátula en la primera página con el estilo <span class="cmd">Normal</span> (sin cuadros de
               texto). Insertá los logos con <span class="cmd">Insertar › Imágenes › Este dispositivo…</span> y
               centralos.</p>
+            <ul class="marca">
+              <li>Sacale a la carátula la sangría de primera línea del estilo Normal, así lo centrado queda bien al
+                medio: seleccioná todo su texto y andá a <span class="cmd">Inicio › Párrafo › Sangría · Especial:
+                  (ninguna)</span>.</li>
+              <li>Poné en <strong>negrita</strong> el título del proyecto, <strong>Miembros</strong> y
+                <strong>Profesores</strong>.</li>
+            </ul>
             <ul class="marca">
               <li>Centrá o alineá cada bloque según la tabla de arriba con los botones de alineación de <span
                   class="cmd">Inicio › Párrafo</span>.</li>
@@ -4416,10 +4425,9 @@
           </div>
 
           <h3>Contenido de encabezado y pie de página del resto del documento</h3>
-          <div class="nota dato"><strong>Quitar igual que el anterior.</strong> Tanto para el encabezado como para el
-            pie
-            de página, quitar la opción <span class="cmd">Igual que el anterior</span>, para evitar que aparezcan el
-            encabezado y el pie en la carátula.
+          <div class="nota dato"><strong>Desactivar «Vincular al anterior».</strong> Tanto en el encabezado como en el
+            pie de página, desactivá la opción <span class="cmd">Vincular al anterior</span>, para evitar que aparezcan
+            el encabezado y el pie en la carátula.
           </div>
           <div class="nota dato"><strong>Cómo ubicar los logos.</strong> En el encabezado, insertá una tabla de
             <strong>2 columnas y 1 fila</strong>, quitale todos los bordes y elegí <strong>Ajustar a la
@@ -4553,7 +4561,7 @@
               <tbody>
                 <tr>
                   <td>Ubicación</td>
-                  <td class="val">Página 2 (tras la carátula)</td>
+                  <td class="val">Después de la carátula (página 2, o 3 si hay Resumen)</td>
                 </tr>
                 <tr>
                   <td>Delimitación</td>
@@ -4658,14 +4666,16 @@
 
           <div class="ayuda solo-paso">
             <div class="ayuda-tt">Cómo hacerlo · Word 2019 (Windows)</div>
-            <p>El orden se arma con los mismos <strong>saltos de sección a página siguiente</strong> (<span
-                class="cmd">Disposición › Saltos › Página siguiente</span>) entre cada bloque: carátula, índice, cuerpo,
-              bibliografía y apéndices.</p>
+            <p>El orden lo da la secuencia del documento. Cada <strong>Título 1</strong> ya empieza en hoja nueva, así
+              que no hace falta apretar Enter ni agregar saltos entre los capítulos. Los <strong>saltos de sección a
+              página siguiente</strong> (<span class="cmd">Disposición › Saltos › Página siguiente</span>) van solo
+              donde cambia el encabezado, la numeración o la orientación: después de la carátula y antes de la
+              bibliografía y de los apéndices.</p>
             <ul class="marca">
               <li>Si incluís <strong>Resumen</strong>, ese párrafo va sin sangría: <span class="cmd">Formato › Párrafo
                   › Especial: (ninguno)</span>.</li>
-              <li>La bibliografía y los apéndices arrancan en hoja nueva; alcanza con el salto de sección que los
-                separa.</li>
+              <li>La bibliografía y los apéndices arrancan en hoja nueva con su salto de sección; no agregues otro
+                salto de página.</li>
             </ul>
           </div>
         </div>
@@ -4874,6 +4884,11 @@
             <p><strong>2. Citala.</strong> Al final de cada uno de esos párrafos escribí la cita como en la tabla de
               arriba, por ejemplo (OpenAI, 2025). Si copiaste literalmente la respuesta, además ponela entre comillas.
             </p>
+            <p><strong>3. Agregá la referencia.</strong> Cargá el chat como fuente en <span class="cmd">Referencias ›
+                Administrar fuentes › Nuevo…</span> con el tipo <strong>Sitio web</strong>: autor corporativo
+              (OpenAI), fecha del chat, el título del chat seguido de [Generative AI chat] y la URL para compartir.
+              Así aparece en la Bibliografía. Si Word no la arma igual que el modelo de arriba, corregí esa entrada a
+              mano al final.</p>
           </div>
         </div>
       </section>
@@ -5180,7 +5195,10 @@
 
           <div class="ayuda solo-paso">
             <div class="ayuda-tt">Cómo hacerlo · Word 2019 (Windows)</div>
-            <p>Cada listado se genera solo, debajo de la tabla de contenido:</p>
+            <p><strong>1. El título.</strong> En una línea nueva debajo de la tabla de contenido escribí
+              <strong>Lista de tablas</strong> y aplicale <span class="cmd">Título 1</span> (empieza solo en hoja
+              nueva). Hacé lo mismo después con <strong>Lista de ilustraciones</strong>.</p>
+            <p><strong>2. El listado.</strong> Con el cursor debajo de cada título, generá el listado:</p>
             <div class="ruta"><span class="cmd">Referencias</span><span class="fl">›</span><span class="cmd">Insertar
                 tabla de ilustraciones</span></div>
             <p>En <span class="cmd">Etiqueta de título</span> elegí <strong>Tabla</strong> para la tabla de tablas y
@@ -5327,6 +5345,10 @@
               <span class="cmd">Referencias › Administrar fuentes › Nuevo…</span> y después hacé clic derecho sobre la
               lista → <span class="cmd">Actualizar campo</span>.
             </p>
+            <p><strong>3. Revisá el formato.</strong> Si la lista no queda con interlineado 1,5, espaciado 0/0 y
+              sangría francesa, clic derecho sobre el estilo <span class="cmd">Bibliografía</span> en la galería →
+              <span class="cmd">Modificar… › Formato › Párrafo</span>: <strong>Especial: Francesa, 1,27 cm</strong>;
+              espaciado anterior y posterior <strong>0 pto</strong>; interlineado <strong>1,5 líneas</strong>.</p>
           </div>
         </div>
       </section>
@@ -5399,6 +5421,18 @@
                 investigación</strong></div>
           </div>
 
+          <div class="ayuda solo-paso">
+            <div class="ayuda-tt">Cómo hacerlo · Word 2019 (Windows)</div>
+            <p><strong>1. Página nueva.</strong> Después de la bibliografía, insertá un salto de sección:</p>
+            <div class="ruta"><span class="cmd">Disposición</span><span class="fl">›</span><span
+                class="cmd">Saltos</span><span class="fl">›</span><strong>Página siguiente</strong></div>
+            <p><strong>2. Identificación y título.</strong> Escribí <strong>Apéndice A</strong>, apretá <span
+                class="tecla">Shift</span> + <span class="tecla">Enter</span>, escribí el título del apéndice y aplicale
+              <span class="cmd">Título 1</span> a ese párrafo. Si es uno solo, escribí <strong>Apéndice</strong>, sin
+              letra.</p>
+            <p><strong>3. El siguiente apéndice.</strong> Repetí el paso 2 con <strong>Apéndice B</strong>: como es
+              Título 1, empieza solo en hoja nueva.</p>
+          </div>
         </div>
       </section>
 
@@ -5419,8 +5453,7 @@
 
           <p>Hay que <strong>actualizar todos los campos</strong> automáticos: la tabla de contenido y, si las usás, la
             tabla de tablas y la de ilustraciones. Se hace con la opción <strong>Actualizar campos</strong> del menú,
-            eligiendo actualizar <strong>toda la tabla</strong> en cada índice. El paso a paso está en la guía de
-            aplicación.</p>
+            eligiendo actualizar <strong>toda la tabla</strong> en cada índice. Prendé el <strong>foquito</strong> para ver el paso a paso.</p>
           <div class="nota alerta"><strong>Actualizá dos veces.</strong> Al actualizar la tabla de contenido, las
             páginas
             del cuerpo se corren (la tabla puede ocupar más o menos espacio que antes) y eso vuelve a cambiar los
@@ -5438,6 +5471,19 @@
           <div class="nota dato"><strong>Un vistazo final.</strong> Después de actualizar, recorré el documento una vez
             más: es el momento de confirmar que ningún título quedó cortado, que las tablas anchas no rompieron la
             numeración y que la carátula sigue sin mostrar número de página.</div>
+          <div class="ayuda solo-paso">
+            <div class="ayuda-tt">Cómo hacerlo · Word 2019 (Windows)</div>
+            <p>Hacé clic derecho sobre la tabla de contenido y elegí:</p>
+            <div class="ruta"><span class="cmd">Actualizar campo</span><span class="fl">›</span><strong>Actualizar
+                toda la tabla</strong></div>
+            <ul class="marca">
+              <li>Hacé lo mismo en la tabla de tablas y en la de ilustraciones, si las tenés.</li>
+              <li>Otra forma: seleccioná todo con <span class="tecla">Ctrl</span> + <span class="tecla">E</span>,
+                apretá <span class="tecla">F9</span> y, cuando pregunte, elegí <strong>Actualizar toda la
+                  tabla</strong>.</li>
+              <li>Repetí la actualización una segunda vez, como se explica arriba.</li>
+            </ul>
+          </div>
         </div>
       </section>
 
@@ -6936,21 +6982,6 @@ OBJETIVO FINAL: determinar si el archivo Word cumple realmente el Formato STEAM 
       if (document.fonts && document.fonts.ready) document.fonts.ready.then(medirBarra);
       function limpiarAvance() { estado.pasos = {}; estado.check = {}; guardar(estado); pintarPasos(); pintarCheck(); }
       document.getElementById("btn-reset").addEventListener("click", limpiarAvance);
-
-      var btnRe = document.getElementById("btn-reiniciar"), reTimer = null;
-      function reposoRe() {
-        btnRe.classList.remove("confirmar");
-        btnRe.setAttribute("title", "Volver el avance a cero y empezar de nuevo");
-        btnRe.setAttribute("aria-label", "Reiniciar");
-      }
-      btnRe.addEventListener("click", function () {
-        clearTimeout(reTimer);
-        if (btnRe.classList.contains("confirmar")) { reposoRe(); limpiarAvance(); ir("inicio"); return; }
-        btnRe.classList.add("confirmar");
-        btnRe.setAttribute("title", "¿Seguro? Tocá de nuevo para confirmar");
-        btnRe.setAttribute("aria-label", "¿Seguro? Tocá de nuevo para confirmar");
-        reTimer = setTimeout(reposoRe, 4000);
-      });
 
       // Foquito: muestra u oculta la ayuda "cómo hacerlo en Word" de cada página.
       var btnAyuda = document.getElementById("btn-ayuda");
