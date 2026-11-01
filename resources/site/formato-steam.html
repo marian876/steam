@@ -363,42 +363,6 @@
       transform: translateX(4px)
     }
 
-    .practica-3ros {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 10px 14px;
-      margin: 4px 0 10px
-    }
-
-    .practica-3ros-texto {
-      color: var(--tinta2);
-      font-size: .92rem
-    }
-
-    .practica-accion--3ros {
-      flex: 0 0 auto;
-      min-height: 0;
-      gap: 12px;
-      padding: 10px 16px;
-      border-radius: 14px;
-      font-size: .98rem;
-      font-weight: 700
-    }
-
-    .practica-accion--3ros .practica-accion-icono {
-      width: 22px;
-      height: 22px;
-      flex-basis: 22px;
-      padding-right: 12px
-    }
-
-    .practica-accion--3ros .practica-accion-flecha {
-      width: 22px;
-      height: 22px;
-      flex-basis: 22px
-    }
-
     @media (max-width:620px) {
       .practica-acciones {
         gap: 12px
@@ -2881,24 +2845,11 @@
           </div>
 
           <h3 style="margin-top:24px">Practicá con un ejemplo</h3>
-          <p>Descargá un trabajo <strong>sin formato</strong> y aplicale vos el Formato STEAM. Después miralo junto a la
-            <strong>muestra ya formateada</strong> para comparar cómo tiene que quedar.
-          </p>
+          <p>Aplicale el Formato STEAM al trabajo <strong>sin formato</strong> que te pasaron en la tarea. Después
+            miralo junto a la <strong>muestra ya formateada</strong> para comparar cómo tiene que quedar.</p>
           <div class="practica-acciones">
-            <a class="practica-accion practica-accion--principal" href="/ejemplos/formatoSteam/MOVA_SF.docx"
-              download="MOVA_sin_formato.docx">
-              <span class="practica-accion-icono" aria-hidden="true"><svg width="30" height="30" viewBox="0 0 24 24"
-                  fill="none">
-                  <path d="M12 3v12m0 0l-4-4m4 4l4-4M5 20h14" stroke="currentColor" stroke-width="1.8"
-                    stroke-linecap="round" stroke-linejoin="round" />
-                </svg></span>
-              <span class="practica-accion-texto">Descargar el ejercicio (.docx)</span>
-              <svg class="practica-accion-flecha" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M5 12h13m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"
-                  stroke-linejoin="round" />
-              </svg>
-            </a>
-            <a class="practica-accion practica-accion--secundaria" href="/muestra-nueva" target="_blank" rel="noopener">
+            <a class="practica-accion practica-accion--principal" href="/muestra-nueva" target="_blank" rel="noopener"
+              style="flex:0 1 460px">
               <span class="practica-accion-icono" aria-hidden="true"><svg width="30" height="30" viewBox="0 0 24 24"
                   fill="none">
                   <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7z" stroke="currentColor" stroke-width="1.8"
@@ -2913,24 +2864,6 @@
             </a>
           </div>
 
-          <!-- Muestra del ejercicio anterior: se mantiene mientras 3.º la siga usando. -->
-          <div class="practica-3ros">
-            <span class="practica-3ros-texto">¿Sos de 3.º? Seguí usando la muestra anterior:</span>
-            <a class="practica-accion practica-accion--secundaria practica-accion--3ros" href="/muestra" target="_blank"
-              rel="noopener">
-              <span class="practica-accion-icono" aria-hidden="true"><svg width="30" height="30" viewBox="0 0 24 24"
-                  fill="none">
-                  <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7z" stroke="currentColor" stroke-width="1.8"
-                    stroke-linejoin="round" />
-                  <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.8" />
-                </svg></span>
-              <span class="practica-accion-texto">Ver muestra 3ros</span>
-              <svg class="practica-accion-flecha" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M5 12h13m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"
-                  stroke-linejoin="round" />
-              </svg>
-            </a>
-          </div>
           <div class="nota alerta"><strong>Es un proyecto ficticio.</strong> La empresa, el producto y los datos son
             inventados: el ejemplo se armó solo para mostrar cómo se aplica el Formato STEAM en un trabajo completo. La
             muestra se abre en modo lectura (no se puede copiar ni descargar), para que sirva solo como referencia.
