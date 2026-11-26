@@ -35,6 +35,10 @@ Route::get('/formato', function () {
     return response()->file(resource_path('site/formato-steam.html'));
 });
 
+Route::get('/contabilidad', function () {
+    return response()->file(resource_path('site/contabilidad.html'));
+});
+
 // Visor de la muestra formateada (solo lectura, sin descarga ni copia)
 Route::get('/muestra', function () {
     return response()->file(resource_path('site/muestra.html'));
