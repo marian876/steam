@@ -43,6 +43,14 @@ Route::get('/marketing', function () {
     return response()->file(resource_path('site/marketing.html'));
 });
 
+Route::get('/business-administration', function () {
+    return response()->file(resource_path('site/business-administration.html'));
+});
+
+Route::get('/economics', function () {
+    return response()->file(resource_path('site/economics.html'));
+});
+
 // Visor de la muestra formateada (solo lectura, sin descarga ni copia)
 Route::get('/muestra', function () {
     return response()->file(resource_path('site/muestra.html'));
