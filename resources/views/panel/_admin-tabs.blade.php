@@ -5,4 +5,5 @@
   <a href="/panel/cursos" class="{{ $actual === 'cursos' ? 'activo' : '' }}">Cursos</a>
   <a href="/panel/roles" class="{{ $actual === 'roles' ? 'activo' : '' }}">Roles</a>
   <a href="/panel/grupos" class="{{ $actual === 'grupos' ? 'activo' : '' }}">Grupos</a>
+  <a href="/panel/configuracion/entregas" class="{{ $actual === 'entregas' ? 'activo' : '' }}">Entregas</a>
 </nav>

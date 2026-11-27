@@ -918,7 +918,7 @@
     <aside class="pnl-lateral" id="pnl-lateral" aria-label="Menú del panel">
       <div class="pnl-grupo-tit">Proyecto</div>
       <a class="pnl-item" href="/panel/calendario"><span>Calendario y plazos</span></a>
-      <a class="pnl-item" href="/aula"><span>Entregas del aula</span></a>
+      <a class="pnl-item" href="/aula/trabajos"><span>Entrega de trabajos</span></a>
       <a class="pnl-item" href="/panel/vista-alumno"><span>Ver como alumno</span></a>
       <div class="pnl-grupo-tit">Materias</div>
       <a class="pnl-item" href="/panel/modulos/contabilidad"><span>Contabilidad</span></a>

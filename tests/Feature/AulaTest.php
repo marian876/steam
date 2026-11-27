@@ -211,4 +211,34 @@ class AulaTest extends TestCase
         $this->actingAs($profesor)->post('/aula/tareas', array_merge($datos, ['grupos' => [1, 1]]))->assertSessionHasErrors('grupos.0');
         $this->assertDatabaseCount('aula_tareas', 2);
     }
+
+    public function test_modalidad_solo_finales_oculta_parciales_y_las_conserva(): void
+    {
+        $admin = $this->usuario(User::ROL_ADMIN);
+        $profesor = $this->usuario(User::ROL_DOCENTE);
+        $alumno = $this->usuario(User::ROL_ALUMNO);
+        DB::table('grupo_user')->insert(['grupo_id' => 1, 'user_id' => $alumno->id]);
+        DB::table('aula_integrantes_autorizados')->insert(['grupo_id' => 1, 'user_id' => $alumno->id, 'autorizado_por' => $profesor->id]);
+        $parcial = DB::table('aula_tareas')->insertGetId(['grupo_id' => 1, 'docente_id' => $profesor->id, 'titulo' => 'Boceto de marca', 'materia' => 'Marketing', 'consigna' => 'Enviar']);
+        DB::table('aula_tareas')->insert(['grupo_id' => 1, 'docente_id' => $profesor->id, 'titulo' => 'Macro final', 'materia' => 'General', 'consigna' => 'Enviar']);
+        $this->actingAs($profesor)->put('/panel/configuracion/entregas', ['modalidad' => 'solo_finales'])->assertForbidden();
+        $this->actingAs($admin)->put('/panel/configuracion/entregas', ['modalidad' => 'solo_finales'])->assertRedirect();
+        $this->actingAs($alumno)->get('/aula/trabajos')->assertOk()->assertSee('Macro final')->assertDontSee('Boceto de marca');
+        $this->actingAs($alumno)->get('/aula/tareas/'.$parcial)->assertNotFound();
+        $this->actingAs($profesor)->post('/aula/tareas', ['grupo_id' => 1, 'titulo' => 'Boceto', 'materia' => 'Marketing', 'consigna' => 'Enviar'])->assertSessionHasErrors('materia');
+        $this->assertDatabaseHas('aula_tareas', ['id' => $parcial]);
+        $this->actingAs($admin)->put('/panel/configuracion/entregas', ['modalidad' => 'todas'])->assertRedirect();
+        $this->actingAs($alumno)->get('/aula/trabajos')->assertSee('Boceto de marca');
+    }
+
+    public function test_seccion_general_y_vista_previa_agrupan_trabajos(): void
+    {
+        $docente = $this->usuario(User::ROL_DOCENTE);
+        $alumno = $this->usuario(User::ROL_ALUMNO);
+        DB::table('grupo_user')->insert(['grupo_id' => 1, 'user_id' => $alumno->id]);
+        DB::table('aula_integrantes_autorizados')->insert(['grupo_id' => 1, 'user_id' => $alumno->id, 'autorizado_por' => $docente->id]);
+        DB::table('aula_tareas')->insert(['grupo_id' => 1, 'docente_id' => $docente->id, 'titulo' => 'Presentación final', 'materia' => 'General', 'consigna' => 'Enviar']);
+        $this->actingAs($alumno)->get('/aula/trabajos')->assertOk()->assertSee('Entrega de trabajos')->assertSee('General')->assertSee('Presentación final');
+        $this->actingAs($docente)->get('/panel/vista-alumno/'.$alumno->id.'/trabajos')->assertOk()->assertSee('Presentación final')->assertDontSee('Crear tarea y fecha de entrega');
+    }
 }

@@ -167,6 +167,7 @@ Route::post('/salir', [SesionController::class, 'salir'])->middleware('auth');
 
 Route::middleware(['auth', CuentaActiva::class])->prefix('aula')->group(function () {
     Route::get('/', [AulaController::class, 'index']);
+    Route::get('/trabajos', [AulaController::class, 'trabajos']);
     Route::post('/tareas', [AulaController::class, 'crearTarea']);
     Route::get('/tareas/{tarea}', [AulaController::class, 'mostrar']);
     Route::post('/tareas/{tarea}/entregas', [AulaController::class, 'entregar']);
@@ -190,6 +191,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', CuentaActiva::class, EsDocente::class])->prefix('panel')->group(function () {
     Route::get('/vista-alumno', [AulaController::class, 'seleccionarAlumno']);
     Route::get('/vista-alumno/{alumno}', [AulaController::class, 'vistaAlumno'])->whereNumber('alumno');
+    Route::get('/vista-alumno/{alumno}/trabajos', [AulaController::class, 'trabajosVistaAlumno'])->whereNumber('alumno');
     Route::get('/vista-alumno/{alumno}/tareas/{tarea}', [AulaController::class, 'tareaVistaAlumno'])->whereNumber(['alumno', 'tarea']);
     Route::get('/modulos/{pagina}', [ModuloController::class, 'panel'])->whereIn('pagina', ModuloController::MODULOS);
     Route::post('/modulos/{pagina}/archivos', [ModuloController::class, 'guardar'])->whereIn('pagina', ModuloController::MODULOS);
@@ -236,6 +238,8 @@ Route::middleware(['auth', CuentaActiva::class, EsDocente::class])->prefix('pane
         Route::get('/usuarios', [UsuarioController::class, 'index']);
         Route::get('/alumnos', [UsuarioController::class, 'index'])->name('panel.alumnos');
         Route::get('/cursos', [UsuarioController::class, 'cursos']);
+        Route::get('/configuracion/entregas', [AulaController::class, 'configuracion']);
+        Route::put('/configuracion/entregas', [AulaController::class, 'actualizarConfiguracion']);
         Route::get('/usuarios/nuevo', [UsuarioController::class, 'crear']);
         Route::post('/usuarios', [UsuarioController::class, 'guardar']);
         Route::get('/usuarios/{usuario}/editar', [UsuarioController::class, 'editar']);

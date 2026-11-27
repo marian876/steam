@@ -78,3 +78,11 @@ CREATE TABLE IF NOT EXISTS aula_plazos (
   KEY aula_plazos_curso_vence_en_index (curso, vence_en),
   CONSTRAINT aula_plazos_docente_id_foreign FOREIGN KEY (docente_id) REFERENCES users(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS aula_configuracion (
+  id TINYINT UNSIGNED NOT NULL PRIMARY KEY,
+  entregas_parciales TINYINT(1) NOT NULL DEFAULT 1,
+  created_at TIMESTAMP NULL, updated_at TIMESTAMP NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+INSERT IGNORE INTO aula_configuracion (id, entregas_parciales, created_at, updated_at)
+VALUES (1, 1, NOW(), NOW());
