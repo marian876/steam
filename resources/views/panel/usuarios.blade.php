@@ -3,14 +3,14 @@
 @section('panel_activo', 'usuarios')
 
 @section('contenido')
-<h1>Administración</h1>
-<p class="bajada">Usuarios, roles y grupos del sitio.</p>
-@include('panel._admin-tabs', ['actual' => 'usuarios'])
+<h1>Configuración · Datos generales</h1>
+<p class="bajada">Usuarios, alumnos, cursos, roles y grupos del sitio.</p>
+@include('panel._admin-tabs', ['actual' => $mostrarAlumnos ? 'alumnos' : 'usuarios'])
 
 <div class="enc-panel">
   <div>
-    <h2 class="titulo-seccion">Usuarios</h2>
-    <p class="bajada" style="margin:0">Cuentas del sitio, con su rol y sus grupos.</p>
+    <h2 class="titulo-seccion">{{ $mostrarAlumnos ? 'Alumnos' : 'Usuarios' }}</h2>
+    <p class="bajada" style="margin:0">{{ $mostrarAlumnos ? 'Cuentas de alumnos y sus grupos.' : 'Profesores, coordinadores y administradores.' }}</p>
   </div>
   @if($hayGrupos)
   <a class="boton btn-p" href="/panel/usuarios/nuevo">+ Nuevo usuario</a>
@@ -67,6 +67,7 @@
         <tr>
           <th data-orden="nombre">Usuario</th>
           <th data-orden="rol" style="width:70px">Rol</th>
+          @if($mostrarAlumnos)<th data-orden="curso">Curso</th>@endif
           @if($hayGrupos)
           <th data-orden="gruposnombre">Grupos</th>
           @endif
@@ -92,11 +93,13 @@
               <strong>{{ $usuario->nombreCompleto() }}</strong>
               @if($esYo) <span class="etq si">Vos</span>@endif
             </div>
+            <div style="color:var(--tinta2);font-size:.82rem">{{ $usuario->email }}</div>
           </td>
           <td>
-            @php($ini = ['admin' => 'Adm', 'docente' => 'D', 'alumno' => 'A'][$usuario->rol] ?? '?')
+            @php($ini = ['admin' => 'Adm', 'coordinador' => 'C', 'docente' => 'D', 'alumno' => 'A'][$usuario->rol] ?? '?')
             <span class="rol-ini rol-{{ $usuario->rol }}" title="{{ $usuario->etiquetaRol() }}">{{ $ini }}</span>
           </td>
+          @if($mostrarAlumnos)<td>{{ $usuario->curso ?: 'Sin curso registrado' }}</td>@endif
           @if($hayGrupos)
           <td>
             @forelse($misGrupos as $g)

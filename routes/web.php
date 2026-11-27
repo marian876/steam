@@ -171,6 +171,9 @@ Route::middleware(['auth', CuentaActiva::class])->prefix('aula')->group(function
     Route::get('/entregas/{entrega}/archivo', [AulaController::class, 'descargar']);
     Route::post('/entregas/{entrega}/devoluciones', [AulaController::class, 'devolver']);
     Route::post('/autorizaciones', [AulaController::class, 'autorizar']);
+    Route::post('/plazos', [AulaController::class, 'crearPlazo']);
+    Route::put('/plazos/{plazo}', [AulaController::class, 'actualizarPlazo']);
+    Route::delete('/plazos/{plazo}', [AulaController::class, 'eliminarPlazo']);
 });
 
 // Mis grupos: el alumno ve sus grupos y elige el de un año nuevo.
@@ -182,6 +185,7 @@ Route::middleware('auth')->group(function () {
 /* ---------- Panel docente ---------- */
 
 Route::middleware(['auth', CuentaActiva::class, EsDocente::class])->prefix('panel')->group(function () {
+    Route::get('/calendario', [AulaController::class, 'calendario']);
     Route::get('/', [PanelController::class, 'index']);
     Route::get('/prompts/nuevo', [PanelController::class, 'crear']);
     Route::post('/prompts', [PanelController::class, 'guardar']);
@@ -221,6 +225,8 @@ Route::middleware(['auth', CuentaActiva::class, EsDocente::class])->prefix('pane
     // Configuración › Usuarios y roles: solo administradores.
     Route::middleware(EsAdmin::class)->group(function () {
         Route::get('/usuarios', [UsuarioController::class, 'index']);
+        Route::get('/alumnos', [UsuarioController::class, 'index'])->name('panel.alumnos');
+        Route::get('/cursos', [UsuarioController::class, 'cursos']);
         Route::get('/usuarios/nuevo', [UsuarioController::class, 'crear']);
         Route::post('/usuarios', [UsuarioController::class, 'guardar']);
         Route::get('/usuarios/{usuario}/editar', [UsuarioController::class, 'editar']);

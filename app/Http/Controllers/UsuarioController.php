@@ -13,17 +13,24 @@ use Illuminate\Validation\ValidationException;
 
 class UsuarioController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $hayGrupos = Schema::hasTable('grupos');
+        $alumnos = $request->routeIs('panel.alumnos');
 
         return view('panel.usuarios', [
-            'usuarios' => User::orderBy('name')->when($hayGrupos, fn ($q) => $q->with('grupos'))->get(),
+            'usuarios' => User::where('rol', $alumnos ? '=' : '!=', User::ROL_ALUMNO)->orderBy('name')->when($hayGrupos, fn ($q) => $q->with('grupos'))->get(),
+            'mostrarAlumnos' => $alumnos,
             'roles' => User::ROLES,
             'tieneActivo' => Schema::hasColumn('users', 'activo'),
             'hayGrupos' => $hayGrupos,
             'grupos' => $hayGrupos ? Grupo::ordenados()->get() : collect(),
         ]);
+    }
+
+    public function cursos()
+    {
+        return view('panel.cursos', ['cursos' => User::CURSOS, 'conteos' => User::where('rol', User::ROL_ALUMNO)->selectRaw('curso, count(*) as total')->groupBy('curso')->pluck('total', 'curso')]);
     }
 
     public function crear()

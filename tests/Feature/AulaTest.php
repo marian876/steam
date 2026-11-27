@@ -104,4 +104,34 @@ class AulaTest extends TestCase
         $this->actingAs($coordinador)->post('/aula/autorizaciones', ['grupo_id' => 1, 'user_id' => $alumno->id])->assertRedirect();
         $this->assertDatabaseHas('grupo_user', ['grupo_id' => 1, 'user_id' => $alumno->id]);
     }
+
+    public function test_plazos_visibles_por_curso_y_solo_autor_o_admin_los_edita(): void
+    {
+        $docente = $this->usuario(User::ROL_DOCENTE);
+        $otroDocente = $this->usuario(User::ROL_DOCENTE);
+        $alumno = $this->usuario(User::ROL_ALUMNO);
+        $alumno->curso = '3ro BATAN A';
+        $alumno->save();
+        $plazo = ['curso' => '3ro BATAN A', 'materia' => 'Marketing', 'etapa' => 'Manual de marca', 'descripcion' => 'Primera versión', 'vence_en' => '2026-12-15T12:00'];
+        $this->actingAs($alumno)->post('/aula/plazos', $plazo)->assertForbidden();
+        $this->actingAs($docente)->post('/aula/plazos', $plazo)->assertRedirect('/panel/calendario');
+        $id = DB::table('aula_plazos')->value('id');
+        $this->actingAs($alumno)->get('/aula?mes=2026-12')->assertOk()->assertSee('Manual de marca');
+        $alumno->curso = '3ro BATAN B';
+        $alumno->save();
+        $this->actingAs($alumno)->get('/aula?mes=2026-12')->assertDontSee('Manual de marca');
+        $this->actingAs($otroDocente)->put('/aula/plazos/'.$id, $plazo)->assertForbidden();
+        $this->actingAs($docente)->put('/aula/plazos/'.$id, array_merge($plazo, ['etapa' => 'Versión final']))->assertRedirect();
+        $this->assertDatabaseHas('aula_plazos', ['id' => $id, 'etapa' => 'Versión final']);
+    }
+
+    public function test_datos_generales_separa_alumnos_y_usuarios(): void
+    {
+        $admin = $this->usuario(User::ROL_ADMIN);
+        $this->usuario(User::ROL_ALUMNO)->update(['name' => 'AlumnoEjemplo']);
+        $this->usuario(User::ROL_DOCENTE)->update(['name' => 'ProfesorEjemplo']);
+        $this->actingAs($admin)->get('/panel/usuarios')->assertOk()->assertSee('ProfesorEjemplo')->assertDontSee('AlumnoEjemplo');
+        $this->actingAs($admin)->get('/panel/alumnos')->assertOk()->assertSee('AlumnoEjemplo')->assertDontSee('ProfesorEjemplo');
+        $this->actingAs($admin)->get('/panel/cursos')->assertOk()->assertSee('3ro BATAN C');
+    }
 }

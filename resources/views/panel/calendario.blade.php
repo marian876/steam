@@ -1,0 +1,14 @@
+@extends('layouts.panel')
+@section('titulo', 'Calendario y plazos')
+@section('contenido')
+<h1>Calendario y plazos</h1><p class="bajada">Agregá una fecha por curso, materia y etapa. Se mostrará en el calendario de los alumnos de ese curso, independientemente de las tareas grupales.</p>
+@if($errors->any())<div class="errores"><ul>@foreach($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul></div>@endif
+<div class="tarjeta"><h2>Agregar plazo</h2><form method="POST" action="/aula/plazos">@csrf
+<div class="campo"><label for="curso">Curso</label><select id="curso" name="curso" required>@foreach($cursos as $curso)<option value="{{ $curso }}">{{ $curso }}</option>@endforeach</select></div>
+<div class="campo"><label for="materia">Materia</label><input id="materia" name="materia" required maxlength="100"></div><div class="campo"><label for="etapa">Etapa o entrega</label><input id="etapa" name="etapa" required maxlength="180"></div><div class="campo"><label for="descripcion">Indicaciones (opcional)</label><textarea id="descripcion" name="descripcion" maxlength="5000"></textarea></div><div class="campo"><label for="vence_en">Fecha y hora de entrega (hora de Paraguay)</label><input id="vence_en" name="vence_en" type="datetime-local" required></div><button class="btn-p">Agregar plazo</button></form></div>
+<div class="tarjeta"><h2>Plazos cargados</h2>@forelse($plazos as $p)<details><summary>{{ \Carbon\Carbon::parse($p->vence_en)->format('d/m/Y H:i') }} · {{ $p->curso }} · {{ $p->materia }} · {{ $p->etapa }}</summary><p>{{ $p->descripcion }}</p>
+@if(auth()->user()->esAdmin() || $p->docente_id === auth()->id())<form method="POST" action="/aula/plazos/{{ $p->id }}">@csrf @method('PUT')
+<div class="campo"><label>Curso</label><select name="curso" required>@foreach($cursos as $curso)<option value="{{ $curso }}" @selected($p->curso === $curso)>{{ $curso }}</option>@endforeach</select></div><div class="campo"><label>Materia</label><input name="materia" value="{{ $p->materia }}" required maxlength="100"></div><div class="campo"><label>Etapa</label><input name="etapa" value="{{ $p->etapa }}" required maxlength="180"></div><div class="campo"><label>Indicaciones</label><textarea name="descripcion" maxlength="5000">{{ $p->descripcion }}</textarea></div><div class="campo"><label>Fecha y hora</label><input type="datetime-local" name="vence_en" value="{{ \Carbon\Carbon::parse($p->vence_en)->format('Y-m-d\TH:i') }}" required></div><button class="btn-p">Guardar cambios</button></form>
+<form method="POST" action="/aula/plazos/{{ $p->id }}" onsubmit="return confirm('¿Eliminar este plazo?')">@csrf @method('DELETE')<button type="submit" class="btn-s">Eliminar plazo</button></form>@endif</details><hr>@empty<p>Todavía no hay plazos.</p>@endforelse</div>
+<p><a href="/aula">Ver calendario del aula</a></p>
+@endsection

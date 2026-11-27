@@ -3,8 +3,8 @@
 @section('panel_activo', 'roles')
 
 @section('contenido')
-<h1>Administración</h1>
-<p class="bajada">Usuarios, roles y grupos del sitio.</p>
+<h1>Configuración · Datos generales</h1>
+<p class="bajada">Usuarios, alumnos, cursos, roles y grupos del sitio.</p>
 @include('panel._admin-tabs', ['actual' => 'roles'])
 
 <div class="enc-panel">

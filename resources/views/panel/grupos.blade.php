@@ -3,15 +3,15 @@
 @section('panel_activo', 'grupos')
 
 @section('contenido')
-<h1>Administración</h1>
-<p class="bajada">Usuarios, roles y grupos del sitio.</p>
+<h1>Configuración · Datos generales</h1>
+<p class="bajada">Usuarios, alumnos, cursos, roles y grupos del sitio.</p>
 @include('panel._admin-tabs', ['actual' => 'grupos'])
 
 <div class="enc-panel">
   <div>
     <h2 class="titulo-seccion">Grupos</h2>
     <p class="bajada" style="margin:0">Formato: Curso Sección Especialidad Grupo Nº Año (ej. <strong>2A BATAN Grupo 1
-        2026</strong>). Los alumnos eligen el suyo; a los docentes se les asignan en Usuarios.</p>
+        2026</strong>). Un profesor o administrador asigna los alumnos a su grupo.</p>
   </div>
   <a class="boton btn-p" href="/panel/grupos/nuevo">+ Nuevo grupo</a>
 </div>

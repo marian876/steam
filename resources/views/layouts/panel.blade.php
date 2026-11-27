@@ -893,7 +893,7 @@
                 d="M19.4 13a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-2.7 1.1V19a2 2 0 0 1-4 0 1.6 1.6 0 0 0-2.7-1.1l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1A1.6 1.6 0 0 0 4.6 13H4.5a2 2 0 0 1 0-4h.1a1.6 1.6 0 0 0 1.1-2.7l-.1-.1A2 2 0 1 1 8.4 3.4l.1.1a1.6 1.6 0 0 0 1.8.3H10.5a1.6 1.6 0 0 0 1-1.5V2a2 2 0 0 1 4 0v.1a1.6 1.6 0 0 0 2.7 1.1l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8V8a1.6 1.6 0 0 0 1.5 1H23a2 2 0 0 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1z"
                 stroke="currentColor" stroke-width="1.3" />
             </svg>
-            Configuración
+            Configuración · Datos generales
           </a>
           @endif
           <form method="POST" action="/salir">
@@ -916,6 +916,13 @@
   <div class="pnl-cuerpo">
     <div class="pnl-velo" id="pnl-velo"></div>
     <aside class="pnl-lateral" id="pnl-lateral" aria-label="Menú del panel">
+      <div class="pnl-grupo-tit">Proyecto</div>
+      <a class="pnl-item" href="/panel/calendario"><span>Calendario y plazos</span></a>
+      <a class="pnl-item" href="/aula"><span>Entregas del aula</span></a>
+      @if($u->esAdmin())
+      <div class="pnl-grupo-tit">Configuración</div>
+      <a class="pnl-item" href="/panel/usuarios"><span>Datos generales</span></a>
+      @endif
       <a class="pnl-item {{ $activo === 'inicio' ? 'activo' : '' }}" href="/panel#inicio" data-tab="inicio">
         <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <path d="M3 10.5 12 3l9 7.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"

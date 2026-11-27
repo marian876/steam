@@ -39,13 +39,71 @@ class AulaController extends Controller
             $tareas->whereIn('grupo_id', DB::table('aula_integrantes_autorizados')->where('user_id', $user->id)->select('grupo_id'))
                 ->whereIn('grupo_id', DB::table('grupo_user')->where('user_id', $user->id)->select('grupo_id'));
         }
+        $plazos = DB::table('aula_plazos')->orderBy('vence_en');
+        if (! $user->esDocente()) {
+            $plazos->where('curso', $user->curso ?? '');
+        }
 
         return view('aula.index', [
             'tareas' => $tareas->get(),
             'grupos' => $user->esDocente() ? Grupo::ordenados()->get() : collect(),
             'usuarios' => $user->esDocente() ? User::where('rol', User::ROL_ALUMNO)->orderBy('name')->get() : collect(),
             'mes' => Carbon::createFromFormat('!Y-m', $mes, 'America/Asuncion'),
+            'plazos' => $plazos->get(),
         ]);
+    }
+
+    public function calendario(Request $request)
+    {
+        $this->docente($request);
+
+        return view('panel.calendario', ['plazos' => DB::table('aula_plazos')->orderBy('vence_en')->get(), 'cursos' => User::CURSOS]);
+    }
+
+    private function validarPlazo(Request $request): array
+    {
+        return $request->validate([
+            'curso' => ['required', Rule::in(User::CURSOS)],
+            'materia' => ['required', 'string', 'max:100'],
+            'etapa' => ['required', 'string', 'max:180'],
+            'descripcion' => ['nullable', 'string', 'max:5000'],
+            'vence_en' => ['required', 'date'],
+        ]);
+    }
+
+    public function crearPlazo(Request $request)
+    {
+        $this->docente($request);
+        $datos = $this->validarPlazo($request);
+        $datos['docente_id'] = $request->user()->id;
+        $datos['created_at'] = $datos['updated_at'] = now();
+        DB::table('aula_plazos')->insert($datos);
+
+        return redirect('/panel/calendario')->with('aviso', 'Plazo agregado al calendario.');
+    }
+
+    public function actualizarPlazo(Request $request, int $plazo)
+    {
+        $this->docente($request);
+        $item = DB::table('aula_plazos')->where('id', $plazo)->first();
+        abort_unless($item, 404);
+        abort_unless($request->user()->esAdmin() || $item->docente_id === $request->user()->id, 403);
+        $datos = $this->validarPlazo($request);
+        $datos['updated_at'] = now();
+        DB::table('aula_plazos')->where('id', $plazo)->update($datos);
+
+        return back()->with('aviso', 'Plazo actualizado.');
+    }
+
+    public function eliminarPlazo(Request $request, int $plazo)
+    {
+        $this->docente($request);
+        $item = DB::table('aula_plazos')->where('id', $plazo)->first();
+        abort_unless($item, 404);
+        abort_unless($request->user()->esAdmin() || $item->docente_id === $request->user()->id, 403);
+        DB::table('aula_plazos')->where('id', $plazo)->delete();
+
+        return back()->with('aviso', 'Plazo eliminado.');
     }
 
     public function crearTarea(Request $request)

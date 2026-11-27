@@ -8,10 +8,11 @@
 <div class="tarjeta"><h2>Calendario de entregas</h2><p>Las fechas y horas se muestran como fueron cargadas por el docente (hora de Paraguay).</p>
 <p><a href="/aula?mes={{ $mes->copy()->subMonth()->format('Y-m') }}">← Mes anterior</a> · <strong>{{ $mes->copy()->locale('es')->translatedFormat('F Y') }}</strong> · <a href="/aula?mes={{ $mes->copy()->addMonth()->format('Y-m') }}">Mes siguiente →</a></p>
 @php($fechas = $tareas->filter(fn ($t) => $t->vence_en && \Carbon\Carbon::parse($t->vence_en)->format('Y-m') === $mes->format('Y-m'))->groupBy(fn ($t) => (int) \Carbon\Carbon::parse($t->vence_en)->format('j')))
+@php($fechasPlazos = $plazos->filter(fn ($p) => \Carbon\Carbon::parse($p->vence_en)->format('Y-m') === $mes->format('Y-m'))->groupBy(fn ($p) => (int) \Carbon\Carbon::parse($p->vence_en)->format('j')))
 <div style="overflow-x:auto"><table class="lista" aria-label="Calendario de entregas"><thead><tr>@foreach(['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'] as $dia)<th scope="col">{{ $dia }}</th>@endforeach</tr></thead><tbody>
 @for($semana = 0; $semana < 6; $semana++)
 <tr>@for($col = 0; $col < 7; $col++) @php($dia = $semana * 7 + $col - ($mes->dayOfWeekIso - 1) + 1)
-<td>@if($dia > 0 && $dia <= $mes->daysInMonth)<strong>{{ $dia }}</strong>@foreach($fechas->get($dia, collect()) as $item)<div><a href="/aula/tareas/{{ $item->id }}">{{ $item->titulo }}</a><br>{{ \Carbon\Carbon::parse($item->vence_en)->format('H:i') }}</div>@endforeach @endif</td>@endfor</tr>
+<td>@if($dia > 0 && $dia <= $mes->daysInMonth)<strong>{{ $dia }}</strong>@foreach($fechas->get($dia, collect()) as $item)<div><a href="/aula/tareas/{{ $item->id }}">{{ $item->titulo }}</a><br>{{ \Carbon\Carbon::parse($item->vence_en)->format('H:i') }}</div>@endforeach @foreach($fechasPlazos->get($dia, collect()) as $plazo)<div><strong>{{ $plazo->materia }}:</strong> {{ $plazo->etapa }}<br>{{ \Carbon\Carbon::parse($plazo->vence_en)->format('H:i') }}@if($plazo->descripcion)<br>{{ $plazo->descripcion }}@endif</div>@endforeach @endif</td>@endfor</tr>
 @endfor</tbody></table></div>
 </div>
 <div class="tarjeta"><h2>Tareas</h2>
