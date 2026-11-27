@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\ValidationException;
 
 class AulaController extends Controller
 {
@@ -44,8 +45,18 @@ class AulaController extends Controller
             $plazos->where('curso', $user->curso ?? '');
         }
 
+        $listaTareas = $tareas->get();
+        $entregasGrupo = DB::table('aula_entregas')->join('users', 'users.id', '=', 'aula_entregas.alumno_id')
+            ->whereIn('tarea_id', $listaTareas->pluck('id'))->orderByDesc('aula_entregas.id')
+            ->select('aula_entregas.*', 'users.name as alumno_nombre', 'users.apellido as alumno_apellido')->get()->groupBy('tarea_id');
+        $devolucionesGrupo = DB::table('aula_devoluciones')->join('users', 'users.id', '=', 'aula_devoluciones.docente_id')
+            ->whereIn('entrega_id', $entregasGrupo->flatten(1)->pluck('id'))->orderByDesc('aula_devoluciones.id')
+            ->select('aula_devoluciones.*', 'users.name as docente_nombre', 'users.apellido as docente_apellido')->get()->groupBy('entrega_id');
+
         return view('aula.index', [
-            'tareas' => $tareas->get(),
+            'tareas' => $listaTareas,
+            'entregasGrupo' => $entregasGrupo,
+            'devolucionesGrupo' => $devolucionesGrupo,
             'grupos' => $user->esDocente() ? Grupo::ordenados()->get() : collect(),
             'usuarios' => $user->esDocente() ? User::where('rol', User::ROL_ALUMNO)->orderBy('name')->get() : collect(),
             'mes' => Carbon::createFromFormat('!Y-m', $mes, 'America/Asuncion'),
@@ -128,8 +139,8 @@ class AulaController extends Controller
         $actividad = DB::table('aula_tareas')->where('id', $tarea)->first();
         abort_unless($actividad, 404);
         $this->acceder($request, $actividad);
-        $entregas = DB::table('aula_entregas')->where('tarea_id', $tarea)->orderByDesc('id')->get();
-        $devoluciones = DB::table('aula_devoluciones')->whereIn('entrega_id', $entregas->pluck('id'))->orderBy('id')->get()->groupBy('entrega_id');
+        $entregas = DB::table('aula_entregas')->join('users', 'users.id', '=', 'aula_entregas.alumno_id')->where('tarea_id', $tarea)->orderByDesc('aula_entregas.id')->select('aula_entregas.*', 'users.name as alumno_nombre', 'users.apellido as alumno_apellido')->get();
+        $devoluciones = DB::table('aula_devoluciones')->join('users', 'users.id', '=', 'aula_devoluciones.docente_id')->whereIn('entrega_id', $entregas->pluck('id'))->orderBy('aula_devoluciones.id')->select('aula_devoluciones.*', 'users.name as docente_nombre', 'users.apellido as docente_apellido')->get()->groupBy('entrega_id');
 
         return view('aula.tarea', compact('actividad', 'entregas', 'devoluciones'));
     }
@@ -145,15 +156,29 @@ class AulaController extends Controller
             'archivo' => ['required', 'file', 'mimes:pdf,docx,xlsx,pptx,png,jpg,jpeg', 'extensions:pdf,docx,xlsx,pptx,png,jpg,jpeg', 'max:20480'],
             'comentario' => ['nullable', 'string', 'max:5000'],
         ]);
-        $archivo = $request->file('archivo')->store('entregas', 'local');
-        abort_unless($archivo, 500);
-        DB::table('aula_entregas')->insert([
-            'tarea_id' => $tarea, 'alumno_id' => $request->user()->id,
-            'archivo' => $archivo, 'nombre_original' => basename($request->file('archivo')->getClientOriginalName()),
-            'comentario' => $datos['comentario'] ?? null, 'created_at' => now(), 'updated_at' => now(),
-        ]);
+        $archivo = null;
+        try {
+            DB::transaction(function () use ($request, $tarea, $datos, &$archivo) {
+                DB::table('aula_tareas')->where('id', $tarea)->lockForUpdate()->first();
+                if (DB::table('aula_entregas')->where('tarea_id', $tarea)->exists()) {
+                    throw ValidationException::withMessages(['archivo' => 'Este grupo ya entregó un archivo para esta tarea.']);
+                }
+                $archivo = $request->file('archivo')->store('entregas', 'local');
+                abort_unless($archivo, 500);
+                DB::table('aula_entregas')->insert([
+                    'tarea_id' => $tarea, 'alumno_id' => $request->user()->id,
+                    'archivo' => $archivo, 'nombre_original' => basename($request->file('archivo')->getClientOriginalName()),
+                    'comentario' => $datos['comentario'] ?? null, 'created_at' => now(), 'updated_at' => now(),
+                ]);
+            });
+        } catch (\Throwable $error) {
+            if ($archivo) {
+                Storage::disk('local')->delete($archivo);
+            }
+            throw $error;
+        }
 
-        return back()->with('aviso', 'Entrega del grupo guardada. Se conserva el historial de versiones.');
+        return back()->with('aviso', 'Entrega del grupo guardada.');
     }
 
     public function descargar(Request $request, int $entrega)
@@ -172,8 +197,12 @@ class AulaController extends Controller
     {
         $this->docente($request);
         abort_unless(DB::table('aula_entregas')->where('id', $entrega)->exists(), 404);
-        $datos = $request->validate(['comentario' => ['required', 'string', 'max:10000']]);
-        DB::table('aula_devoluciones')->insert(['entrega_id' => $entrega, 'docente_id' => $request->user()->id, 'comentario' => $datos['comentario'], 'created_at' => now(), 'updated_at' => now()]);
+        $datos = $request->validate([
+            'comentario' => ['nullable', 'string', 'max:10000', 'required_without_all:errores,calificacion'],
+            'errores' => ['nullable', 'string', 'max:10000'],
+            'calificacion' => ['nullable', 'string', 'max:100'],
+        ]);
+        DB::table('aula_devoluciones')->insert(['entrega_id' => $entrega, 'docente_id' => $request->user()->id, 'comentario' => $datos['comentario'] ?? '', 'errores' => $datos['errores'] ?? null, 'calificacion' => $datos['calificacion'] ?? null, 'created_at' => now(), 'updated_at' => now()]);
 
         return back()->with('aviso', 'Devolución guardada para el grupo.');
     }

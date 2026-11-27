@@ -135,6 +135,26 @@ class AulaTest extends TestCase
         $this->actingAs($admin)->get('/panel/cursos')->assertOk()->assertSee('3ro BATAN C');
     }
 
+    public function test_panel_del_grupo_muestra_entregante_y_devolucion_y_no_permitiese_doble_entrega(): void
+    {
+        $profesor = $this->usuario(User::ROL_DOCENTE);
+        $primero = $this->usuario(User::ROL_ALUMNO);
+        $segundo = $this->usuario(User::ROL_ALUMNO);
+        foreach ([$primero, $segundo] as $alumno) {
+            DB::table('grupo_user')->insert(['grupo_id' => 1, 'user_id' => $alumno->id]);
+            DB::table('aula_integrantes_autorizados')->insert(['grupo_id' => 1, 'user_id' => $alumno->id, 'autorizado_por' => $profesor->id]);
+        }
+        $tarea = DB::table('aula_tareas')->insertGetId(['grupo_id' => 1, 'docente_id' => $profesor->id, 'titulo' => 'Proyecto', 'materia' => 'Marketing', 'consigna' => 'Entregar']);
+        $this->actingAs($primero)->post('/aula/tareas/'.$tarea.'/entregas', ['archivo' => UploadedFile::fake()->create('proyecto.pdf', 10, 'application/pdf')])->assertRedirect();
+        $entrega = DB::table('aula_entregas')->first();
+        $this->actingAs($segundo)->get('/aula/tareas/'.$tarea)->assertOk()->assertSee('Trabajo entregado')->assertSee($primero->name)->assertDontSee('Enviar entrega');
+        $this->actingAs($segundo)->post('/aula/tareas/'.$tarea.'/entregas', ['archivo' => UploadedFile::fake()->create('otro.pdf', 10, 'application/pdf')])->assertSessionHasErrors('archivo');
+        $this->assertDatabaseCount('aula_entregas', 1);
+        $this->actingAs($profesor)->post('/aula/entregas/'.$entrega->id.'/devoluciones', ['calificacion' => '8/10', 'errores' => 'Corregir el logo', 'comentario' => 'Buen progreso'])->assertRedirect();
+        $this->actingAs($segundo)->get('/aula')->assertOk()->assertSee($primero->name)->assertSee('8/10')->assertSee('Corregir el logo')->assertSee('Buen progreso')->assertSee($profesor->name);
+        $this->actingAs($profesor)->post('/aula/entregas/'.$entrega->id.'/devoluciones', [])->assertSessionHasErrors('comentario');
+    }
+
     public function test_inicio_de_sesion_limita_intentos_repetidos(): void
     {
         for ($intento = 0; $intento < 10; $intento++) {

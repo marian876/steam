@@ -1,7 +1,7 @@
 @extends('layouts.base')
 @section('titulo', 'Aula del proyecto')
 @section('contenido')
-<h1>Aula del proyecto</h1>
+<h1>{{ auth()->user()->esAlumno() ? 'Mi panel de alumno' : 'Aula del proyecto' }}</h1>
 <p class="bajada">Tareas, entregas por grupo y fechas del proyecto.</p>
 @if(session('aviso')) <div class="aviso">{{ session('aviso') }}</div> @endif
 @if($errors->any()) <div class="errores"><ul>@foreach($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul></div> @endif
@@ -17,7 +17,17 @@
 </div>
 <div class="tarjeta"><h2>Tareas</h2>
 @forelse($tareas as $t)
-<p><a href="/aula/tareas/{{ $t->id }}"><strong>{{ $t->titulo }}</strong></a> · {{ $t->materia }} · {{ $t->vence_en ? \Carbon\Carbon::parse($t->vence_en)->format('d/m/Y H:i') : 'Sin fecha' }}</p>
+@php($ultimaEntrega = $entregasGrupo->get($t->id, collect())->first())
+<div style="padding:12px 0;border-bottom:1px solid var(--linea)"><p><a href="/aula/tareas/{{ $t->id }}"><strong>{{ $t->titulo }}</strong></a> · {{ $t->materia }} · {{ $t->vence_en ? \Carbon\Carbon::parse($t->vence_en)->format('d/m/Y H:i') : 'Sin fecha' }}</p>
+@if($ultimaEntrega)
+<p>Entregado por <strong>{{ $ultimaEntrega->alumno_nombre }} {{ $ultimaEntrega->alumno_apellido }}</strong> · <a href="/aula/entregas/{{ $ultimaEntrega->id }}/archivo">{{ $ultimaEntrega->nombre_original }}</a></p>
+@forelse($devolucionesGrupo->get($ultimaEntrega->id, collect()) as $d)
+<div><strong>Devolución de {{ $d->docente_nombre }} {{ $d->docente_apellido }}</strong>
+@if($d->calificacion !== null && $d->calificacion !== '')<p>Calificación: {{ $d->calificacion }}</p>@endif
+@if($d->errores)<p>Errores o aspectos a corregir: {{ $d->errores }}</p>@endif
+@if($d->comentario)<p>Observaciones: {{ $d->comentario }}</p>@endif</div>
+@empty <p>La entrega todavía no tiene devolución.</p> @endforelse
+@else <p>Pendiente de entrega · <a href="/aula/tareas/{{ $t->id }}">Ver consigna y entregar</a></p> @endif</div>
 @empty <p>No hay tareas disponibles. Si sos alumno, un profesor o administrador debe asignarte un grupo.</p> @endforelse
 </div>
 @if(auth()->user()->esDocente())

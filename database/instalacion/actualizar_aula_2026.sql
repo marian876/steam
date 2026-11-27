@@ -62,7 +62,8 @@ CREATE TABLE IF NOT EXISTS aula_entregas (
 CREATE TABLE IF NOT EXISTS aula_devoluciones (
   id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
   entrega_id BIGINT UNSIGNED NOT NULL, docente_id BIGINT UNSIGNED NOT NULL,
-  comentario TEXT NOT NULL, created_at TIMESTAMP NULL, updated_at TIMESTAMP NULL,
+  comentario TEXT NOT NULL, errores TEXT NULL, calificacion VARCHAR(100) NULL,
+  created_at TIMESTAMP NULL, updated_at TIMESTAMP NULL,
   CONSTRAINT aula_devoluciones_entrega_id_foreign FOREIGN KEY (entrega_id) REFERENCES aula_entregas(id),
   CONSTRAINT aula_devoluciones_docente_id_foreign FOREIGN KEY (docente_id) REFERENCES users(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
