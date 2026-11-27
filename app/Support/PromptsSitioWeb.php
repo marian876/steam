@@ -23,6 +23,10 @@ class PromptsSitioWeb
         'sitio-web' => 'Sitio web de la empresa',
         'sitio-web-batan' => 'Sitio web · BATAN',
         'defensa-oral' => 'Defensa oral',
+        'contabilidad' => 'Contabilidad',
+        'marketing' => 'Marketing',
+        'business-administration' => 'Business Administration',
+        'economics' => 'Economics',
     ];
 
     /** Textos entre corchetes que la página completa sola: no se pueden borrar. */
@@ -77,6 +81,12 @@ class PromptsSitioWeb
     public function pestana(): string
     {
         return $this->pagina === 'sitio-web' ? 'sitio-web' : $this->pagina.'-prompts';
+    }
+
+    public function urlPanel(): string
+    {
+        return in_array($this->pagina, ['contabilidad', 'marketing', 'business-administration', 'economics'], true)
+            ? '/panel/modulos/'.$this->pagina : '/panel#'.$this->pestana();
     }
 
     /** @return string[] */

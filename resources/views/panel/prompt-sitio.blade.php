@@ -52,7 +52,7 @@
 
     <div class="acciones" style="margin-top:6px">
       <button class="btn-p" type="submit" @disabled(! $hayTabla)>Guardar cambios</button>
-      <a class="boton btn-s" href="/panel#{{ $guia->pestana() }}">Cancelar</a>
+      <a class="boton btn-s" href="{{ $guia->urlPanel() }}">Cancelar</a>
     </div>
   </form>
 

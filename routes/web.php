@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\SesionController;
 use App\Http\Controllers\EjemploController;
 use App\Http\Controllers\GrupoController;
 use App\Http\Controllers\MisGruposController;
+use App\Http\Controllers\ModuloController;
 use App\Http\Controllers\PanelController;
 use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\PromptSitioWebController;
@@ -38,20 +39,21 @@ Route::get('/formato', function () {
 });
 
 Route::get('/contabilidad', function () {
-    return response()->file(resource_path('site/contabilidad.html'));
+    return app(ModuloController::class)->mostrar('contabilidad');
 });
 
 Route::get('/marketing', function () {
-    return response()->file(resource_path('site/marketing.html'));
+    return app(ModuloController::class)->mostrar('marketing');
 });
 
 Route::get('/business-administration', function () {
-    return response()->file(resource_path('site/business-administration.html'));
+    return app(ModuloController::class)->mostrar('business-administration');
 });
 
 Route::get('/economics', function () {
-    return response()->file(resource_path('site/economics.html'));
+    return app(ModuloController::class)->mostrar('economics');
 });
+Route::get('/materiales/{archivo}', [ModuloController::class, 'descargar'])->whereNumber('archivo');
 
 // Visor de la muestra formateada (solo lectura, sin descarga ni copia)
 Route::get('/muestra', function () {
@@ -185,6 +187,9 @@ Route::middleware('auth')->group(function () {
 /* ---------- Panel docente ---------- */
 
 Route::middleware(['auth', CuentaActiva::class, EsDocente::class])->prefix('panel')->group(function () {
+    Route::get('/modulos/{pagina}', [ModuloController::class, 'panel'])->whereIn('pagina', ModuloController::MODULOS);
+    Route::post('/modulos/{pagina}/archivos', [ModuloController::class, 'guardar'])->whereIn('pagina', ModuloController::MODULOS);
+    Route::put('/modulos/{pagina}/archivos/{archivo}', [ModuloController::class, 'estado'])->whereIn('pagina', ModuloController::MODULOS)->whereNumber('archivo');
     Route::get('/calendario', [AulaController::class, 'calendario']);
     Route::get('/', [PanelController::class, 'index']);
     Route::get('/prompts/nuevo', [PanelController::class, 'crear']);
@@ -193,9 +198,9 @@ Route::middleware(['auth', CuentaActiva::class, EsDocente::class])->prefix('pane
     Route::put('/prompts/{prompt}', [PanelController::class, 'actualizar']);
     Route::delete('/prompts/{prompt}', [PanelController::class, 'eliminar']);
 
-    Route::get('/{pagina}/prompts/{clave}', [PromptSitioWebController::class, 'editar'])->whereIn('pagina', ['sitio-web', 'sitio-web-batan', 'defensa-oral']);
-    Route::put('/{pagina}/prompts/{clave}', [PromptSitioWebController::class, 'actualizar'])->whereIn('pagina', ['sitio-web', 'sitio-web-batan', 'defensa-oral']);
-    Route::delete('/{pagina}/prompts/{clave}', [PromptSitioWebController::class, 'restaurar'])->whereIn('pagina', ['sitio-web', 'sitio-web-batan', 'defensa-oral']);
+    Route::get('/{pagina}/prompts/{clave}', [PromptSitioWebController::class, 'editar'])->whereIn('pagina', array_keys(PromptsSitioWeb::PAGINAS));
+    Route::put('/{pagina}/prompts/{clave}', [PromptSitioWebController::class, 'actualizar'])->whereIn('pagina', array_keys(PromptsSitioWeb::PAGINAS));
+    Route::delete('/{pagina}/prompts/{clave}', [PromptSitioWebController::class, 'restaurar'])->whereIn('pagina', array_keys(PromptsSitioWeb::PAGINAS));
 
     Route::get('/ejemplos/nuevo', [EjemploController::class, 'crear']);
     Route::post('/ejemplos', [EjemploController::class, 'guardar']);

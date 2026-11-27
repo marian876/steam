@@ -54,7 +54,7 @@ class PromptSitioWebController extends Controller
             PromptSitioWeb::updateOrCreate(['clave' => $claveGuardada], $datos);
         }
 
-        return redirect('/panel#'.$guia->pestana())->with('aviso', 'Prompt actualizado.');
+        return redirect($guia->urlPanel())->with('aviso', 'Prompt actualizado.');
     }
 
     public function restaurar(string $pagina, string $clave)
@@ -64,6 +64,6 @@ class PromptSitioWebController extends Controller
             PromptSitioWeb::where('clave', $guia->claveGuardada($clave))->delete();
         }
 
-        return redirect('/panel#'.$guia->pestana())->with('aviso', 'Se restauró el prompt original.');
+        return redirect($guia->urlPanel())->with('aviso', 'Se restauró el prompt original.');
     }
 }

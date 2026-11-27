@@ -919,6 +919,11 @@
       <div class="pnl-grupo-tit">Proyecto</div>
       <a class="pnl-item" href="/panel/calendario"><span>Calendario y plazos</span></a>
       <a class="pnl-item" href="/aula"><span>Entregas del aula</span></a>
+      <div class="pnl-grupo-tit">Materias</div>
+      <a class="pnl-item" href="/panel/modulos/contabilidad"><span>Contabilidad</span></a>
+      <a class="pnl-item" href="/panel/modulos/marketing"><span>Marketing</span></a>
+      <a class="pnl-item" href="/panel/modulos/business-administration"><span>Business Administration</span></a>
+      <a class="pnl-item" href="/panel/modulos/economics"><span>Economics</span></a>
       @if($u->esAdmin())
       <div class="pnl-grupo-tit">Configuración</div>
       <a class="pnl-item" href="/panel/usuarios"><span>Datos generales</span></a>
