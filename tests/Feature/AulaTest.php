@@ -162,4 +162,23 @@ class AulaTest extends TestCase
         }
         $this->post('/ingresar', ['email' => 'prueba@sil.edu.py', 'password' => 'incorrecta'])->assertTooManyRequests();
     }
+
+    public function test_vista_previa_es_solo_lectura_y_filtra_como_el_alumno(): void
+    {
+        $docente = $this->usuario(User::ROL_DOCENTE);
+        $alumno = $this->usuario(User::ROL_ALUMNO);
+        $otro = $this->usuario(User::ROL_ALUMNO);
+        $alumno->curso = '3ro BATAN A';
+        $alumno->save();
+        DB::table('grupo_user')->insert(['grupo_id' => 1, 'user_id' => $alumno->id]);
+        DB::table('aula_integrantes_autorizados')->insert(['grupo_id' => 1, 'user_id' => $alumno->id, 'autorizado_por' => $docente->id]);
+        $id = DB::table('aula_tareas')->insertGetId(['grupo_id' => 1, 'docente_id' => $docente->id, 'titulo' => 'Trabajo del grupo', 'materia' => 'Marketing', 'consigna' => 'Preparar logo']);
+        DB::table('aula_tareas')->insert(['grupo_id' => 999, 'docente_id' => $docente->id, 'titulo' => 'Tarea de otro grupo', 'materia' => 'Business', 'consigna' => 'Otra']);
+        $this->actingAs($docente)->get('/panel/vista-alumno/'.$alumno->id)->assertOk()->assertSee('Vista previa de')->assertSee('Trabajo del grupo')->assertDontSee('Tarea de otro grupo')->assertDontSee('Crear tarea y fecha');
+        $this->actingAs($docente)->get('/panel/vista-alumno/'.$alumno->id.'/tareas/'.$id)->assertOk()->assertSee('formulario está desactivado')->assertDontSee('Guardar devolución');
+        $this->actingAs($docente)->get('/panel/vista-alumno/'.$otro->id.'/tareas/'.$id)->assertNotFound();
+        $this->assertAuthenticatedAs($docente);
+        $this->actingAs($alumno)->get('/panel/vista-alumno')->assertForbidden();
+        $this->actingAs($alumno)->get('/panel/vista-alumno/'.$otro->id)->assertForbidden();
+    }
 }

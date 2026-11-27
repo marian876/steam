@@ -18,19 +18,39 @@ class AulaController extends Controller
         abort_unless($request->user()->esDocente(), 403);
     }
 
-    private function acceder(Request $request, object $tarea): void
+    private function acceder(Request $request, object $tarea, ?User $comoAlumno = null): void
     {
-        if ($request->user()->esDocente()) {
+        $usuario = $comoAlumno ?? $request->user();
+        if (! $comoAlumno && $usuario->esDocente()) {
             return;
         }
-        abort_unless($request->user()->esAlumno() && DB::table('aula_integrantes_autorizados')
-            ->where('user_id', $request->user()->id)->where('grupo_id', $tarea->grupo_id)->exists()
-            && DB::table('grupo_user')->where('user_id', $request->user()->id)->where('grupo_id', $tarea->grupo_id)->exists(), 404);
+        abort_unless($usuario->esAlumno() && DB::table('aula_integrantes_autorizados')
+            ->where('user_id', $usuario->id)->where('grupo_id', $tarea->grupo_id)->exists()
+            && DB::table('grupo_user')->where('user_id', $usuario->id)->where('grupo_id', $tarea->grupo_id)->exists(), 404);
     }
 
     public function index(Request $request)
     {
-        $user = $request->user();
+        return $this->indicePara($request, $request->user());
+    }
+
+    public function seleccionarAlumno(Request $request)
+    {
+        $this->docente($request);
+
+        return view('panel.vista-alumno', ['alumnos' => User::where('rol', User::ROL_ALUMNO)->orderBy('name')->get()]);
+    }
+
+    public function vistaAlumno(Request $request, User $alumno)
+    {
+        $this->docente($request);
+        abort_unless($alumno->esAlumno(), 404);
+
+        return $this->indicePara($request, $alumno, true);
+    }
+
+    private function indicePara(Request $request, User $user, bool $vistaAlumno = false)
+    {
         $mes = $request->query('mes', now('America/Asuncion')->format('Y-m'));
         if (! is_string($mes) || ! preg_match('/^\d{4}-(0[1-9]|1[0-2])$/', $mes)) {
             $mes = now('America/Asuncion')->format('Y-m');
@@ -61,6 +81,8 @@ class AulaController extends Controller
             'usuarios' => $user->esDocente() ? User::where('rol', User::ROL_ALUMNO)->orderBy('name')->get() : collect(),
             'mes' => Carbon::createFromFormat('!Y-m', $mes, 'America/Asuncion'),
             'plazos' => $plazos->get(),
+            'vistaAlumno' => $vistaAlumno,
+            'alumnoVista' => $vistaAlumno ? $user : null,
         ]);
     }
 
@@ -136,13 +158,26 @@ class AulaController extends Controller
 
     public function mostrar(Request $request, int $tarea)
     {
+        return $this->mostrarPara($request, $tarea);
+    }
+
+    public function tareaVistaAlumno(Request $request, User $alumno, int $tarea)
+    {
+        $this->docente($request);
+        abort_unless($alumno->esAlumno(), 404);
+
+        return $this->mostrarPara($request, $tarea, $alumno);
+    }
+
+    private function mostrarPara(Request $request, int $tarea, ?User $alumnoVista = null)
+    {
         $actividad = DB::table('aula_tareas')->where('id', $tarea)->first();
         abort_unless($actividad, 404);
-        $this->acceder($request, $actividad);
+        $this->acceder($request, $actividad, $alumnoVista);
         $entregas = DB::table('aula_entregas')->join('users', 'users.id', '=', 'aula_entregas.alumno_id')->where('tarea_id', $tarea)->orderByDesc('aula_entregas.id')->select('aula_entregas.*', 'users.name as alumno_nombre', 'users.apellido as alumno_apellido')->get();
         $devoluciones = DB::table('aula_devoluciones')->join('users', 'users.id', '=', 'aula_devoluciones.docente_id')->whereIn('entrega_id', $entregas->pluck('id'))->orderBy('aula_devoluciones.id')->select('aula_devoluciones.*', 'users.name as docente_nombre', 'users.apellido as docente_apellido')->get()->groupBy('entrega_id');
 
-        return view('aula.tarea', compact('actividad', 'entregas', 'devoluciones'));
+        return view('aula.tarea', compact('actividad', 'entregas', 'devoluciones', 'alumnoVista'));
     }
 
     public function entregar(Request $request, int $tarea)

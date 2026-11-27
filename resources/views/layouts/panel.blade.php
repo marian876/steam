@@ -919,6 +919,7 @@
       <div class="pnl-grupo-tit">Proyecto</div>
       <a class="pnl-item" href="/panel/calendario"><span>Calendario y plazos</span></a>
       <a class="pnl-item" href="/aula"><span>Entregas del aula</span></a>
+      <a class="pnl-item" href="/panel/vista-alumno"><span>Ver como alumno</span></a>
       <div class="pnl-grupo-tit">Materias</div>
       <a class="pnl-item" href="/panel/modulos/contabilidad"><span>Contabilidad</span></a>
       <a class="pnl-item" href="/panel/modulos/marketing"><span>Marketing</span></a>

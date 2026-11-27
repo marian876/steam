@@ -187,6 +187,9 @@ Route::middleware('auth')->group(function () {
 /* ---------- Panel docente ---------- */
 
 Route::middleware(['auth', CuentaActiva::class, EsDocente::class])->prefix('panel')->group(function () {
+    Route::get('/vista-alumno', [AulaController::class, 'seleccionarAlumno']);
+    Route::get('/vista-alumno/{alumno}', [AulaController::class, 'vistaAlumno'])->whereNumber('alumno');
+    Route::get('/vista-alumno/{alumno}/tareas/{tarea}', [AulaController::class, 'tareaVistaAlumno'])->whereNumber(['alumno', 'tarea']);
     Route::get('/modulos/{pagina}', [ModuloController::class, 'panel'])->whereIn('pagina', ModuloController::MODULOS);
     Route::post('/modulos/{pagina}/archivos', [ModuloController::class, 'guardar'])->whereIn('pagina', ModuloController::MODULOS);
     Route::put('/modulos/{pagina}/archivos/{archivo}', [ModuloController::class, 'estado'])->whereIn('pagina', ModuloController::MODULOS)->whereNumber('archivo');
