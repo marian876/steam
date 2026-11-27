@@ -142,18 +142,28 @@ class AulaController extends Controller
     public function crearTarea(Request $request)
     {
         $this->docente($request);
+        if (! $request->has('grupos') && $request->filled('grupo_id')) {
+            $request->merge(['grupos' => [$request->input('grupo_id')]]);
+        }
         $datos = $request->validate([
-            'grupo_id' => ['required', 'integer', Rule::exists('grupos', 'id')->where('activo', true)],
+            'grupos' => ['required', 'array', 'min:1'],
+            'grupos.*' => ['required', 'integer', 'distinct', Rule::exists('grupos', 'id')->where('activo', true)],
             'titulo' => ['required', 'string', 'max:180'],
             'materia' => ['required', 'string', 'max:100'],
             'consigna' => ['required', 'string', 'max:10000'],
             'vence_en' => ['nullable', 'date'],
         ]);
+        $grupos = $datos['grupos'];
+        unset($datos['grupos']);
         $datos['docente_id'] = $request->user()->id;
         $datos['created_at'] = $datos['updated_at'] = now();
-        DB::table('aula_tareas')->insert($datos);
+        DB::transaction(function () use ($grupos, $datos) {
+            foreach ($grupos as $grupo) {
+                DB::table('aula_tareas')->insert($datos + ['grupo_id' => $grupo]);
+            }
+        });
 
-        return redirect('/aula')->with('aviso', 'Tarea creada.');
+        return redirect('/aula')->with('aviso', 'Tarea creada para los grupos seleccionados.');
     }
 
     public function mostrar(Request $request, int $tarea)
@@ -194,8 +204,9 @@ class AulaController extends Controller
         $archivo = null;
         try {
             DB::transaction(function () use ($request, $tarea, $datos, &$archivo) {
-                DB::table('aula_tareas')->where('id', $tarea)->lockForUpdate()->first();
-                if (DB::table('aula_entregas')->where('tarea_id', $tarea)->exists()) {
+                $bloqueada = DB::table('aula_tareas')->where('id', $tarea)->lockForUpdate()->first();
+                abort_unless($bloqueada, 404);
+                if (DB::table('aula_entregas')->where('tarea_id', $tarea)->exists() && ! $bloqueada->permite_nueva_entrega) {
                     throw ValidationException::withMessages(['archivo' => 'Este grupo ya entregó un archivo para esta tarea.']);
                 }
                 $archivo = $request->file('archivo')->store('entregas', 'local');
@@ -205,6 +216,7 @@ class AulaController extends Controller
                     'archivo' => $archivo, 'nombre_original' => basename($request->file('archivo')->getClientOriginalName()),
                     'comentario' => $datos['comentario'] ?? null, 'created_at' => now(), 'updated_at' => now(),
                 ]);
+                DB::table('aula_tareas')->where('id', $tarea)->update(['permite_nueva_entrega' => false, 'updated_at' => now()]);
             });
         } catch (\Throwable $error) {
             if ($archivo) {
@@ -214,6 +226,20 @@ class AulaController extends Controller
         }
 
         return back()->with('aviso', 'Entrega del grupo guardada.');
+    }
+
+    public function reabrir(Request $request, int $tarea)
+    {
+        $this->docente($request);
+        DB::transaction(function () use ($tarea) {
+            $actividad = DB::table('aula_tareas')->where('id', $tarea)->lockForUpdate()->first();
+            abort_unless($actividad, 404);
+            abort_unless(DB::table('aula_entregas')->where('tarea_id', $tarea)->exists(), 422, 'Todavía no hay una entrega para corregir.');
+            abort_unless(Grupo::where('id', $actividad->grupo_id)->where('activo', true)->exists(), 403);
+            DB::table('aula_tareas')->where('id', $tarea)->update(['permite_nueva_entrega' => true, 'updated_at' => now()]);
+        });
+
+        return back()->with('aviso', 'Se habilitó una nueva versión para el grupo.');
     }
 
     public function descargar(Request $request, int $entrega)

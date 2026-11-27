@@ -170,6 +170,7 @@ Route::middleware(['auth', CuentaActiva::class])->prefix('aula')->group(function
     Route::post('/tareas', [AulaController::class, 'crearTarea']);
     Route::get('/tareas/{tarea}', [AulaController::class, 'mostrar']);
     Route::post('/tareas/{tarea}/entregas', [AulaController::class, 'entregar']);
+    Route::post('/tareas/{tarea}/reabrir', [AulaController::class, 'reabrir']);
     Route::get('/entregas/{entrega}/archivo', [AulaController::class, 'descargar']);
     Route::post('/entregas/{entrega}/devoluciones', [AulaController::class, 'devolver']);
     Route::post('/autorizaciones', [AulaController::class, 'autorizar']);

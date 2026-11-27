@@ -181,4 +181,34 @@ class AulaTest extends TestCase
         $this->actingAs($alumno)->get('/panel/vista-alumno')->assertForbidden();
         $this->actingAs($alumno)->get('/panel/vista-alumno/'.$otro->id)->assertForbidden();
     }
+
+    public function test_docente_reabre_y_grupo_entrega_nueva_version_con_historial(): void
+    {
+        $profesor = $this->usuario(User::ROL_DOCENTE);
+        $alumno = $this->usuario(User::ROL_ALUMNO);
+        DB::table('grupo_user')->insert(['grupo_id' => 1, 'user_id' => $alumno->id]);
+        DB::table('aula_integrantes_autorizados')->insert(['grupo_id' => 1, 'user_id' => $alumno->id, 'autorizado_por' => $profesor->id]);
+        $tarea = DB::table('aula_tareas')->insertGetId(['grupo_id' => 1, 'docente_id' => $profesor->id, 'titulo' => 'Proyecto', 'materia' => 'Business', 'consigna' => 'Enviar']);
+        $this->actingAs($alumno)->post('/aula/tareas/'.$tarea.'/entregas', ['archivo' => UploadedFile::fake()->create('primera.pdf', 10, 'application/pdf')])->assertRedirect();
+        $this->actingAs($alumno)->post('/aula/tareas/'.$tarea.'/reabrir')->assertForbidden();
+        $this->actingAs($profesor)->post('/aula/tareas/'.$tarea.'/reabrir')->assertRedirect();
+        $this->actingAs($alumno)->get('/aula/tareas/'.$tarea)->assertSee('Enviar una nueva versión');
+        $this->actingAs($alumno)->post('/aula/tareas/'.$tarea.'/entregas', ['archivo' => UploadedFile::fake()->create('corregida.pdf', 10, 'application/pdf')])->assertRedirect();
+        $this->assertDatabaseCount('aula_entregas', 2);
+        $this->assertDatabaseHas('aula_tareas', ['id' => $tarea, 'permite_nueva_entrega' => false]);
+        $this->actingAs($alumno)->get('/aula/tareas/'.$tarea)->assertSee('primera.pdf')->assertSee('corregida.pdf')->assertDontSee('Enviar una nueva versión');
+        $this->actingAs($alumno)->post('/aula/tareas/'.$tarea.'/entregas', ['archivo' => UploadedFile::fake()->create('tercera.pdf', 10, 'application/pdf')])->assertSessionHasErrors('archivo');
+    }
+
+    public function test_docente_crea_tarea_para_varios_grupos_sin_duplicar_destinatarios(): void
+    {
+        $profesor = $this->usuario(User::ROL_DOCENTE);
+        DB::table('grupos')->insert(['id' => 2, 'curso' => '3', 'seccion' => 'B', 'especialidad' => 'BATAN', 'numero' => 1, 'anio' => 2026, 'activo' => 1]);
+        $datos = ['grupos' => [1, 2], 'titulo' => 'Macro', 'materia' => 'Business', 'consigna' => 'Enviar'];
+        $this->actingAs($profesor)->post('/aula/tareas', $datos)->assertRedirect('/aula');
+        $this->assertDatabaseHas('aula_tareas', ['grupo_id' => 1, 'titulo' => 'Macro']);
+        $this->assertDatabaseHas('aula_tareas', ['grupo_id' => 2, 'titulo' => 'Macro']);
+        $this->actingAs($profesor)->post('/aula/tareas', array_merge($datos, ['grupos' => [1, 1]]))->assertSessionHasErrors('grupos.0');
+        $this->assertDatabaseCount('aula_tareas', 2);
+    }
 }

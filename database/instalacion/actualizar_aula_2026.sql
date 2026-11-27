@@ -45,7 +45,8 @@ CREATE TABLE IF NOT EXISTS aula_tareas (
   id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
   grupo_id BIGINT UNSIGNED NOT NULL, docente_id BIGINT UNSIGNED NOT NULL,
   titulo VARCHAR(180) NOT NULL, materia VARCHAR(100) NOT NULL, consigna TEXT NOT NULL,
-  vence_en DATETIME NULL, created_at TIMESTAMP NULL, updated_at TIMESTAMP NULL,
+  vence_en DATETIME NULL, permite_nueva_entrega TINYINT(1) NOT NULL DEFAULT 0,
+  created_at TIMESTAMP NULL, updated_at TIMESTAMP NULL,
   KEY aula_tareas_grupo_id_index (grupo_id),
   CONSTRAINT aula_tareas_docente_id_foreign FOREIGN KEY (docente_id) REFERENCES users(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
