@@ -186,14 +186,7 @@
       aviso.hidden = !(rol.value === 'alumno' && repetido);
     }
 
-    // En un alta, el rol se sugiere según el dominio del correo.
-    email.addEventListener('input', function () {
-      if (rolTocado || rol.disabled) return;
-      var v = email.value.toLowerCase();
-      if (/@alumnos\.sil\.edu\.py$/.test(v)) rol.value = 'alumno';
-      else if (/@sil\.edu\.py$/.test(v)) rol.value = 'docente';
-      revisar();
-    });
+    // El administrador elige el rol: el dominio no determina si es profesor.
     rol.addEventListener('change', function () { rolTocado = true; revisar(); });
     checks.forEach(function (c) { c.addEventListener('change', revisar); });
 

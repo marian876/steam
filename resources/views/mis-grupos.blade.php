@@ -28,25 +28,7 @@
   @endif
 
   @if($usuario->esAlumno())
-  @if($disponibles->isEmpty())
-  <p style="margin:0;color:var(--tinta2);font-size:.9rem">No hay grupos nuevos para elegir. Si te falta el de este
-    año, avisale a tu docente.</p>
-  @else
-  <form method="POST" action="/mis-grupos">
-    @csrf
-    <div class="campo">
-      <label for="grupo">Agregar el grupo de otro año</label>
-      <select id="grupo" name="grupo" required style="width:100%;font-size:.92rem;padding:9px 12px">
-        <option value="">Elegí tu grupo…</option>
-        @foreach($disponibles as $g)
-        <option value="{{ $g->id }}">{{ $g->nombre() }}</option>
-        @endforeach
-      </select>
-      <div class="ayuda">Podés tener un grupo por año.</div>
-    </div>
-    <button class="btn-p" type="submit">Agregar grupo</button>
-  </form>
-  @endif
+  <p style="margin:0;color:var(--tinta2);font-size:.9rem">Para agregar o cambiar un grupo, avisale a un administrador.</p>
   @else
   <p style="margin:0;color:var(--tinta2);font-size:.9rem">Tus grupos los asigna el administrador.</p>
   @endif

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AulaController;
 use App\Http\Controllers\Auth\RegistroController;
 use App\Http\Controllers\Auth\SesionController;
 use App\Http\Controllers\EjemploController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\ProyectoController;
 use App\Http\Controllers\ProyectosAnterioresController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\VideoController;
+use App\Http\Middleware\CuentaActiva;
 use App\Http\Middleware\EsAdmin;
 use App\Http\Middleware\EsDocente;
 use App\Models\Ejemplo;
@@ -161,6 +163,16 @@ Route::middleware('guest')->group(function () {
 
 Route::post('/salir', [SesionController::class, 'salir'])->middleware('auth');
 
+Route::middleware(['auth', CuentaActiva::class])->prefix('aula')->group(function () {
+    Route::get('/', [AulaController::class, 'index']);
+    Route::post('/tareas', [AulaController::class, 'crearTarea']);
+    Route::get('/tareas/{tarea}', [AulaController::class, 'mostrar']);
+    Route::post('/tareas/{tarea}/entregas', [AulaController::class, 'entregar']);
+    Route::get('/entregas/{entrega}/archivo', [AulaController::class, 'descargar']);
+    Route::post('/entregas/{entrega}/devoluciones', [AulaController::class, 'devolver']);
+    Route::post('/autorizaciones', [AulaController::class, 'autorizar']);
+});
+
 // Mis grupos: el alumno ve sus grupos y elige el de un año nuevo.
 Route::middleware('auth')->group(function () {
     Route::get('/mis-grupos', [MisGruposController::class, 'mostrar']);
@@ -169,7 +181,7 @@ Route::middleware('auth')->group(function () {
 
 /* ---------- Panel docente ---------- */
 
-Route::middleware(['auth', EsDocente::class])->prefix('panel')->group(function () {
+Route::middleware(['auth', CuentaActiva::class, EsDocente::class])->prefix('panel')->group(function () {
     Route::get('/', [PanelController::class, 'index']);
     Route::get('/prompts/nuevo', [PanelController::class, 'crear']);
     Route::post('/prompts', [PanelController::class, 'guardar']);
@@ -239,4 +251,4 @@ Route::get('/plantilla-docente', function () {
     abort_unless(is_file($ruta), 404);
 
     return response()->download($ruta, 'Plantilla_Formato_STEAM.docx');
-})->middleware(['auth', EsDocente::class]);
+})->middleware(['auth', CuentaActiva::class, EsDocente::class]);

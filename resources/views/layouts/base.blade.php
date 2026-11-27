@@ -338,6 +338,7 @@
       @auth
       <div class="tb-usuario">
         <span>{{ auth()->user()->name }}</span>
+        <a class="boton btn-s" href="/aula">Aula</a>
         @if(auth()->user()->esDocente())
         <a class="boton btn-s" href="/panel">Panel</a>
         @endif

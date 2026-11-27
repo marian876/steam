@@ -17,8 +17,9 @@
 
 @php($info = [
   'admin' => ['Gestiona usuarios, roles y grupos. Tiene además todo lo del docente.', true, true],
-  'docente' => ['Entra al panel y administra prompts, videos y ejemplos. Tiene grupos a cargo.', true, false],
-  'alumno' => ['Usa el sitio (Formato STEAM, defensa oral, sitio web) y elige su grupo.', false, false],
+  'coordinador' => ['Accede al panel y a las funciones docentes del aula.', true, false],
+  'docente' => ['Administra tareas, devoluciones y asigna alumnos a grupos.', true, false],
+  'alumno' => ['Se registra con su curso y trabaja en el grupo que le asignen.', false, false],
 ])
 
 <div class="tbl-toolbar" data-tabla="tabla-roles">

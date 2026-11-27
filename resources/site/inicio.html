@@ -693,6 +693,10 @@
             menu.className = "menu-desplegable";
             menu.hidden = true;
 
+            var aA = document.createElement("a");
+            aA.href = "/aula"; aA.textContent = "Aula del proyecto";
+            menu.appendChild(aA);
+
             if (yo.docente) {
               var aP = document.createElement("a");
               aP.href = "/panel"; aP.textContent = "Panel";

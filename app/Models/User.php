@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-#[Fillable(['name', 'apellido', 'email', 'rol', 'password', 'activo'])]
+#[Fillable(['name', 'apellido', 'email', 'rol', 'password', 'activo', 'curso'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
@@ -22,14 +22,19 @@ class User extends Authenticatable
 
     public const ROL_DOCENTE = 'docente';
 
+    public const ROL_COORDINADOR = 'coordinador';
+
     public const ROL_ALUMNO = 'alumno';
 
     /** Roles que se pueden asignar desde "Usuarios y roles". */
     public const ROLES = [
         self::ROL_ADMIN => 'Administrador',
-        self::ROL_DOCENTE => 'Docente',
+        self::ROL_COORDINADOR => 'Coordinador',
+        self::ROL_DOCENTE => 'Profesor',
         self::ROL_ALUMNO => 'Alumno',
     ];
+
+    public const CURSOS = ['2do BATAN A', '2do BATAN B', '3ro BATAN A', '3ro BATAN B', '3ro BATAN C'];
 
     /**
      * Get the attributes that should be cast.
@@ -48,7 +53,7 @@ class User extends Authenticatable
     public function esDocente(): bool
     {
         // El administrador también entra a todo lo de docente.
-        return $this->rol === self::ROL_DOCENTE || $this->rol === self::ROL_ADMIN;
+        return in_array($this->rol, [self::ROL_DOCENTE, self::ROL_COORDINADOR, self::ROL_ADMIN], true);
     }
 
     public function esAdmin(): bool
@@ -93,16 +98,13 @@ class User extends Authenticatable
         return self::ROLES[$this->rol] ?? ucfirst((string) $this->rol);
     }
 
-    /**
-     * El rol sale del dominio del correo institucional.
-     * Devuelve null si el dominio no pertenece al colegio.
-     */
+    /** El registro público acepta ambos dominios y crea únicamente alumnos. */
     public static function rolSegunCorreo(string $email): ?string
     {
         $dominio = strtolower(substr(strrchr($email, '@') ?: '', 1));
 
         return match ($dominio) {
-            'sil.edu.py' => self::ROL_DOCENTE,
+            'sil.edu.py' => self::ROL_ALUMNO,
             'alumnos.sil.edu.py' => self::ROL_ALUMNO,
             default => null,
         };

@@ -35,6 +35,9 @@ class PerfilController extends Controller
 
         $usuario->name = $datos['name'];
         $usuario->apellido = $datos['apellido'];
+        if (strtolower($datos['email']) !== strtolower($usuario->email)) {
+            $usuario->email_verified_at = null;
+        }
         $usuario->email = strtolower($datos['email']);
         if (! empty($datos['password'])) {
             $usuario->password = $datos['password'];

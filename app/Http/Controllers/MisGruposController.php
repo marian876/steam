@@ -33,6 +33,8 @@ class MisGruposController extends Controller
     {
         $usuario = Auth::user();
 
+        abort_if($usuario->esAlumno(), 403, 'La asignación de grupos la realiza un administrador.');
+
         $datos = $request->validate([
             'grupo' => ['required', 'integer', Rule::exists('grupos', 'id')->where('activo', true)],
         ], [
