@@ -158,9 +158,9 @@ Route::get('/api/yo', function () {
 
 Route::middleware('guest')->group(function () {
     Route::get('/registro', [RegistroController::class, 'mostrar']);
-    Route::post('/registro', [RegistroController::class, 'registrar']);
+    Route::post('/registro', [RegistroController::class, 'registrar'])->middleware('throttle:acceso-cuenta');
     Route::get('/ingresar', [SesionController::class, 'mostrar'])->name('login');
-    Route::post('/ingresar', [SesionController::class, 'ingresar']);
+    Route::post('/ingresar', [SesionController::class, 'ingresar'])->middleware('throttle:acceso-cuenta');
 });
 
 Route::post('/salir', [SesionController::class, 'salir'])->middleware('auth');

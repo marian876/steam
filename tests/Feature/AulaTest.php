@@ -134,4 +134,12 @@ class AulaTest extends TestCase
         $this->actingAs($admin)->get('/panel/alumnos')->assertOk()->assertSee('AlumnoEjemplo')->assertDontSee('ProfesorEjemplo');
         $this->actingAs($admin)->get('/panel/cursos')->assertOk()->assertSee('3ro BATAN C');
     }
+
+    public function test_inicio_de_sesion_limita_intentos_repetidos(): void
+    {
+        for ($intento = 0; $intento < 10; $intento++) {
+            $this->post('/ingresar', ['email' => 'prueba@sil.edu.py', 'password' => 'incorrecta'])->assertSessionHasErrors('email');
+        }
+        $this->post('/ingresar', ['email' => 'prueba@sil.edu.py', 'password' => 'incorrecta'])->assertTooManyRequests();
+    }
 }
