@@ -26,7 +26,7 @@ class AulaController extends Controller
         if (! $comoAlumno && $usuario->esDocente()) {
             return;
         }
-        abort_if(! ConfiguracionAula::admiteParciales() && mb_strtolower(trim($tarea->materia)) !== 'general', 404);
+        abort_unless(ConfiguracionAula::permiteTarea($tarea), 404);
         abort_unless($usuario->esAlumno() && DB::table('aula_integrantes_autorizados')
             ->where('user_id', $usuario->id)->where('grupo_id', $tarea->grupo_id)->exists()
             && DB::table('grupo_user')->where('user_id', $usuario->id)->where('grupo_id', $tarea->grupo_id)->exists(), 404);
@@ -75,16 +75,27 @@ class AulaController extends Controller
         if (! $user->esDocente()) {
             $tareas->whereIn('grupo_id', DB::table('aula_integrantes_autorizados')->where('user_id', $user->id)->select('grupo_id'))
                 ->whereIn('grupo_id', DB::table('grupo_user')->where('user_id', $user->id)->select('grupo_id'));
-            if (! ConfiguracionAula::admiteParciales()) {
-                $tareas->whereRaw('LOWER(TRIM(materia)) = ?', ['general']);
-            }
         }
-        $plazos = DB::table('aula_plazos')->orderBy('vence_en');
-        if (! $user->esDocente()) {
+        $hayPlazos = Schema::hasTable('aula_plazos');
+        $plazos = $hayPlazos ? DB::table('aula_plazos')->orderBy('vence_en') : null;
+        if ($plazos && ! $user->esDocente()) {
             $plazos->where('curso', $user->curso ?? '');
         }
 
         $listaTareas = $tareas->get();
+        if (! $user->esDocente()) {
+            $gruposAlumno = Grupo::whereIn('id', $listaTareas->pluck('grupo_id'))->get()->keyBy('id');
+            $modalidades = collect(User::CURSOS)->mapWithKeys(fn ($curso) => [$curso => ConfiguracionAula::admiteParciales($curso)]);
+            $listaTareas = $listaTareas->filter(function ($tarea) use ($gruposAlumno, $modalidades) {
+                if (mb_strtolower(trim($tarea->materia)) === 'general') {
+                    return true;
+                }
+                $grupo = $gruposAlumno->get($tarea->grupo_id);
+                $curso = $grupo ? ConfiguracionAula::cursoGrupo($grupo) : null;
+
+                return $grupo && ($modalidades->get($curso) ?? ConfiguracionAula::admiteParciales());
+            })->values();
+        }
         $entregasGrupo = DB::table('aula_entregas')->join('users', 'users.id', '=', 'aula_entregas.alumno_id')
             ->whereIn('tarea_id', $listaTareas->pluck('id'))->orderByDesc('aula_entregas.id')
             ->select('aula_entregas.*', 'users.name as alumno_nombre', 'users.apellido as alumno_apellido')->get()->groupBy('tarea_id');
@@ -99,24 +110,36 @@ class AulaController extends Controller
             'grupos' => $user->esDocente() ? Grupo::ordenados()->get() : collect(),
             'usuarios' => $user->esDocente() ? User::where('rol', User::ROL_ALUMNO)->orderBy('name')->get() : collect(),
             'mes' => Carbon::createFromFormat('!Y-m', $mes, 'America/Asuncion'),
-            'plazos' => $plazos->get(),
+            'plazos' => $plazos ? $plazos->get() : collect(),
+            'hayPlazos' => $hayPlazos,
             'vistaAlumno' => $vistaAlumno,
             'alumnoVista' => $vistaAlumno ? $user : null,
             'seccionTrabajos' => $seccionTrabajos,
-            'admiteParciales' => ConfiguracionAula::admiteParciales(),
+            'admiteParciales' => $user->esDocente() ? true : ConfiguracionAula::admiteParciales($user->curso),
         ]);
     }
 
     public function configuracion()
     {
-        return view('panel.configuracion-entregas', ['hayTabla' => Schema::hasTable('aula_configuracion'), 'admiteParciales' => ConfiguracionAula::admiteParciales()]);
+        return view('panel.configuracion-entregas', [
+            'hayTabla' => Schema::hasTable('aula_configuracion_cursos'),
+            'modalidades' => collect(User::CURSOS)->mapWithKeys(fn ($curso) => [$curso => ConfiguracionAula::admiteParciales($curso)]),
+        ]);
     }
 
     public function actualizarConfiguracion(Request $request)
     {
-        abort_unless(Schema::hasTable('aula_configuracion'), 503, 'Falta importar el SQL de configuración de entregas.');
-        $datos = $request->validate(['modalidad' => ['required', Rule::in(['todas', 'solo_finales'])]]);
-        DB::table('aula_configuracion')->updateOrInsert(['id' => 1], ['entregas_parciales' => $datos['modalidad'] === 'todas', 'updated_at' => now()]);
+        abort_unless(Schema::hasTable('aula_configuracion_cursos'), 503, 'Falta importar el SQL de configuración por curso.');
+        $reglas = ['modalidades' => ['required', 'array']];
+        foreach (User::CURSOS as $curso) {
+            $reglas['modalidades.'.$curso] = ['required', Rule::in(['todas', 'solo_finales'])];
+        }
+        $datos = $request->validate($reglas);
+        DB::transaction(function () use ($datos) {
+            foreach (User::CURSOS as $curso) {
+                DB::table('aula_configuracion_cursos')->updateOrInsert(['curso' => $curso], ['entregas_parciales' => $datos['modalidades'][$curso] === 'todas', 'updated_at' => now()]);
+            }
+        });
 
         return back()->with('aviso', 'Modalidad de entregas actualizada.');
     }
@@ -125,7 +148,9 @@ class AulaController extends Controller
     {
         $this->docente($request);
 
-        return view('panel.calendario', ['plazos' => DB::table('aula_plazos')->orderBy('vence_en')->get(), 'cursos' => User::CURSOS]);
+        $hayPlazos = Schema::hasTable('aula_plazos');
+
+        return view('panel.calendario', ['plazos' => $hayPlazos ? DB::table('aula_plazos')->orderBy('vence_en')->get() : collect(), 'cursos' => User::CURSOS, 'hayPlazos' => $hayPlazos]);
     }
 
     private function validarPlazo(Request $request): array
@@ -142,6 +167,9 @@ class AulaController extends Controller
     public function crearPlazo(Request $request)
     {
         $this->docente($request);
+        if (! Schema::hasTable('aula_plazos')) {
+            return back()->withErrors(['calendario' => 'Falta importar el SQL del calendario de plazos.']);
+        }
         $datos = $this->validarPlazo($request);
         $datos['docente_id'] = $request->user()->id;
         $datos['created_at'] = $datos['updated_at'] = now();
@@ -188,10 +216,14 @@ class AulaController extends Controller
             'consigna' => ['required', 'string', 'max:10000'],
             'vence_en' => ['nullable', 'date'],
         ]);
-        if (! ConfiguracionAula::admiteParciales() && mb_strtolower(trim($datos['materia'])) !== 'general') {
-            throw ValidationException::withMessages(['materia' => 'La configuración permite solamente entregas de la sección General.']);
-        }
         $grupos = $datos['grupos'];
+        if (mb_strtolower(trim($datos['materia'])) !== 'general') {
+            foreach (Grupo::whereIn('id', $grupos)->get() as $grupo) {
+                if (! ConfiguracionAula::admiteParciales(ConfiguracionAula::cursoGrupo($grupo))) {
+                    throw ValidationException::withMessages(['materia' => 'El curso de '.$grupo->nombre().' solo admite entregas finales en General.']);
+                }
+            }
+        }
         unset($datos['grupos']);
         $datos['docente_id'] = $request->user()->id;
         $datos['created_at'] = $datos['updated_at'] = now();
@@ -244,8 +276,7 @@ class AulaController extends Controller
             DB::transaction(function () use ($request, $tarea, $datos, &$archivo) {
                 $bloqueada = DB::table('aula_tareas')->where('id', $tarea)->lockForUpdate()->first();
                 abort_unless($bloqueada, 404);
-                $configuracion = Schema::hasTable('aula_configuracion') ? DB::table('aula_configuracion')->where('id', 1)->lockForUpdate()->first() : null;
-                abort_if($configuracion && ! $configuracion->entregas_parciales && mb_strtolower(trim($bloqueada->materia)) !== 'general', 404);
+                abort_unless(ConfiguracionAula::permiteTarea($bloqueada), 404);
                 if (DB::table('aula_entregas')->where('tarea_id', $tarea)->exists() && ! $bloqueada->permite_nueva_entrega) {
                     throw ValidationException::withMessages(['archivo' => 'Este grupo ya entregó un archivo para esta tarea.']);
                 }

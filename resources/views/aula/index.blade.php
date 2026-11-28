@@ -11,6 +11,7 @@
 @if($errors->any()) <div class="errores"><ul>@foreach($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul></div> @endif
 @unless($seccionTrabajos)
 <div class="tarjeta"><h2>Calendario de entregas</h2><p>Las fechas y horas se muestran como fueron cargadas por el docente (hora de Paraguay).</p>
+@if(! $hayPlazos && auth()->user()->esDocente() && ! $vistaAlumno)<p>Falta importar el SQL de plazos para habilitar el calendario de etapas.</p>@endif
 <p><a href="{{ $rutaAula }}?mes={{ $mes->copy()->subMonth()->format('Y-m') }}">← Mes anterior</a> · <strong>{{ $mes->copy()->locale('es')->translatedFormat('F Y') }}</strong> · <a href="{{ $rutaAula }}?mes={{ $mes->copy()->addMonth()->format('Y-m') }}">Mes siguiente →</a></p>
 @php($fechas = $tareas->filter(fn ($t) => $t->vence_en && \Carbon\Carbon::parse($t->vence_en)->format('Y-m') === $mes->format('Y-m'))->groupBy(fn ($t) => (int) \Carbon\Carbon::parse($t->vence_en)->format('j')))
 @php($fechasPlazos = $plazos->filter(fn ($p) => \Carbon\Carbon::parse($p->vence_en)->format('Y-m') === $mes->format('Y-m'))->groupBy(fn ($p) => (int) \Carbon\Carbon::parse($p->vence_en)->format('j')))
@@ -29,8 +30,7 @@
 @foreach($tareasPorMateria->keys() as $claveMateria) @if(! $categorias->has($claveMateria)) @php($categorias->put($claveMateria, $tareasPorMateria[$claveMateria]->first()->materia)) @endif @endforeach
 @foreach($categorias as $claveMateria => $nombreMateria)
 @if(! $seccionTrabajos && ! $tareasPorMateria->has($claveMateria)) @continue @endif
-@if($seccionTrabajos && ! $admiteParciales && ! auth()->user()->esDocente() && $claveMateria !== 'general') @continue @endif
-@if($seccionTrabajos && ! $admiteParciales && $vistaAlumno && $claveMateria !== 'general') @continue @endif
+@if($seccionTrabajos && ! $admiteParciales && (! auth()->user()->esDocente() || $vistaAlumno) && $claveMateria !== 'general' && ! $tareasPorMateria->has($claveMateria)) @continue @endif
 <h3>{{ $nombreMateria }}</h3>
 @if($claveMateria === 'general' && $seccionTrabajos)<p>Macro, presentación y otras entregas finales definidas por los docentes.</p>@endif
 @forelse($tareasPorMateria->get($claveMateria, collect()) as $t)

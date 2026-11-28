@@ -3,9 +3,11 @@
 namespace Tests\Feature;
 
 use App\Models\User;
+use App\Support\ConfiguracionAula;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
@@ -221,14 +223,60 @@ class AulaTest extends TestCase
         DB::table('aula_integrantes_autorizados')->insert(['grupo_id' => 1, 'user_id' => $alumno->id, 'autorizado_por' => $profesor->id]);
         $parcial = DB::table('aula_tareas')->insertGetId(['grupo_id' => 1, 'docente_id' => $profesor->id, 'titulo' => 'Boceto de marca', 'materia' => 'Marketing', 'consigna' => 'Enviar']);
         DB::table('aula_tareas')->insert(['grupo_id' => 1, 'docente_id' => $profesor->id, 'titulo' => 'Macro final', 'materia' => 'General', 'consigna' => 'Enviar']);
-        $this->actingAs($profesor)->put('/panel/configuracion/entregas', ['modalidad' => 'solo_finales'])->assertForbidden();
-        $this->actingAs($admin)->put('/panel/configuracion/entregas', ['modalidad' => 'solo_finales'])->assertRedirect();
+        $modalidades = array_fill_keys(User::CURSOS, 'todas');
+        $modalidades['3ro BATAN A'] = 'solo_finales';
+        $this->actingAs($profesor)->put('/panel/configuracion/entregas', ['modalidades' => $modalidades])->assertForbidden();
+        $this->actingAs($admin)->put('/panel/configuracion/entregas', ['modalidades' => $modalidades])->assertRedirect();
         $this->actingAs($alumno)->get('/aula/trabajos')->assertOk()->assertSee('Macro final')->assertDontSee('Boceto de marca');
         $this->actingAs($alumno)->get('/aula/tareas/'.$parcial)->assertNotFound();
         $this->actingAs($profesor)->post('/aula/tareas', ['grupo_id' => 1, 'titulo' => 'Boceto', 'materia' => 'Marketing', 'consigna' => 'Enviar'])->assertSessionHasErrors('materia');
         $this->assertDatabaseHas('aula_tareas', ['id' => $parcial]);
-        $this->actingAs($admin)->put('/panel/configuracion/entregas', ['modalidad' => 'todas'])->assertRedirect();
+        $modalidades['3ro BATAN A'] = 'todas';
+        $this->actingAs($admin)->put('/panel/configuracion/entregas', ['modalidades' => $modalidades])->assertRedirect();
         $this->actingAs($alumno)->get('/aula/trabajos')->assertSee('Boceto de marca');
+    }
+
+    public function test_modalidad_se_aplica_por_curso_y_no_al_abanico_completo(): void
+    {
+        $admin = $this->usuario(User::ROL_ADMIN);
+        $profesor = $this->usuario(User::ROL_DOCENTE);
+        $a = $this->usuario(User::ROL_ALUMNO);
+        $b = $this->usuario(User::ROL_ALUMNO);
+        $a->curso = '3ro BATAN A';
+        $a->save();
+        $b->curso = '3ro BATAN B';
+        $b->save();
+        DB::table('grupos')->insert(['id' => 2, 'curso' => '3', 'seccion' => 'B', 'especialidad' => 'BATAN', 'numero' => 1, 'anio' => 2026, 'activo' => 1]);
+        foreach ([[$a, 1], [$b, 2]] as [$alumno, $grupo]) {
+            DB::table('grupo_user')->insert(['grupo_id' => $grupo, 'user_id' => $alumno->id]);
+            DB::table('aula_integrantes_autorizados')->insert(['grupo_id' => $grupo, 'user_id' => $alumno->id, 'autorizado_por' => $profesor->id]);
+            DB::table('aula_tareas')->insert(['grupo_id' => $grupo, 'docente_id' => $profesor->id, 'titulo' => 'Parcial del curso', 'materia' => 'Marketing', 'consigna' => 'Entregar']);
+        }
+        $modalidades = array_fill_keys(User::CURSOS, 'todas');
+        $modalidades['3ro BATAN A'] = 'solo_finales';
+        $this->actingAs($admin)->put('/panel/configuracion/entregas', ['modalidades' => $modalidades])->assertRedirect();
+        $this->actingAs($a)->get('/aula/trabajos')->assertDontSee('Parcial del curso');
+        $this->actingAs($b)->get('/aula/trabajos')->assertSee('Parcial del curso');
+        $this->actingAs($profesor)->post('/aula/tareas', ['grupos' => [1, 2], 'titulo' => 'Actividad', 'materia' => 'Marketing', 'consigna' => 'Enviar'])->assertSessionHasErrors('materia');
+        $this->actingAs($profesor)->post('/aula/tareas', ['grupos' => [2], 'titulo' => 'Actividad', 'materia' => 'Marketing', 'consigna' => 'Enviar'])->assertRedirect();
+    }
+
+    public function test_calendario_sin_tabla_muestra_instruccion_en_vez_de_error(): void
+    {
+        $docente = $this->usuario(User::ROL_DOCENTE);
+        Schema::drop('aula_plazos');
+        $this->actingAs($docente)->get('/panel/calendario')->assertOk()->assertSee('Falta la tabla del calendario');
+        $this->actingAs($docente)->get('/aula')->assertOk()->assertSee('Falta importar el SQL de plazos');
+        $this->actingAs($docente)->post('/aula/plazos', ['curso' => '3ro BATAN A', 'materia' => 'Marketing', 'etapa' => 'Logo', 'vence_en' => '2026-12-10T12:00'])->assertSessionHasErrors('calendario');
+    }
+
+    public function test_modalidad_general_anterior_se_conserva_hasta_configurar_cada_curso(): void
+    {
+        DB::table('aula_configuracion')->where('id', 1)->update(['entregas_parciales' => false]);
+        $this->assertFalse(ConfiguracionAula::admiteParciales('3ro BATAN A'));
+        DB::table('aula_configuracion_cursos')->insert(['curso' => '3ro BATAN A', 'entregas_parciales' => true]);
+        $this->assertTrue(ConfiguracionAula::admiteParciales('3ro BATAN A'));
+        $this->assertFalse(ConfiguracionAula::admiteParciales('3ro BATAN B'));
     }
 
     public function test_seccion_general_y_vista_previa_agrupan_trabajos(): void
